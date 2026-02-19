@@ -134,7 +134,7 @@ export default function SeattleTransitVisualizer() {
 
       // Load relevant isochrone files.
       for (const year of yearsToLoad) {
-        const isochroneUrl = `/base_data/isochrones_${year}.json`;
+        const isochroneUrl = `${import.meta.env.BASE_URL}base_data/isochrones_${year}.json`;
         try {
           const response = await fetch(isochroneUrl);
           if (response.ok) {
@@ -165,7 +165,7 @@ export default function SeattleTransitVisualizer() {
   useEffect(() => {
     async function loadSeattleBoundary() {
       try {
-        const response = await fetch('/base_data/seattle-city-limits.geojson');
+        const response = await fetch(`${import.meta.env.BASE_URL}base_data/seattle-city-limits.geojson`);
         if (response.ok) {
           const boundary = await response.json();
           console.log('Seattle boundary loaded successfully');
@@ -555,7 +555,7 @@ export default function SeattleTransitVisualizer() {
     try {
       // For 2027, use 2025 GTFS data as the base (since 2027 data doesn't exist yet)
       const gtfsYear = selectedYear === '2027' ? '2025' : selectedYear;
-      const allStopsUrl = `/base_data/all_stops_${gtfsYear}.json`;
+      const allStopsUrl = `${import.meta.env.BASE_URL}base_data/all_stops_${gtfsYear}.json`;
 
       if (selectedYear === '2027') {
         console.log('Using 2025 GTFS data as base for 2027 scenario');
@@ -664,7 +664,7 @@ export default function SeattleTransitVisualizer() {
     }
 
     try {
-      const futureStopsUrl = `/base_data/future_stops/future_stops_${year}.json`;
+      const futureStopsUrl = `${import.meta.env.BASE_URL}base_data/future_stops/future_stops_${year}.json`;
       console.log(`Loading future stops from: ${futureStopsUrl}`);
 
       const response = await fetch(futureStopsUrl);
@@ -736,7 +736,7 @@ export default function SeattleTransitVisualizer() {
 
     try {
       // STEP 1: Load census block geometries with population data from base_data directory
-      const censusUrl = '/base_data/KING_COUNTY_BLOCK_2020_POPULATION.geojson';
+      const censusUrl = `${import.meta.env.BASE_URL}base_data/KING_COUNTY_BLOCK_2020_POPULATION.geojson`;
       console.log(`Loading census data from: ${censusUrl}`);
 
       const censusResponse = await fetch(censusUrl);
