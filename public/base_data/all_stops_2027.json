@@ -1,0 +1,172 @@
+[
+  {
+    "id": "future_2027_001",
+    "original_id": "future_2027_001",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "U District",
+    "lat": 47.661214827607566,
+    "lon": -122.31352647407182,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_002",
+    "original_id": "future_2027_002",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "U District",
+    "lat": 47.6598824927027,
+    "lon": -122.31405719583358,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_003",
+    "original_id": "future_2027_003",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "U District",
+    "lat": 47.65977113527656,
+    "lon": -122.31574730674946,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_004",
+    "original_id": "future_2027_004",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "U District",
+    "lat": 47.65709747173895,
+    "lon": -122.31793562352706,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_005",
+    "original_id": "future_2027_005",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "U District",
+    "lat": 47.658141154639715,
+    "lon": -122.31661166989277,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_006",
+    "original_id": "future_2027_006",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "Fuhrman Ave E",
+    "lat": 47.651174980377604,
+    "lon": -122.32162962872027,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_007",
+    "original_id": "future_2027_007",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "E Hamlin St",
+    "lat": 47.64531870188516,
+    "lon": -122.32589686695984,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_008",
+    "original_id": "future_2027_008",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "E Lynn St",
+    "lat": 47.639691129136054,
+    "lon": -122.32590681041889,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_009",
+    "original_id": "future_2027_009",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "E Garfield St",
+    "lat": 47.63356487331134,
+    "lon": -122.32568608555847,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_010",
+    "original_id": "future_2027_010",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "Aloha St",
+    "lat": 47.62733757571216,
+    "lon": -122.33258878699637,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_011",
+    "original_id": "future_2027_011",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "Harrison St",
+    "lat": 47.62201745022846,
+    "lon": -122.33434546219692,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_012",
+    "original_id": "future_2027_012",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "Virginia St",
+    "lat": 47.617305291581395,
+    "lon": -122.33345998081857,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_013",
+    "original_id": "future_2027_013",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "9th Ave",
+    "lat": 47.61652309625916,
+    "lon": -122.33543143354436,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_014",
+    "original_id": "future_2027_014",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "7th Ave",
+    "lat": 47.61449887767257,
+    "lon": -122.3360753743477,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_015",
+    "original_id": "future_2027_015",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "6th Ave",
+    "lat": 47.61417392393024,
+    "lon": -122.3384881625163,
+    "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_2027_016",
+    "original_id": "future_2027_016",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "Pinehurst Station",
+    "lat": 47.72391068859437,
+    "lon": -122.32377023851807,
+    "route_name": "1 Line"
+  },
+  {
+    "id": "future_2027_017",
+    "original_id": "future_2027_017",
+    "feed": "future",
+    "dataset": "2027",
+    "name": "Judkins Park Station",
+    "lat": 47.59025353478169,
+    "lon": -122.30487902960992,
+    "route_name": "2 Line"
+  }
+]
