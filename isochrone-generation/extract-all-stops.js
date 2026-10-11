@@ -49,6 +49,7 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
   const stopTimesFile = zip.file('stop_times.txt');
   const tripsFile = zip.file('trips.txt');
   const calendarFile = zip.file('calendar.txt');
+  const calendarDatesFile = zip.file('calendar_dates.txt');
 
   if (!stopsFile) {
     console.error(`No stops.txt found in ${zipPath}`);
@@ -105,11 +106,22 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
     dynamicTyping: false
   });
 
+  // Parse calendar_dates.txt (optional) - some feeds add/remove weekdays via exceptions
+  let calendarDates = [];
+  if (calendarDatesFile) {
+    const calendarDatesText = await calendarDatesFile.async('text');
+    calendarDates = Papa.parse(calendarDatesText, {
+      header: true,
+      skipEmptyLines: true,
+      dynamicTyping: false
+    }).data;
+  }
+
   // Calculate frequencies
   const stopFrequencies = calculateStopFrequencies(
     parsedStopTimes.data,
     parsedTrips.data,
-    getRelevantServiceIds(parsedCalendar.data)
+    getRelevantServiceIds(parsedCalendar.data, calendarDates)
   );
 
   // Combine stop data with frequencies
@@ -253,20 +265,18 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds) {
 
 /**
  * Get service IDs active on a representative weekday.
- * Finds the list of 'weekday' service IDs (Mon-Fri) and filters to one active during the first wednesday.
+ * Picks the first Wednesday on or after the latest Wednesday service start date, then finds every
+ * service running that day: calendar.txt entries that include Wednesday and cover the date, plus
+ * calendar_dates.txt additions (exception_type 1), minus removals (exception_type 2).
+ *
+ * Wednesday-only matching (rather than requiring Mon-Fri) matters for feeds like Metro's 2026 feed,
+ * where the main weekday service is defined as Mon-Wed with Thu/Fri added via calendar_dates.
  */
-function getRelevantServiceIds(calendar) {
-  const weekdayServiceEntries = calendar
-    .filter(c =>
-      c.monday === '1' &&
-      c.tuesday === '1' &&
-      c.wednesday === '1' &&
-      c.thursday === '1' &&
-      c.friday === '1'
-    );
+function getRelevantServiceIds(calendar, calendarDates = []) {
+  const weekdayServiceEntries = calendar.filter(c => c.wednesday === '1');
 
   if (weekdayServiceEntries.length === 0) {
-    console.error('No weekday services found in calendar.txt');
+    console.error('No Wednesday services found in calendar.txt');
     return new Set();
   }
 
@@ -302,17 +312,31 @@ function getRelevantServiceIds(calendar) {
     wednesdayDate.getDate().toString().padStart(2, '0');
 
   // Find all service IDs active on this Wednesday
-  const activeServiceIds = weekdayServiceEntries
+  const activeServiceIds = new Set(weekdayServiceEntries
     .filter(s => {
       const start = s.start_date || '0';
       const end = s.end_date || '99999999';
       return wednesdayDateStr >= start && wednesdayDateStr <= end;
     })
-    .map(s => s.service_id);
+    .map(s => s.service_id));
 
-  console.log(`  Found ${activeServiceIds.length} active weekday service(s) for ${wednesdayDateStr}`);
+  // Apply calendar_dates exceptions for this date
+  let added = 0;
+  let removed = 0;
+  calendarDates
+    .filter(cd => cd.date === wednesdayDateStr)
+    .forEach(cd => {
+      if (cd.exception_type === '1' && !activeServiceIds.has(cd.service_id)) {
+        activeServiceIds.add(cd.service_id);
+        added++;
+      } else if (cd.exception_type === '2' && activeServiceIds.delete(cd.service_id)) {
+        removed++;
+      }
+    });
 
-  return new Set(activeServiceIds);
+  console.log(`  Found ${activeServiceIds.size} active weekday service(s) for ${wednesdayDateStr} (${added} added, ${removed} removed by calendar_dates)`);
+
+  return activeServiceIds;
 }
 
 /**
