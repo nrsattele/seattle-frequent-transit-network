@@ -26,12 +26,28 @@ const GTFS_FILES_2025 = [
   ['../public/base_data/2025/dec_2025_soundtransit_gtfs.zip', 'soundtransit']
 ];
 
+const GTFS_FILES_2026 = [
+  ['../public/base_data/2026/oct_2026_metro.zip', 'metro'],
+  ['../public/base_data/2026/oct_2026_soundtransit.zip', 'soundtransit']
+];
+
+const GTFS_FILES_BY_YEAR = {
+  '2020': GTFS_FILES_2020,
+  '2025': GTFS_FILES_2025,
+  '2026': GTFS_FILES_2026
+};
+
 // Choose which dataset to process (can be set via command line argument)
 const DATASET = process.argv[2] || '2025'; // Default to 2025
 
-// For 2027, use 2025 GTFS as base and add future stops
-const GTFS_YEAR = DATASET === '2027' ? '2025' : DATASET;
-const GTFS_FILES = GTFS_YEAR === '2020' ? GTFS_FILES_2020 : GTFS_FILES_2025;
+// For 2027, use 2026 GTFS as base and add future stops
+// Keep in sync with FUTURE_SCENARIO_BASE_YEAR in seattle-transit-access.tsx.
+const GTFS_YEAR = DATASET === '2027' ? '2026' : DATASET;
+const GTFS_FILES = GTFS_FILES_BY_YEAR[GTFS_YEAR];
+if (!GTFS_FILES) {
+  console.error(`No GTFS files configured for ${GTFS_YEAR}. Options: ${Object.keys(GTFS_FILES_BY_YEAR).join(', ')}, 2027`);
+  process.exit(1);
+}
 const OUTPUT_FILE = `../public/base_data/all_stops_${DATASET}.json`;
 const FUTURE_STOPS_FILE = `../public/base_data/future_stops/future_stops_${DATASET}.json`;
 
@@ -410,9 +426,9 @@ async function main() {
 
   let allStopArrays = [];
 
-  // For 2027, only extract future stops (GTFS stops from 2025 already have isochrones)
+  // For 2027, only extract future stops (GTFS stops from the base year already have isochrones)
   if (DATASET === '2027') {
-    console.log(`Extracting only NEW future stops for ${DATASET} (2025 GTFS stops already have isochrones)\n`);
+    console.log(`Extracting only NEW future stops for ${DATASET} (${GTFS_YEAR} GTFS stops already have isochrones)\n`);
 
     const futureStops = loadFutureStops(DATASET);
     if (futureStops.length > 0) {

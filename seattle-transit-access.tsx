@@ -4,6 +4,31 @@ import { useState, useEffect, useRef } from 'react';
 const SEATTLE_CENTER = [47.6062, -122.3321]; // Center coordinates for map initialization
 const HALF_MILE_METERS = 804.672; // Walking distance buffer (approximately 10 minute walk)
 
+// The 2027 scenario has no GTFS feed of its own; it layers future_stops_2027.json on top of this year's data.
+// Keep in sync with GTFS_YEAR in isochrone-generation/extract-all-stops.js.
+const FUTURE_SCENARIO_BASE_YEAR = '2026';
+
+/**
+ * Load a script at most once per page, resolving when its global is available.
+ *
+ * React StrictMode (dev) and hot reloads re-run effects. Loading Leaflet a second time replaces window.L,
+ * leaving the existing map on a different Leaflet copy than new layers, which crashes in Bounds.intersects.
+ */
+const scriptLoads = new Map<string, Promise<void>>();
+function loadScriptOnce(src: string, globalName: 'L' | 'turf'): Promise<void> {
+  if (window[globalName]) return Promise.resolve();
+  if (!scriptLoads.has(src)) {
+    scriptLoads.set(src, new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(script);
+    }));
+  }
+  return scriptLoads.get(src)!;
+}
+
 /**
  * Seattle Transit Visualizer
  *
@@ -36,9 +61,9 @@ export default function SeattleTransitVisualizer() {
   const [showCensusBlocks, setShowCensusBlocks] = useState<boolean>(false); // Toggle census block visualization
 
   // Year selection - allows switching between different GTFS datasets
-  // 2020 is base year, 2025 is near-future, 2027 is 2025 plus hardocded 'future' data
+  // 2020 is base year, 2025 and 2026 are recent feeds, 2027 is 2026 plus hardcoded 'future' data
   const [selectedYear, setSelectedYear] = useState<string>('2020');
-  const [availableYears] = useState<string[]>(['2020', '2025', '2027']);
+  const [availableYears] = useState<string[]>(['2020', '2025', '2026', '2027']);
 
   // React refs - maintain references to DOM elements and map objects
   const mapRef = useRef<HTMLDivElement>(null); // Container for Leaflet map
@@ -58,33 +83,27 @@ export default function SeattleTransitVisualizer() {
    * - Leaflet: Interactive map rendering (CSS + JS)
    * - Turf.js: Geospatial calculations (polygon unions, area calculations, intersections)
    *
-   * Cleanup function removes script tags when component unmounts
+   * Scripts are loaded once per page and left in place (see loadScriptOnce)
    */
   useEffect(() => {
     // Load Leaflet CSS for map styling
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';
-    document.head.appendChild(link);
+    const leafletCss = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';
+    if (!document.querySelector(`link[href="${leafletCss}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = leafletCss;
+      document.head.appendChild(link);
+    }
 
     // Load Leaflet JS for interactive mapping
-    const leafletScript = document.createElement('script');
-    leafletScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';
-    leafletScript.onload = () => setLeafletLoaded(true);
-    document.head.appendChild(leafletScript);
+    loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js', 'L')
+      .then(() => setLeafletLoaded(true))
+      .catch(err => console.error(err));
 
     // Load Turf.js for geospatial operations (polygon unions, area calculations)
-    const turfScript = document.createElement('script');
-    turfScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js';
-    turfScript.onload = () => setTurfLoaded(true);
-    document.head.appendChild(turfScript);
-
-    // Cleanup: remove all injected scripts when component unmounts
-    return () => {
-      document.head.removeChild(link);
-      document.head.removeChild(leafletScript);
-      document.head.removeChild(turfScript);
-    };
+    loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/Turf.js/6.5.0/turf.min.js', 'turf')
+      .then(() => setTurfLoaded(true))
+      .catch(err => console.error(err));
   }, []);
 
   /**
@@ -122,15 +141,15 @@ export default function SeattleTransitVisualizer() {
    * Effect: Load pre-computed isochrones for the selected year
    *
    * Isochrones are accurate walking polygons generated offline
-   * Loads isochrones for the selected year or for 2027, loads both 2025 and 2027 ones.
+   * Loads isochrones for the selected year or for 2027, loads both the base year and 2027 ones.
    *
    */
   useEffect(() => {
     async function loadIsochrones() {
       const isoMap = new Map();
 
-      // For 2027, load both 2025 (base) and 2027 (future stops) isochrones
-      const yearsToLoad = selectedYear === '2027' ? ['2025', '2027'] : [selectedYear];
+      // For 2027, load both base year and 2027 (future stops) isochrones
+      const yearsToLoad = selectedYear === '2027' ? [FUTURE_SCENARIO_BASE_YEAR, '2027'] : [selectedYear];
 
       // Load relevant isochrone files.
       for (const year of yearsToLoad) {
@@ -373,9 +392,9 @@ export default function SeattleTransitVisualizer() {
   function findIsochroneForStop(stop: any, year: string): any {
     const stopId = stop.id || stop.stop_id;
 
-    // For 2027 viewing mode, GTFS stops come from 2025 data and new stops from 2027 data.
-    // So we need to check 2025 isochrones for non-future stops
-    const isochroneYear = (year === '2027' && !stop.isFuture) ? '2025' : year;
+    // For 2027 viewing mode, GTFS stops come from base year data and new stops from 2027 data.
+    // So we need to check base year isochrones for non-future stops
+    const isochroneYear = (year === '2027' && !stop.isFuture) ? FUTURE_SCENARIO_BASE_YEAR : year;
 
     // Try different feed combinations
     const possibleKeys = [
@@ -544,7 +563,7 @@ export default function SeattleTransitVisualizer() {
    * Loads stop data with pre-calculated hourly trip frequencies from the
    * all_stops_{year}.json files generated by extract-all-stops.js
    *
-   * For 2027, loads 2025 GTFS data as the base (since 2027 data doesn't exist yet)
+   * For 2027, loads base year GTFS data (since 2027 data doesn't exist yet)
    *
    * File structure expected: /base_data/all_stops_{year}.json
    */
@@ -553,12 +572,12 @@ export default function SeattleTransitVisualizer() {
     setError(null);
 
     try {
-      // For 2027, use 2025 GTFS data as the base (since 2027 data doesn't exist yet)
-      const gtfsYear = selectedYear === '2027' ? '2025' : selectedYear;
+      // For 2027, use base year GTFS data (since 2027 data doesn't exist yet)
+      const gtfsYear = selectedYear === '2027' ? FUTURE_SCENARIO_BASE_YEAR : selectedYear;
       const allStopsUrl = `${import.meta.env.BASE_URL}base_data/all_stops_${gtfsYear}.json`;
 
       if (selectedYear === '2027') {
-        console.log('Using 2025 GTFS data as base for 2027 scenario');
+        console.log(`Using ${FUTURE_SCENARIO_BASE_YEAR} GTFS data as base for 2027 scenario`);
       }
       console.log(`Loading pre-processed stop data from: ${allStopsUrl}`);
 

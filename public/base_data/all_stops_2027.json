@@ -148,25 +148,5 @@
     "lat": 47.61417392393024,
     "lon": -122.3384881625163,
     "route_name": "RapidRide J Line"
-  },
-  {
-    "id": "future_2027_016",
-    "original_id": "future_2027_016",
-    "feed": "future",
-    "dataset": "2027",
-    "name": "Pinehurst Station",
-    "lat": 47.72391068859437,
-    "lon": -122.32377023851807,
-    "route_name": "1 Line"
-  },
-  {
-    "id": "future_2027_017",
-    "original_id": "future_2027_017",
-    "feed": "future",
-    "dataset": "2027",
-    "name": "Judkins Park Station",
-    "lat": 47.59025353478169,
-    "lon": -122.30487902960992,
-    "route_name": "2 Line"
   }
 ]
