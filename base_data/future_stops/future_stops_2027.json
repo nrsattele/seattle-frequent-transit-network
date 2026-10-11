@@ -565,7 +565,8 @@
         "23": 6
       },
       "opening_date": "2027-01-01",
-      "enabled": true
+      "enabled": false,
+      "disabled_reason": "In service in the Oct 2026 Sound Transit GTFS feed (stop N13)"
     },
     {
       "id": "future_2027_017",
@@ -600,7 +601,8 @@
         "23": 6
       },
       "opening_date": "2027-01-01",
-      "enabled": true
+      "enabled": false,
+      "disabled_reason": "In service in the Oct 2026 Sound Transit GTFS feed (stop E01)"
     }
   ]
 }
