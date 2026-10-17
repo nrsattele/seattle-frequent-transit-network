@@ -68,6 +68,45 @@ function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Pres
 }
 
 /**
+ * Merge polygons into one with turf.union, in a tree: pairs, then pairs of pairs, and so on.
+ *
+ * Merging one at a time into a single growing shape gets slower with every polygon, since each union scans the
+ * whole merged outline (minutes for a few thousand walksheds). In a tree most unions are between small shapes,
+ * which takes seconds. A polygon that fails to merge is set aside and retried at the end, and skipped if it fails
+ * again, so one bad geometry doesn't drop the rest of its branch.
+ */
+function mergeWalksheds(polygons: any[]): any {
+  const failed: any[] = [];
+  let level = polygons;
+  while (level.length > 1) {
+    const next = [];
+    for (let i = 0; i < level.length; i += 2) {
+      if (i + 1 === level.length) {
+        next.push(level[i]);
+        continue;
+      }
+      try {
+        next.push(window.turf.union(level[i], level[i + 1]));
+      } catch {
+        next.push(level[i]);
+        failed.push(level[i + 1]);
+      }
+    }
+    level = next;
+  }
+
+  let union = level[0];
+  for (const polygon of failed) {
+    try {
+      union = window.turf.union(union, polygon);
+    } catch {
+      continue;
+    }
+  }
+  return union;
+}
+
+/**
  * Load a script at most once per page, resolving when its global is available.
  *
  * React StrictMode (dev) and hot reloads re-run effects. Loading Leaflet a second time replaces window.L,
@@ -525,14 +564,7 @@ export default function SeattleTransitVisualizer() {
       });
 
       // Merge all overlapping walksheds into a single polygon
-      let union = walksheds[0];
-      for (let i = 1; i < walksheds.length; i++) {
-        try {
-          union = window.turf.union(union, walksheds[i]);
-        } catch {
-          continue;
-        }
-      }
+      const union = mergeWalksheds(walksheds);
 
       let mergedPolygon = null;
       let mergedPolygonOutOfBounds = null;
