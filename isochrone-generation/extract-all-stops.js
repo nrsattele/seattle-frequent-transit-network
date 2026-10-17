@@ -373,21 +373,8 @@ function loadFutureStops(dataset) {
   console.log(`\nLoading future stops from ${FUTURE_STOPS_FILE}...`);
   const futureData = JSON.parse(fs.readFileSync(FUTURE_STOPS_FILE, 'utf-8'));
 
-  // Filter to enabled stops that meet frequency requirements
-  const enabledStops = futureData.stops.filter(stop => {
-    if (stop.enabled === false) return false;
-
-    // Check frequency requirements (4+ trips per hour in hours 6-18)
-    const hourlyTrips = stop.hourly_trips || {};
-    for (let h = 6; h < 19; h++) {
-      const trips = hourlyTrips[h.toString()] || 0;
-      if (trips < 4) {
-        console.log(`Skipping ${stop.id} (${stop.name}) - only ${trips} trips at hour ${h}`);
-        return false;
-      }
-    }
-    return true;
-  });
+  // Keep every enabled stop. The site decides which ones meet the selected frequency threshold.
+  const enabledStops = futureData.stops.filter(stop => stop.enabled !== false);
 
   console.log(`Found ${enabledStops.length} enabled future stops (from ${futureData.stops.length} total)`);
 

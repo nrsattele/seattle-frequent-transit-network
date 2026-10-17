@@ -8,6 +8,52 @@ const HALF_MILE_METERS = 804.672; // Walking distance buffer (approximately 10 m
 // Keep in sync with GTFS_YEAR in isochrone-generation/extract-all-stops.js.
 const FUTURE_SCENARIO_BASE_YEAR = '2026';
 
+// Time-of-day presets.
+enum Preset {
+  AllDay,
+  AmPeak,
+  Midday,
+  PmPeak,
+  Evening,
+  LateNight,
+  Overnight,
+}
+
+// Hours are [start, end) on a 24-hour clock, matching the keys of hourly_trips.
+const PRESETS: Record<Preset, { label: string; hours: readonly [number, number] }> = {
+  [Preset.AllDay]: { label: 'All day', hours: [6, 19] },
+  [Preset.AmPeak]: { label: 'AM peak', hours: [6, 9] },
+  [Preset.Midday]: { label: 'Midday', hours: [9, 15] },
+  [Preset.PmPeak]: { label: 'PM peak', hours: [15, 19] },
+  [Preset.Evening]: { label: 'Evening', hours: [19, 21] },
+  [Preset.LateNight]: { label: 'Late night', hours: [21, 24] },
+  [Preset.Overnight]: { label: 'Overnight', hours: [0, 6] },
+};
+
+/**
+ * Does a stop with these hourly trip counts have service every `headway` minutes or better during the preset?
+ *
+ * Every hour in the preset's window needs at least 60 / headway trips.
+ * Exception: all day + 10 minutes keeps the city-matched rule of 4+ trips every hour AND 77+ trips in total,
+ * which tolerates a few 15-minute hours while averaging close to every 10 minutes.
+ */
+function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Preset, headway: number): boolean {
+  if (!hourlyTrips) return false;
+
+  const [start, end] = PRESETS[preset].hours;
+  const cityRule = preset === Preset.AllDay && headway === 10;
+  const minTripsPerHour = cityRule ? 4 : 60 / headway;
+
+  let total = 0;
+  for (let h = start; h < end; h++) {
+    const trips = hourlyTrips[h.toString()] || 0;
+    if (trips < minTripsPerHour) return false;
+    total += trips;
+  }
+
+  return !cityRule || total >= 77;
+}
+
 /**
  * Load a script at most once per page, resolving when its global is available.
  *
@@ -614,31 +660,7 @@ export default function SeattleTransitVisualizer() {
     console.log(`Processing ${allStops.length} stops to identify frequent transit...`);
 
     // Filter for stops that meet frequent transit criteria
-    const frequentStopList = allStops.filter((stop: any) => {
-      const hourlyTrips = stop.hourly_trips;
-      if (!hourlyTrips) return false;
-
-      // Check if EVERY hour from 6am-7pm has at least 4 trips
-      // AND it averages 6 trips per hour (78 trips total)
-      let total = 0;
-      let minTripsInAnyHour = Infinity;
-
-      for (let h = 6; h < 19; h++) {
-        const trips = hourlyTrips[h.toString()] || 0;
-        total += trips;
-        minTripsInAnyHour = Math.min(minTripsInAnyHour, trips);
-
-        if (trips < 4) {
-          return false;
-        }
-      }
-
-      if (total < 77) {
-        return false;
-      }
-
-      return true;
-    }).map((s: any) => ({
+    const frequentStopList = allStops.filter((stop: any) => qualifies(stop.hourly_trips, Preset.AllDay, 10)).map((s: any) => ({
       id: s.id,
       name: s.name,
       lat: s.lat,
@@ -700,14 +722,9 @@ export default function SeattleTransitVisualizer() {
           // Must be enabled
           if (stop.enabled === false) return false;
 
-          // Check hourly_trips frequency (must have 4+ trips per hour in all hours 6-18)
-          const hourlyTrips = stop.hourly_trips || {};
-          for (let h = 6; h < 19; h++) {
-            const trips = hourlyTrips[h.toString()] || 0;
-            if (trips < 4) {
-              console.warn(`Future stop ${stop.id} does not meet frequency requirement (${trips} trips at hour ${h})`);
-              return false;
-            }
+          if (!qualifies(stop.hourly_trips, Preset.AllDay, 10)) {
+            console.warn(`Future stop ${stop.id} does not meet frequency requirement`);
+            return false;
           }
           return true;
         })
