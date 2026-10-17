@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
 // Geographic constants for Seattle
 const SEATTLE_CENTER = [47.6062, -122.3321]; // Center coordinates for map initialization
@@ -93,7 +93,7 @@ function loadScriptOnce(src: string, globalName: 'L' | 'turf'): Promise<void> {
  */
 export default function SeattleTransitVisualizer() {
   // Data state - stores processed transit information
-  const [frequentStops, setFrequentStops] = useState<any[]>([]); // Stops meeting frequency criteria
+  const [yearStops, setYearStops] = useState<any[]>([]); // Every stop for the selected year (incl. future stops), with hourlyTrips
   const [stats, setStats] = useState<any>(null); // Calculated coverage statistics
   const [censusData, setCensusData] = useState<any>(null); // Population data from US Census
   const [seattleBoundary, setSeattleBoundary] = useState<any>(null); // Seattle city limits polygon
@@ -110,6 +110,16 @@ export default function SeattleTransitVisualizer() {
   // 2020 is base year, 2025 and 2026 are recent feeds, 2027 is 2026 plus hardcoded 'future' data
   const [selectedYear, setSelectedYear] = useState<string>('2020');
   const [availableYears] = useState<string[]>(['2020', '2025', '2026', '2027']);
+
+  // Frequency selection - which time of day and how often buses must come for a stop to count
+  const [preset] = useState<Preset>(Preset.AllDay);
+  const [headway] = useState<number>(10); // Minutes between buses
+
+  // Stops meeting the selected frequency. Changing year, preset or headway re-filters without re-fetching.
+  const frequentStops = useMemo(
+    () => yearStops.filter(stop => qualifies(stop.hourlyTrips, preset, headway)),
+    [yearStops, preset, headway]
+  );
 
   // React refs - maintain references to DOM elements and map objects
   const mapRef = useRef<HTMLDivElement>(null); // Container for Leaflet map
@@ -255,7 +265,7 @@ export default function SeattleTransitVisualizer() {
     if (seattleBoundary && frequentStops.length > 0 && isochrones.size > 0 && turfLoaded && window.turf) {
       recalculateWalksheds();
     }
-  }, [seattleBoundary, frequentStops, isochrones]);
+  }, [seattleBoundary, frequentStops, isochrones, turfLoaded]);
 
   /**
    * Initialize the Leaflet map with OpenStreetMap tiles
@@ -417,7 +427,7 @@ export default function SeattleTransitVisualizer() {
 
       // Create circle marker for each frequent transit stop
       const tooltip = isFuture
-        ? `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small><br><small>Opening: ${stop.description || 'TBD'}</small>`
+        ? `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small>`
         : `${stop.name}<br><small>ID: ${stop.id}</small>`;
 
       L.circleMarker([stop.lat, stop.lon], markerOptions)
@@ -635,7 +645,7 @@ export default function SeattleTransitVisualizer() {
       const allStops = await response.json();
       console.log(`Loaded ${allStops.length} stops with frequency data`);
 
-      // Process the stops data to identify frequent stops
+      // Keep every stop; frequentStops filters them for the selected preset and headway
       await processAllStopsData(allStops);
 
     } catch (err: any) {
@@ -647,20 +657,14 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Process pre-processed all_stops data to identify frequent transit stops
+   * Store every stop for the selected year, including future stops for scenario years
    *
-   * Takes the all_stops JSON data (which already has hourly_trips calculated)
-   * and filters for stops that meet the frequent transit criteria.
-   *
-   * FREQUENCY CRITERIA:
-   * A "frequent transit" stop must have at least 4 trips per hour (every 15 mins)
-   * from 6am-7pm (hours 6-18), AND average 6+ trips per hour (78+ total trips, every 10).
+   * Takes the all_stops JSON data (which already has hourly_trips calculated) and keeps all of it.
+   * Filtering to the selected frequency happens in frequentStops, and the walkshed effect
+   * recalculates coverage whenever that list changes.
    */
   async function processAllStopsData(allStops: any[]) {
-    console.log(`Processing ${allStops.length} stops to identify frequent transit...`);
-
-    // Filter for stops that meet frequent transit criteria
-    const frequentStopList = allStops.filter((stop: any) => qualifies(stop.hourly_trips, Preset.AllDay, 10)).map((s: any) => ({
+    const stopList = allStops.map((s: any) => ({
       id: s.id,
       name: s.name,
       lat: s.lat,
@@ -669,26 +673,10 @@ export default function SeattleTransitVisualizer() {
     }));
 
     // Load and add future stops if this is a future year scenario
-    const finalStopList = await addFutureStops(frequentStopList, selectedYear);
+    const finalStopList = await addFutureStops(stopList, selectedYear);
     console.log(`Total stops including future: ${finalStopList.length}`);
 
-    // Update UI state with frequent stops (triggers map redraw)
-    setFrequentStops(finalStopList);
-
-    // Calculate walkshed coverage area
-    const { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent } =
-      calculateWalkshedCoverage(finalStopList, seattleBoundary);
-
-    // Update UI with calculated statistics
-    setStats({
-      stopCount: finalStopList.length,
-      coveragePercent: parseFloat(coveragePercent) > 100 ? '100+' : coveragePercent
-    });
-
-    // Store merged polygons for map visualization
-    mergedPolygonRef.current = mergedPolygon;
-    mergedPolygonOutOfBoundsRef.current = mergedPolygonOutOfBounds;
-
+    setYearStops(finalStopList);
   }
   
   /**
@@ -716,18 +704,9 @@ export default function SeattleTransitVisualizer() {
 
       const futureData = await response.json();
 
-      // Filter to only enabled stops that meet frequency requirements
+      // Keep enabled stops; frequentStops decides which meet the selected frequency
       const enabledFutureStops = futureData.stops
-        .filter((stop: any) => {
-          // Must be enabled
-          if (stop.enabled === false) return false;
-
-          if (!qualifies(stop.hourly_trips, Preset.AllDay, 10)) {
-            console.warn(`Future stop ${stop.id} does not meet frequency requirement`);
-            return false;
-          }
-          return true;
-        })
+        .filter((stop: any) => stop.enabled !== false)
         .map((stop: any) => ({
           id: stop.id,
           name: stop.name,
@@ -735,7 +714,6 @@ export default function SeattleTransitVisualizer() {
           lon: stop.lon,
           isFuture: true,
           routeName: stop.route_name,
-          description: stop.description,
           hourlyTrips: stop.hourly_trips
         }));
 
@@ -869,7 +847,7 @@ export default function SeattleTransitVisualizer() {
     // Clear existing data
     setStats(null);
     setCensusData(null);
-    setFrequentStops([]);
+    setYearStops([]);
     setCensusBlocks(null);
     setShowCensusBlocks(false);
     mergedPolygonRef.current = null;
