@@ -30,19 +30,32 @@ const PRESETS: Record<Preset, { label: string; hours: readonly [number, number] 
   [Preset.Overnight]: { label: 'Overnight', hours: [0, 6] },
 };
 
+const HEADWAYS = [10, 15, 20, 30, 60]; // Minutes between buses, offered in the headway dropdown
+
+// Format an hour of the day (0-24) for display, e.g. 6 -> "6am", 15 -> "3pm", 0 or 24 -> "midnight"
+function formatHour(hour: number): string {
+  if (hour % 24 === 0) return 'midnight';
+  if (hour === 12) return 'noon';
+  return hour < 12 ? `${hour}am` : `${hour - 12}pm`;
+}
+
 /**
  * Does a stop with these hourly trip counts have service every `headway` minutes or better during the preset?
  *
- * Every hour in the preset's window needs at least 60 / headway trips.
- * Exception: all day + 10 minutes keeps the city-matched rule of 4+ trips every hour AND 77+ trips in total,
- * which tolerates a few 15-minute hours while averaging close to every 10 minutes.
+ * The preset's window must average at least 60 / headway trips per hour, and no hour may drop below the next
+ * looser headway in HEADWAYS. e.g. 15 minutes needs an average of 4 trips per hour with no hour under 3
+ * (every 20 minutes). This forgives routes that ex: ramp up slowly in the morning.
+ *
+ * This generalizes the city-matched 10-minute rule: 4+ trips every hour (15 minutes) AND 77+ trips in total
+ * from 6am-7pm. All day + 10 minutes keeps the city's 77-trip total rather than 6 x 13 = 78.
  */
 function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Preset, headway: number): boolean {
   if (!hourlyTrips) return false;
 
   const [start, end] = PRESETS[preset].hours;
-  const cityRule = preset === Preset.AllDay && headway === 10;
-  const minTripsPerHour = cityRule ? 4 : 60 / headway;
+  const looserHeadway = HEADWAYS[HEADWAYS.indexOf(headway) + 1] ?? headway;
+  const minTripsPerHour = 60 / looserHeadway;
+  const minTotalTrips = preset === Preset.AllDay && headway === 10 ? 77 : (60 / headway) * (end - start);
 
   let total = 0;
   for (let h = start; h < end; h++) {
@@ -51,7 +64,7 @@ function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Pres
     total += trips;
   }
 
-  return !cityRule || total >= 77;
+  return total >= minTotalTrips;
 }
 
 /**
@@ -112,8 +125,8 @@ export default function SeattleTransitVisualizer() {
   const [availableYears] = useState<string[]>(['2020', '2025', '2026', '2027']);
 
   // Frequency selection - which time of day and how often buses must come for a stop to count
-  const [preset] = useState<Preset>(Preset.AllDay);
-  const [headway] = useState<number>(10); // Minutes between buses
+  const [preset, setPreset] = useState<Preset>(Preset.AllDay);
+  const [headway, setHeadway] = useState<number>(10); // Minutes between buses
 
   // Stops meeting the selected frequency. Changing year, preset or headway re-filters without re-fetching.
   const frequentStops = useMemo(
@@ -124,6 +137,8 @@ export default function SeattleTransitVisualizer() {
   // React refs - maintain references to DOM elements and map objects
   const mapRef = useRef<HTMLDivElement>(null); // Container for Leaflet map
   const leafletMapRef = useRef<any>(null); // Leaflet map instance
+  const canvasRendererRef = useRef<any>(null); // Shared canvas renderer, so thousands of stop markers stay fast
+  const fitToStopsRef = useRef<boolean>(true); // Zoom to fit the stops on the next draw (set when the year changes)
   const mergedPolygonRef = useRef<any>(null); // Combined walkshed polygon for visualization
   const mergedPolygonOutOfBoundsRef = useRef<any>(null); // Out-of-bounds walkshed portions
 
@@ -176,10 +191,11 @@ export default function SeattleTransitVisualizer() {
   /**
    * Effect: Redraw map markers when frequent stops data changes
    *
-   * Triggers whenever we process new GTFS data or change years
+   * Triggers whenever we process new GTFS data, change years, or change preset/headway.
+   * Runs even when no stops qualify, so the previous selection's markers are cleared.
    */
   useEffect(() => {
-    if (frequentStops.length > 0 && leafletMapRef.current) {
+    if (yearStops.length > 0 && leafletMapRef.current) {
       drawStops();
     }
   }, [frequentStops, seattleBoundary, showCensusBlocks]);
@@ -260,9 +276,10 @@ export default function SeattleTransitVisualizer() {
    * 1. Boundary loads after GTFS data is already processed
    * 2. GTFS data loads after boundary is already available
    * 3. Isochrones load after stops are already calculated
+   * 4. Preset or headway changes (including to a selection with no qualifying stops)
    */
   useEffect(() => {
-    if (seattleBoundary && frequentStops.length > 0 && isochrones.size > 0 && turfLoaded && window.turf) {
+    if (seattleBoundary && yearStops.length > 0 && isochrones.size > 0 && turfLoaded && window.turf) {
       recalculateWalksheds();
     }
   }, [seattleBoundary, frequentStops, isochrones, turfLoaded]);
@@ -283,6 +300,11 @@ export default function SeattleTransitVisualizer() {
     }).addTo(map);
 
     leafletMapRef.current = map;
+    // Stop markers get their own pane above the overlay pane (z-index 400), where walksheds and census blocks
+    // are drawn as SVG. Otherwise whichever renderer was created last covers the other and takes the hover.
+    map.createPane('stops');
+    map.getPane('stops').style.zIndex = '450';
+    canvasRendererRef.current = L.canvas({ padding: 0.5, pane: 'stops' });
   }
 
   /**
@@ -430,14 +452,15 @@ export default function SeattleTransitVisualizer() {
         ? `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small>`
         : `${stop.name}<br><small>ID: ${stop.id}</small>`;
 
-      L.circleMarker([stop.lat, stop.lon], markerOptions)
+      L.circleMarker([stop.lat, stop.lon], { ...markerOptions, renderer: canvasRendererRef.current })
         .bindTooltip(tooltip)
         .addTo(map);
     });
 
-    // Auto-zoom map to show all stops with padding
-    if (bounds.length > 0) {
+    // Auto-zoom map to show all stops with padding, only after a year change so preset/headway changes keep the view
+    if (fitToStopsRef.current && bounds.length > 0) {
       map.fitBounds(bounds, { padding: [50, 50] });
+      fitToStopsRef.current = false;
     }
   }
 
@@ -592,7 +615,7 @@ export default function SeattleTransitVisualizer() {
    * This is called when the boundary loads after GTFS data has been processed
    */
   function recalculateWalksheds() {
-    if (frequentStops.length === 0 || !seattleBoundary) return;
+    if (!seattleBoundary) return;
 
     console.log('Recalculating with boundary:', seattleBoundary.type);
     const { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent } =
@@ -852,6 +875,7 @@ export default function SeattleTransitVisualizer() {
     setShowCensusBlocks(false);
     mergedPolygonRef.current = null;
     mergedPolygonOutOfBoundsRef.current = null;
+    fitToStopsRef.current = true;
 
     // Clear map layers
     if (leafletMapRef.current) {
@@ -866,6 +890,24 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
+   * Handle preset or headway change
+   *
+   * frequentStops re-filters on its own and the effects redraw the map and walksheds.
+   * Population served describes the previous walkshed, so clear it.
+   */
+  function handlePresetChange(newPreset: Preset) {
+    setPreset(newPreset);
+    setCensusData(null);
+  }
+
+  function handleHeadwayChange(newHeadway: number) {
+    setHeadway(newHeadway);
+    setCensusData(null);
+  }
+
+  const [presetStart, presetEnd] = PRESETS[preset].hours;
+
+  /**
    * RENDER: Main component UI
    */
   return (
@@ -876,7 +918,7 @@ export default function SeattleTransitVisualizer() {
           <div className="flex-1">
             <h1 className="text-2xl font-bold">Seattle Frequent Transit Access</h1>
             <p className="text-blue-100 text-sm mt-1">
-              Stops with service every 10 minutes, 6am-7pm weekdays + 10-minute walksheds
+              Stops with service every {headway} minutes, {formatHour(presetStart)}–{formatHour(presetEnd)} weekdays + 10-minute walksheds
             </p>
           </div>
           {/* Year selector dropdown */}
@@ -891,6 +933,40 @@ export default function SeattleTransitVisualizer() {
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
+          </div>
+        </div>
+        {/* Frequency controls - time of day preset buttons and headway dropdown */}
+        <div className="flex items-center gap-x-4 gap-y-2 flex-wrap mt-3">
+          <div className="flex flex-wrap gap-1">
+            {Object.entries(PRESETS).map(([key, { label }]) => {
+              const value = Number(key) as Preset;
+              return (
+                <button
+                  key={key}
+                  onClick={() => handlePresetChange(value)}
+                  className={`px-3 py-1 rounded text-sm border ${
+                    preset === value
+                      ? 'bg-white text-blue-700 border-white font-semibold'
+                      : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-sm text-blue-100">Every</label>
+            <select
+              value={headway}
+              onChange={(e) => handleHeadwayChange(Number(e.target.value))}
+              className="px-3 py-1 rounded bg-blue-700 text-white border border-blue-500 hover:bg-blue-800 cursor-pointer"
+            >
+              {HEADWAYS.map((minutes) => (
+                <option key={minutes} value={minutes}>{minutes}</option>
+              ))}
+            </select>
+            <span className="text-sm text-blue-100">min or better</span>
           </div>
         </div>
       </div>
