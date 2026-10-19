@@ -30,23 +30,25 @@ const PRESETS: Record<Preset, { label: string; hours: readonly [number, number] 
   [Preset.Overnight]: { label: 'Overnight', hours: [0, 6] },
 };
 
-const HEADWAYS = [10, 15, 20, 30, 60]; // Minutes between buses, offered in the headway dropdown
+const HEADWAYS = [10, 15, 20, 30, 60, 120]; // Minutes between buses, offered in the headway dropdown
 
 // One color per headway, used in both single and tiers mode so a headway always looks the same.
 // The tier colors stay distinguishable in every pair under red-green colorblindness, and the cool hues stay clear
 // of the yellow/orange/red population density layer. The purple is darker than the blue so the two don't merge
 // for colorblind viewers. 10 min keeps the blue of the original single-headway map.
 // 20 min only appears in single mode, never beside the tiers, so it's a neutral slate rather than a fifth hue.
+// 120 min is a warm gray for barely any service; no fifth hue passed against the other tiers.
 const HEADWAY_COLORS: Record<number, string> = {
   10: '#2563eb', // blue
   15: '#0b8f6a', // bluish green
   20: '#475569', // slate
   30: '#6d3c9e', // purple
   60: '#62bbe9', // sky blue
+  120: '#a8a29e', // warm gray
 };
 
 // Tiers mode draws nested walksheds for these headways, tightest first, each as a ring outside the tighter tier
-const TIER_HEADWAYS = [10, 15, 30, 60];
+const TIER_HEADWAYS = [10, 15, 30, 60, 120];
 const TIER_FILL_OPACITY = 0.35;
 const TIER_MARKER_MIN_ZOOM = 14; // In tiers mode, stop markers would hide the bands when zoomed out
 
@@ -66,11 +68,25 @@ function formatHour(hour: number): string {
  *
  * This generalizes the city-matched 10-minute rule: 4+ trips every hour (15 minutes) AND 77+ trips in total
  * from 6am-7pm. All day + 10 minutes keeps the city's 77-trip total rather than 6 x 13 = 78.
+ *
+ * Headways longer than an hour (120 min) can't be checked hour by hour, since that would need half a trip per hour.
+ * Instead every stretch of that many hours in the window needs at least 1 trip. (60 minutes is unaffected: its
+ * floor of 60 / 120 = 0.5 trips still means at least 1 trip every hour.)
  */
 function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Preset, headway: number): boolean {
   if (!hourlyTrips) return false;
 
   const [start, end] = PRESETS[preset].hours;
+  if (headway > 60) {
+    const span = headway / 60;
+    for (let h = start; h + span <= end; h++) {
+      let trips = 0;
+      for (let k = h; k < h + span; k++) trips += hourlyTrips[k.toString()] || 0;
+      if (trips < 1) return false;
+    }
+    return true;
+  }
+
   const looserHeadway = HEADWAYS[HEADWAYS.indexOf(headway) + 1] ?? headway;
   const minTripsPerHour = 60 / looserHeadway;
   const minTotalTrips = preset === Preset.AllDay && headway === 10 ? 77 : (60 / headway) * (end - start);
@@ -1258,7 +1274,7 @@ export default function SeattleTransitVisualizer() {
 
       {/* Footer with methodology explanation */}
       <div className="bg-gray-100 p-3 text-xs text-gray-600 border-t">
-        <p>Shaded areas are within a 10-minute walk of a qualifying stop. Coverage and population count only the part inside Seattle; gray areas are outside the city.</p>
+        <p>Shaded areas are within a 10-minute walk of a qualifying stop. Coverage and population count only the part inside Seattle; dashed gray areas are outside the city.</p>
       </div>
     </div>
   );

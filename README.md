@@ -21,11 +21,13 @@ Everything uses trips per hour at each stop on a representative weekday (the fir
 | Late night | 9pm-midnight |
 | Overnight | midnight-6am |
 
-**Headways:** 10, 15, 20, 30 and 60 minutes.
+**Headways:** 10, 15, 20, 30, 60 and 120 minutes.
 
 **Rule:** a stop meets a headway when, over the preset's hours, it averages at least 60/headway trips per hour and no single hour drops below the next looser headway:
 
 The averaging forgives routes that ramp up slowly at the start of service without letting real gaps through. All day + 10 minutes needs 77 trips in total rather than 6 × 13 = 78, which matches the city's frequent transit maps.
+
+120 minutes can't be checked hour by hour (that would be half a trip per hour), so instead every 2-hour stretch in the preset's hours needs at least one trip.
 
 **Which trips count:** each stop is judged by its best single route and direction, so a corridor served by several less frequent routes isn't added together. The one exception is Routes 3 and 4, which run as one combined service and count together (`combinableRoutes` in `extract-all-stops.js`).
 
@@ -65,7 +67,7 @@ node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or 2027
 - Loads pre-processed data from all_stops JSON files
 - Year selector (2020, 2025, 2026, 2027) and time of day preset buttons
 - **Single mode:** one headway, picked from a dropdown. Each headway has its own color, used in both modes.
-- **Tiers mode:** nested bands for every 10, 15, 30 and 60 minutes, so you can see all levels of service at once. Stop markers appear from zoom 14 and their tooltips show the stop's tier.
+- **Tiers mode:** nested bands for every 10, 15, 30, 60 and 120 minutes, so you can see all levels of service at once. Stop markers appear from zoom 14 and their tooltips show the stop's tier.
 - Visualizes 10-minute walksheds (using pre-computed isochrones or circles), merged per headway
 - Coverage: share of Seattle's area within a 10-minute walk, per headway
 - Population served (on request): share of Seattle's 2020 population within a 10-minute walk, from census blocks. The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
