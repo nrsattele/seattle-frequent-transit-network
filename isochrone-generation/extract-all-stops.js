@@ -33,6 +33,17 @@ const GTFS_FILES_2026 = [
   ['../public/base_data/2026/oct_2026_soundtransit.zip', 'soundtransit']
 ];
 
+// Metro routes (by route number) that alternate on a shared corridor, so riders there get their combined
+// frequency. At each stop both routes serve, their trips are combined hour by hour.
+const COMBINABLE_ROUTES = [
+  ['3', '4'],
+  ['10', '12'],
+  ['24', '33'],
+  ['31', '32'],
+  ['131', '132'],
+  ['345', '365'],
+];
+
 const GTFS_FILES_BY_YEAR = {
   '2020': GTFS_FILES_2020,
   '2025': GTFS_FILES_2025,
@@ -148,7 +159,8 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
     parsedStopTimes.data,
     parsedTrips.data,
     getRelevantServiceIds(parsedCalendar.data, calendarDates),
-    routeNames
+    routeNames,
+    feedName === 'metro' ? COMBINABLE_ROUTES : []
   );
 
   // Combine stop data with frequencies
@@ -175,10 +187,14 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
  * Tracks each stop+route+direction combination separately, then aggregates to get
  * the maximum frequency across all route/direction combinations for each stop, hour by hour.
  *
+ * Pairs in combinableRoutes (route numbers) also count together: at a stop both serve, their trips are added hour
+ * by hour, and that sum competes with the single routes for the per-hour maximum.
+ *
  * Returns { frequencies, routes }: frequencies maps stop_id -> hourly trips (the per-hour maximum), and routes maps
- * stop_id -> each route and direction serving the stop, with its own hourly trips (for the site's stop popups).
+ * stop_id -> each route and direction serving the stop, with its own hourly trips (for the site's stop popups),
+ * plus a combined entry (e.g. route "3/4", combined: true) for each pair at the stop.
  */
-function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames = new Map()) {
+function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames = new Map(), combinableRoutes = []) {
   if (activeServiceIds.size === 0) {
     console.warn('No active weekday service IDs found');
     return { frequencies: new Map(), routes: new Map() };
@@ -202,13 +218,6 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames
       .map(t => t.trip_id)
   );
 
-  // Routes that are allowed to be combined for the definition of frequent service.
-  const combinableRoutes = new Map([
-    // Routes 3 and 4.
-    ['100173', '100219'],
-    ['100219', '100173'],
-  ]);
-
   // Count trips per hour for each stop+route+direction combination
   // Similar to stopRouteDirectionHeadways in seattle-transit-access.tsx
   const stopRouteDirectionHeadways = {};
@@ -228,14 +237,7 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames
       const trip = tripInfo[tripId];
       if (!trip) return;
 
-      // Allow combining certain routes for frequency calculation
-      let route_id = trip.route_id;
-      if (combinableRoutes.has(route_id)) {
-        const otherRoute = combinableRoutes.get(route_id);
-        const first = [route_id, otherRoute].sort()[0];
-        const second = [route_id, otherRoute].sort()[1];
-        route_id = `${first}|${second}`;
-      }
+      const route_id = trip.route_id;
 
       // Create unique key for this stop + route + direction combination
       const key = `${stopId}|${route_id}|${trip.direction_id}`;
@@ -274,10 +276,10 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames
       hourlyTrips[h] = tripTimes[h] ? tripTimes[h].size : 0;
     }
 
-    // Record this route and direction for the stop. Combined routes (e.g. "100173|100219") become "3/4".
+    // Record this route and direction for the stop
     if (!stopRoutes.has(stop_id)) stopRoutes.set(stop_id, []);
     stopRoutes.get(stop_id).push({
-      route: route_id.split('|').map(id => routeNames.get(id) || id).join('/'),
+      route: routeNames.get(route_id) || route_id,
       direction: direction_id,
       headsign: Object.entries(headsigns).sort((a, b) => b[1] - a[1])[0][0],
       hourly_trips: Array.from({ length: 24 }, (_, h) => hourlyTrips[h])
@@ -294,6 +296,36 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames
       }
     }
   });
+
+  // Combine route pairs: at each stop both routes serve, add their trips hour by hour. If a route serves the stop in
+  // more than one direction (e.g. a terminal), use the pairing with the most trips.
+  for (const [stopId, routes] of stopRoutes.entries()) {
+    const combinedEntries = [];
+    for (const [first, second] of combinableRoutes) {
+      const firsts = routes.filter(r => r.route === first);
+      const seconds = routes.filter(r => r.route === second);
+      let best = null;
+      for (const a of firsts) {
+        for (const b of seconds) {
+          const hourly = a.hourly_trips.map((trips, h) => trips + b.hourly_trips[h]);
+          const total = hourly.reduce((sum, trips) => sum + trips, 0);
+          if (!best || total > best.total) best = { a, hourly, total };
+        }
+      }
+      if (!best) continue;
+
+      combinedEntries.push({
+        route: `${first}/${second}`,
+        direction: best.a.direction,
+        headsign: best.a.headsign,
+        combined: true,
+        hourly_trips: best.hourly
+      });
+      const maxFreq = stopMaxFrequencies.get(stopId);
+      for (let h = 0; h < 24; h++) maxFreq[h] = Math.max(maxFreq[h] || 0, best.hourly[h]);
+    }
+    routes.push(...combinedEntries);
+  }
 
   // Convert to final format with string keys
   const result = new Map();

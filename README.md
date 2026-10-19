@@ -29,7 +29,7 @@ The averaging forgives routes that ramp up slowly at the start of service withou
 
 120 minutes can't be checked hour by hour (that would be half a trip per hour), so instead every 2-hour stretch in the preset's hours needs at least one trip.
 
-**Which trips count:** each stop is judged by its best single route and direction, so a corridor served by several less frequent routes isn't added together. The one exception is Routes 3 and 4, which run as one combined service and count together (`combinableRoutes` in `extract-all-stops.js`).
+**Which trips count:** each stop is judged by its best single route and direction, so a corridor served by several less frequent routes isn't added together. The exceptions are routes which run as one combined service and count together (`combinableRoutes` in `extract-all-stops.js`).
 
 ## flow
 

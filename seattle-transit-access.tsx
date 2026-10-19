@@ -646,12 +646,13 @@ export default function SeattleTransitVisualizer() {
     const routes: any[] = stop.routes || [];
     if (routes.length === 0) return '';
 
-    const routeNames = [...new Set(routes.map(r => r.route))];
+    const routeNames = [...new Set(routes.filter(r => !r.combined).map(r => r.route))]; // Combined pairs like "3/4" are listed via their routes
     const lines = [`Routes: ${routeNames.join(', ')}`];
 
     const single = routes.filter(r => qualifies(r.hourly_trips, preset, stopHeadway));
     if (single.length > 0) {
-      const via = single.map(r => `${r.route}${r.headsign ? ` to ${r.headsign}` : ''}`).join('; ');
+      // Combined pairs go to different places, so they're named without a destination
+      const via = single.map(r => `${r.route}${r.headsign && !r.combined ? ` to ${r.headsign}` : ''}`).join('; ');
       lines.push(`Every ${stopHeadway} min or better on ${via}`);
     } else {
       // Routes that supply the stop's count in at least one hour of the preset

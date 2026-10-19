@@ -11678,7 +11678,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,2,4,4,2,2,2,2,2,2,3,4,4,3,3,2,2,2,2]
@@ -11728,7 +11728,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,2,4,3,3,2,2,2,2,2,3,4,4,3,3,2,2,2,2]
@@ -11778,13 +11778,13 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,2,4,3,3,2,2,2,2,2,3,4,3,4,3,2,2,2,2]
       },
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,3,3,3,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2]
@@ -11872,7 +11872,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,2,4,4,2,2,2,2,2,2,3,4,4,3,3,2,2,2,2]
@@ -11922,7 +11922,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,3,3,3,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2]
@@ -11966,7 +11966,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
@@ -12066,7 +12066,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
@@ -12110,7 +12110,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
@@ -12154,7 +12154,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
@@ -12204,7 +12204,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
@@ -12260,7 +12260,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
@@ -12372,7 +12372,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,3,4,3,2,2,2,2,2,2,4,4,3,3,3,2,2,2,2]
@@ -12422,7 +12422,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,3,4,3,2,2,2,2,2,2,4,4,3,3,3,2,2,2,2]
@@ -12478,7 +12478,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,3,3,4,2,2,2,2,2,2,4,4,3,3,3,2,2,2,2]
@@ -12528,7 +12528,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,2,4,4,2,2,2,2,2,2,4,3,4,3,3,2,2,2,2]
@@ -12572,7 +12572,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,0,2,4,4,2,2,2,2,2,2,4,3,4,3,3,2,2,2,2]
@@ -12616,13 +12616,13 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [2,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,4,4,3,3,2,2,2,2]
       },
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,1,0,0,1,2,3,3,3,2,2,2,2,2,2,3,4,5,2,2,2,2,2,2]
@@ -12710,7 +12710,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,1,0,0,1,2,3,3,3,2,2,2,2,2,2,3,4,5,2,2,2,2,2,2]
@@ -12754,7 +12754,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,1,0,0,1,2,3,3,3,2,2,2,2,2,2,3,4,4,3,2,2,2,2,2]
@@ -12804,7 +12804,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,1,0,0,1,1,4,3,3,2,2,2,2,2,2,3,4,4,3,2,2,2,2,2]
@@ -12848,7 +12848,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,1,0,0,1,1,4,3,3,2,2,2,2,2,2,3,3,5,3,2,2,2,2,2]
@@ -12898,7 +12898,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,1,0,0,1,1,4,3,3,2,2,2,2,2,2,3,3,5,3,2,2,2,2,2]
@@ -12942,7 +12942,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [1,2,0,0,1,1,4,3,5,6,6,6,6,6,6,5,4,5,3,2,2,2,2,2]
@@ -13004,10 +13004,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,2,0,0,1,1,4,3,5,6,6,6,6,6,6,5,4,5,3,2,2,2,1,3]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [3,2,0,0,1,3,6,6,8,8,8,9,8,8,8,7,8,7,5,4,4,4,3,5]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,2,3,3,2,2,3,2,2,2,2,4,2,2,2,2,2,2,2]
       }
     ]
   },
@@ -13048,10 +13061,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,2,0,0,1,1,4,3,5,6,6,6,6,6,6,5,4,5,3,2,2,2,1,3]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [3,2,0,0,1,3,6,6,8,8,8,9,8,8,8,7,8,7,5,4,4,4,3,5]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,2,3,3,2,2,3,2,2,2,2,4,2,2,2,2,2,2,2]
       }
     ]
   },
@@ -13136,10 +13162,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,2,0,0,1,1,3,4,5,6,6,6,6,6,6,5,4,5,3,2,2,2,1,3]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [3,2,0,0,1,3,5,7,8,8,8,8,8,8,8,8,7,8,5,4,4,4,3,5]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,2,3,3,2,2,2,2,2,2,3,3,3,2,2,2,2,2,2]
       },
       {
         "route": "63",
@@ -13204,10 +13243,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,2,0,0,1,1,3,4,5,6,6,6,6,6,6,5,4,5,2,2,2,2,2,3]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [3,2,0,0,1,3,5,7,8,8,8,8,8,8,8,8,7,8,4,4,4,4,4,5]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,2,3,3,2,2,2,2,2,2,3,3,3,2,2,2,2,2,2]
       }
     ]
   },
@@ -13248,10 +13300,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,2,0,0,1,1,3,4,5,6,6,6,6,6,6,5,4,4,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,2,0,0,1,3,5,7,8,8,8,8,8,8,8,8,7,7,5,4,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,2,3,3,2,2,2,2,2,2,3,3,3,2,2,2,2,2,2]
       },
       {
         "route": "63",
@@ -13316,10 +13381,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,2,0,0,1,1,3,3,6,6,6,6,6,6,6,5,4,4,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,2,0,0,1,3,5,6,9,8,8,8,8,8,8,7,8,7,5,4,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,2,3,3,2,2,2,2,2,2,2,4,3,2,2,2,2,2,2]
       },
       {
         "route": "63",
@@ -13384,10 +13462,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,2,0,0,1,1,3,3,5,6,6,6,7,6,5,6,4,4,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,2,0,0,1,2,6,6,8,8,8,8,9,8,7,8,8,7,5,4,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,4,3,2,2,2,2,2,2]
       },
       {
         "route": "13",
@@ -13446,10 +13537,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,2,0,0,1,1,3,3,5,6,6,6,6,7,5,6,4,4,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,2,0,0,1,2,6,6,8,8,8,8,8,9,7,8,8,6,5,4,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
       },
       {
         "route": "13",
@@ -13496,10 +13600,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,3,5,5,5,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,7,8,8,8,8,8,8,8,8,8,8,7,6,5,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,4,3,3,3,2,2,2,2,2,4,4,3,3,2,2,2,2,2]
       }
     ]
   },
@@ -13540,10 +13657,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,3,5,5,5,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,7,8,8,8,8,7,8,8,8,8,8,7,7,5,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,4,3,3,3,2,1,2,2,2,4,4,3,4,2,2,2,2,2]
       },
       {
         "route": "60",
@@ -13596,10 +13726,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,3,4,5,6,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,7,7,8,8,8,8,8,8,8,8,8,7,7,5,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,4,3,3,2,2,2,2,2,2,4,4,3,4,2,2,2,2,2]
       },
       {
         "route": "63",
@@ -13664,10 +13807,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,3,4,5,6,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,7,7,8,8,8,8,8,8,8,8,8,7,6,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,4,3,3,2,2,2,2,2,2,4,4,3,3,3,2,2,2,2]
       },
       {
         "route": "63",
@@ -13732,10 +13888,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,3,4,5,6,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,6,8,8,8,8,8,8,8,8,8,8,7,6,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,3,4,3,2,2,2,2,2,2,4,4,3,3,3,2,2,2,2]
       }
     ]
   },
@@ -13776,10 +13945,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,3,4,5,6,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,6,8,8,8,8,8,8,8,8,8,8,7,6,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,3,4,3,2,2,2,2,2,2,4,4,3,3,3,2,2,2,2]
       },
       {
         "route": "63",
@@ -13844,10 +14026,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,3,4,5,6,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,6,8,8,8,8,8,8,8,8,8,8,7,6,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,3,4,3,2,2,2,2,2,2,4,4,3,3,3,2,2,2,2]
       }
     ]
   },
@@ -13932,13 +14127,13 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,1,0,1,0,3,3,4,5,6,6,5,6,6,7,3,5,4,3,2,2,2,3,2]
       },
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [0,0,0,0,0,0,0,1,2,3,4,4,4,4,4,3,0,0,0,0,0,0,0,0]
@@ -13982,7 +14177,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,5,4,3,2,2,2,3,2]
@@ -14026,7 +14221,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,5,4,3,2,2,2,2,3]
@@ -14070,7 +14265,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,4,5,3,2,2,2,2,3]
@@ -14114,7 +14309,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [2,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,4,5,3,2,2,2,2,2]
@@ -14158,7 +14353,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [2,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,4,4,4,2,2,2,2,2]
@@ -14208,7 +14403,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [2,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,4,4,4,2,2,2,2,2]
@@ -14252,7 +14447,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "0",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [2,1,0,1,0,3,3,3,3,3,2,2,2,2,2,3,4,4,4,2,2,2,2,2]
@@ -17280,7 +17475,7 @@
       "18": 6,
       "19": 6,
       "20": 4,
-      "21": 3,
+      "21": 4,
       "22": 4,
       "23": 4
     },
@@ -17296,6 +17491,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,4,7,7,5,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
       },
       {
         "route": "32",
@@ -17348,7 +17550,7 @@
       "18": 6,
       "19": 6,
       "20": 4,
-      "21": 3,
+      "21": 4,
       "22": 4,
       "23": 4
     },
@@ -17382,6 +17584,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,4,7,7,5,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
       },
       {
         "route": "32",
@@ -17744,6 +17953,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [1,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,3,4,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,4,4,4,4,4,4,4,4,4,4,6,8,5,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -18940,7 +19156,7 @@
         "hourly_trips": [1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       },
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Only ",
         "hourly_trips": [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0]
@@ -20842,10 +21058,23 @@
         "hourly_trips": [0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Seattle Pacific University Queen Anne",
+        "hourly_trips": [0,0,0,1,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Seattle Pacific University Queen Anne",
+        "combined": true,
         "hourly_trips": [0,0,0,1,0,1,2,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Seattle Pacific University Queen Anne",
+        "hourly_trips": [0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
       },
       {
         "route": "7",
@@ -21064,10 +21293,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,1,1,0,1,1,3,3,5,6,6,6,6,6,6,6,3,5,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,1,1,0,1,2,6,6,8,8,8,8,8,8,8,8,7,7,5,4,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
       },
       {
         "route": "13",
@@ -21264,10 +21506,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,1,1,0,1,1,3,3,5,6,6,6,6,6,6,6,3,5,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,1,1,0,1,2,5,6,9,8,8,8,8,8,8,8,7,7,5,4,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,1,2,3,4,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
       },
       {
         "route": "13",
@@ -21878,10 +22133,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,4,4,5,5,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,8,7,8,8,8,8,8,8,8,8,8,7,6,5,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,4,3,3,3,2,2,2,2,2,4,4,3,3,2,2,2,2,2]
       }
     ]
   },
@@ -22324,10 +22592,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,4,4,5,5,6,6,6,6,6,4,4,4,3,3,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,0,1,0,3,8,7,8,8,8,8,8,8,8,8,8,7,6,5,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,0,0,0,0,0,4,3,3,3,2,2,2,2,2,4,4,3,3,2,2,2,2,2]
       },
       {
         "route": "303",
@@ -22474,10 +22755,23 @@
         "hourly_trips": [0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Seattle Pacific University Queen Anne",
+        "hourly_trips": [0,0,0,1,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Seattle Pacific University Queen Anne",
+        "combined": true,
         "hourly_trips": [0,0,0,1,0,1,2,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Seattle Pacific University Queen Anne",
+        "hourly_trips": [0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
       },
       {
         "route": "7",
@@ -26836,10 +27130,23 @@
         "hourly_trips": [1,1,0,0,1,2,2,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,5,3,5,3,2,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,3,6,9,4,4,4,4,4,4,4,6,6,6,5,4,4,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,2,3,3,1,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       },
       {
         "route": "13",
@@ -26858,6 +27165,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,3,3,3,3,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,4,4,4,4,4,4,4,4,5,6,6,6,4,4,4,4,2]
       },
       {
         "route": "33",
@@ -31499,22 +31813,22 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 4,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 3,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 3,
+      "11": 4,
+      "12": 5,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 6,
+      "18": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -31530,6 +31844,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,3,1,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,1,4,6,6,6,3,4,5,4,4,5,5,6,3,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -31555,22 +31876,22 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 4,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 3,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 4,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 5,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
+      "18": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -31586,6 +31907,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,3,1,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,1,4,6,6,5,4,4,5,4,4,4,6,6,3,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -31611,22 +31939,22 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 4,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 3,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 4,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 5,
+      "13": 3,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -31642,6 +31970,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,3,1,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,1,4,6,6,5,4,4,5,3,4,5,6,6,3,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -31667,22 +32002,22 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 4,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 4,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -31698,6 +32033,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,3,1,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,1,4,6,6,5,4,4,4,4,4,5,6,6,3,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -31726,13 +32068,13 @@
       "6": 5,
       "7": 8,
       "8": 6,
-      "9": 4,
+      "9": 5,
       "10": 4,
       "11": 4,
       "12": 4,
       "13": 4,
       "14": 4,
-      "15": 4,
+      "15": 5,
       "16": 6,
       "17": 6,
       "18": 6,
@@ -31744,10 +32086,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,4,4,3,4,4,4,4,4,4,3,4,5,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,5,8,6,4,4,4,4,4,4,4,6,6,6,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,2,4,2,1,0,0,0,0,0,0,3,2,1,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -31760,6 +32115,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,3,1,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,0,5,6,6,5,4,4,4,4,4,5,6,6,3,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -31785,22 +32147,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 4,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 5,
+      "7": 6,
+      "8": 6,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -31810,6 +32172,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,3,1,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,0,5,6,6,5,4,4,4,4,4,5,6,6,3,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -31835,22 +32204,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 4,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 5,
+      "7": 6,
+      "8": 6,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -31860,6 +32229,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,0,5,6,6,5,4,4,4,4,4,5,6,5,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -31885,22 +32261,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 4,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 5,
+      "7": 6,
+      "8": 6,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -31910,6 +32286,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,0,5,6,6,5,4,4,4,4,4,5,6,5,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -32840,22 +33223,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 4,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "7": 4,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 6,
+      "16": 5,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -32864,6 +33247,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,4,4,4,4,4,4,6,5,6,4,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -32890,22 +33280,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "7": 4,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -32914,6 +33304,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,4,4,4,4,4,4,5,6,6,4,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -32940,22 +33337,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "7": 4,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -32964,6 +33361,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,4,4,4,4,4,4,5,6,6,4,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -32990,22 +33394,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 5,
+      "7": 4,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
       "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -33020,6 +33424,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,4,4,4,4,4,4,5,6,6,4,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -33046,22 +33457,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 5,
+      "7": 4,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
       "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -33076,6 +33487,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,4,4,4,4,4,4,5,6,6,4,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -33102,22 +33520,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
+      "7": 4,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
       "17": 5,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -33132,6 +33550,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,2,3,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,4,4,4,4,4,4,5,6,5,5,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -33158,22 +33583,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 2,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
+      "7": 4,
+      "8": 4,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
       "17": 5,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -33188,6 +33613,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,2,3,2,2,2,2,2,2,3,2,3,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,4,5,4,4,4,4,4,5,6,5,5,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -33214,22 +33646,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 2,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
+      "7": 4,
+      "8": 4,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
       "18": 5,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -33244,6 +33676,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,2,3,2,2,2,2,2,2,3,2,3,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,4,5,4,4,4,4,4,5,6,5,5,4,4,4,4,2]
       },
       {
         "route": "32",
@@ -36338,25 +36777,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 4,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 3,
+      "6": 4,
+      "7": 7,
+      "8": 7,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -36370,6 +36809,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,4,7,7,5,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -36394,25 +36840,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 4,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 3,
+      "6": 4,
+      "7": 7,
+      "8": 7,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -36426,6 +36872,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,4,7,7,5,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -36450,25 +36903,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 4,
+      "5": 3,
+      "6": 4,
+      "7": 7,
       "8": 8,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -36502,6 +36955,13 @@
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
       },
       {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,4,7,7,5,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
+      },
+      {
         "route": "33",
         "direction": "1",
         "headsign": "Downtown Seattle ",
@@ -36524,25 +36984,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 3,
-      "8": 5,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 3,
+      "6": 4,
+      "7": 6,
+      "8": 8,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 3,
+      "17": 5,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -36556,6 +37016,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,4,6,8,5,4,4,4,4,4,4,3,5,4,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -36580,24 +37047,24 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 4,
-      "17": 5,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "5": 2,
+      "6": 4,
+      "7": 3,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 3,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 8,
+      "17": 6,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 5,
       "23": 2
     },
     "routes": [
@@ -36630,6 +37097,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,4,3,2,2,2,2,3,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,3,5,4,4,3,4,4,4,4,8,6,5,4,4,4,5,2]
       },
       {
         "route": "33",
@@ -36654,24 +37128,24 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 4,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 3,
+      "5": 2,
+      "6": 4,
+      "7": 3,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 3,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 8,
+      "17": 6,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 5,
       "23": 2
     },
     "routes": [
@@ -36686,6 +37160,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,4,3,2,2,2,2,3,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,3,5,4,4,3,4,4,4,4,8,6,5,4,4,4,5,2]
       },
       {
         "route": "33",
@@ -36710,24 +37191,24 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 4,
-      "17": 5,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "5": 2,
+      "6": 3,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 8,
+      "17": 6,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -36762,6 +37243,13 @@
         "hourly_trips": [1,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,4,3,2,2,2,2,2,2]
       },
       {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,2,3,4,4,4,4,4,4,4,4,4,8,6,5,4,4,4,4,2]
+      },
+      {
         "route": "33",
         "direction": "0",
         "headsign": "E Magnolia ",
@@ -36784,24 +37272,24 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 4,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "5": 2,
+      "6": 3,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 8,
+      "17": 6,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -36816,6 +37304,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [1,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,4,3,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,2,3,4,4,4,4,4,4,4,4,4,8,6,5,4,4,4,4,2]
       },
       {
         "route": "33",
@@ -36840,24 +37335,24 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 4,
-      "17": 4,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "5": 2,
+      "6": 3,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 7,
+      "17": 7,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -36872,6 +37367,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [1,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,4,3,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,2,3,4,4,4,4,4,4,4,4,4,7,7,5,4,4,4,4,2]
       },
       {
         "route": "33",
@@ -36896,24 +37398,24 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 4,
-      "17": 4,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "5": 2,
+      "6": 3,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 7,
+      "17": 7,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -36928,6 +37430,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [1,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,4,3,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,2,3,4,4,4,4,4,4,4,4,4,7,7,5,4,4,4,4,2]
       },
       {
         "route": "33",
@@ -40302,25 +40811,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 3,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
+      "5": 3,
+      "6": 5,
+      "7": 6,
+      "8": 7,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
       "16": 3,
-      "17": 2,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "17": 4,
+      "18": 5,
+      "19": 4,
+      "20": 3,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -40334,6 +40843,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,3,1,2,3,2,1,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,5,6,7,5,4,4,4,4,4,5,3,4,5,4,3,4,4,3]
       },
       {
         "route": "31",
@@ -40370,25 +40886,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 3,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 2,
-      "17": 2,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 3,
+      "6": 5,
+      "7": 6,
+      "8": 7,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 3,
+      "17": 4,
+      "18": 5,
+      "19": 4,
+      "20": 3,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -40402,6 +40918,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,3,1,2,3,2,1,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,5,6,7,5,4,4,4,4,4,5,3,4,5,4,3,4,4,3]
       },
       {
         "route": "33",
@@ -40426,25 +40949,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 3,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 2,
-      "17": 2,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 3,
+      "6": 5,
+      "7": 6,
+      "8": 7,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 3,
+      "17": 4,
+      "18": 5,
+      "19": 4,
+      "20": 3,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -40458,6 +40981,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,3,1,2,3,2,1,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,5,6,7,5,4,4,4,4,4,5,3,4,5,4,3,4,4,3]
       },
       {
         "route": "33",
@@ -40482,25 +41012,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 3,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 3,
+      "6": 5,
+      "7": 6,
+      "8": 7,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -40514,6 +41044,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,5,6,7,5,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -40715,23 +41252,23 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 3,
-      "17": 4,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "6": 4,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 7,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -40746,6 +41283,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [1,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,3,4,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,4,4,4,4,4,4,4,4,4,4,6,7,6,4,4,4,4,2]
       },
       {
         "route": "33",
@@ -40771,23 +41315,23 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 3,
-      "17": 4,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "6": 4,
+      "7": 4,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 7,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -40802,6 +41346,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [1,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,3,4,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,4,4,4,4,4,4,4,4,4,4,6,7,6,4,4,4,4,2]
       },
       {
         "route": "33",
@@ -46032,10 +46583,23 @@
         "hourly_trips": [2,1,0,0,0,2,4,5,4,4,4,4,4,4,5,5,5,5,4,4,4,4,2,2]
       },
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,1,0,1,1,1,4,4,4,4,4,4,4,4,4,3,2,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,2,2,0,1,1,3,7,7,4,4,4,4,4,4,4,5,7,6,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,1,0,0,0,2,3,3,0,0,0,0,0,0,0,2,5,3,4,2,2,2,2]
       },
       {
         "route": "13",
@@ -46060,6 +46624,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,2,4,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,2,4,7,8,5,4,4,4,4,3,4,4,4,5,4,4,4,4,3]
       },
       {
         "route": "27",
@@ -47560,9 +48131,9 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
+      "5": 3,
       "6": 4,
-      "7": 5,
+      "7": 6,
       "8": 8,
       "9": 5,
       "10": 5,
@@ -47576,9 +48147,9 @@
       "18": 5,
       "19": 4,
       "20": 4,
-      "21": 3,
-      "22": 2,
-      "23": 2
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -47634,6 +48205,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [1,0,0,0,0,1,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,4,6,8,5,4,4,4,4,4,3,4,5,4,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -50913,7 +51491,7 @@
       "5": 3,
       "6": 4,
       "7": 4,
-      "8": 4,
+      "8": 5,
       "9": 4,
       "10": 4,
       "11": 4,
@@ -50921,13 +51499,13 @@
       "13": 4,
       "14": 4,
       "15": 5,
-      "16": 5,
-      "17": 5,
-      "18": 4,
-      "19": 4,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "16": 7,
+      "17": 6,
+      "18": 5,
+      "19": 5,
+      "20": 4,
+      "21": 4,
+      "22": 4,
       "23": 2
     },
     "routes": [
@@ -50960,6 +51538,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,4,3,2,3,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,3,5,4,4,4,4,4,4,4,7,6,5,5,4,4,4,2]
       },
       {
         "route": "29",
@@ -54108,25 +54693,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 4,
-      "8": 4,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 4,
+      "6": 5,
+      "7": 7,
+      "8": 7,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -54134,6 +54719,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,4,5,7,7,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -54164,25 +54756,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 3,
-      "7": 4,
-      "8": 4,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 4,
+      "6": 5,
+      "7": 7,
+      "8": 7,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -54190,6 +54782,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,4,5,7,7,4,4,4,4,4,4,4,4,4,4,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -55585,24 +56184,24 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 2,
-      "7": 2,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 3,
-      "17": 4,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "6": 4,
+      "7": 3,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 5,
+      "17": 7,
+      "18": 7,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 4,
+      "23": 3
     },
     "routes": [
       {
@@ -55610,6 +56209,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [1,0,0,0,0,1,2,1,2,2,2,2,2,2,2,2,3,4,3,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,4,3,4,4,4,4,4,4,4,4,5,7,7,4,4,4,4,3]
       },
       {
         "route": "33",
@@ -57424,6 +58030,13 @@
         "hourly_trips": [0,0,0,0,0,0,1,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,0,0]
       },
       {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,1,3,6,4,4,4,4,4,4,4,5,6,5,4,4,4,4,3,2]
+      },
+      {
         "route": "32",
         "direction": "0",
         "headsign": "Seattle Center Fremont",
@@ -57496,6 +58109,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,1,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,1,3,5,5,4,4,4,4,4,4,5,6,5,4,4,4,4,2,3]
       },
       {
         "route": "32",
@@ -60528,22 +61148,22 @@
       "4": 0,
       "5": 1,
       "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "7": 5,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 6,
+      "16": 6,
+      "17": 5,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -60552,6 +61172,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,3,3,2,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,5,4,4,4,4,4,4,6,6,5,4,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -60578,9 +61205,9 @@
       "4": 0,
       "5": 0,
       "6": 4,
-      "7": 4,
-      "8": 4,
-      "9": 5,
+      "7": 5,
+      "8": 6,
+      "9": 6,
       "10": 4,
       "11": 4,
       "12": 4,
@@ -60602,6 +61229,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,2,3,3,2,2,2,2,2,2,2,3,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,5,6,6,4,4,4,4,4,4,6,6,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -60635,21 +61269,21 @@
       "5": 2,
       "6": 2,
       "7": 6,
-      "8": 4,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -60664,6 +61298,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,5,4,4,4,4,4,4,5,6,6,4,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -60691,21 +61332,21 @@
       "5": 2,
       "6": 2,
       "7": 6,
-      "8": 4,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -60720,6 +61361,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,5,4,4,4,4,4,4,5,6,6,4,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -60747,21 +61395,21 @@
       "5": 2,
       "6": 2,
       "7": 6,
-      "8": 4,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -60776,6 +61424,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,5,4,4,4,4,4,4,5,6,5,5,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -60860,20 +61515,20 @@
       "6": 2,
       "7": 6,
       "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -60888,6 +61543,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,4,5,4,4,4,4,4,5,6,5,5,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -60914,22 +61576,22 @@
       "4": 0,
       "5": 1,
       "6": 2,
-      "7": 3,
-      "8": 2,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "7": 5,
+      "8": 4,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -60938,6 +61600,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,4,5,4,4,4,4,4,5,6,5,5,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -60964,22 +61633,22 @@
       "4": 0,
       "5": 1,
       "6": 2,
-      "7": 3,
-      "8": 2,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "7": 5,
+      "8": 4,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -60988,6 +61657,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,4,5,4,4,4,4,4,5,6,5,5,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -61014,22 +61690,22 @@
       "4": 0,
       "5": 1,
       "6": 2,
-      "7": 2,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "7": 4,
+      "8": 5,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 5,
+      "18": 5,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -61038,6 +61714,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,4,5,5,4,4,4,4,4,5,6,5,5,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -61064,22 +61747,22 @@
       "4": 0,
       "5": 0,
       "6": 3,
-      "7": 2,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 4,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 3,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "7": 4,
+      "8": 5,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 3,
+      "15": 6,
+      "16": 6,
+      "17": 5,
+      "18": 4,
+      "19": 5,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -61088,6 +61771,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,5,4,4,4,4,3,6,6,5,4,5,4,4,3,2]
       },
       {
         "route": "32",
@@ -61122,12 +61812,12 @@
       "12": 4,
       "13": 4,
       "14": 4,
-      "15": 4,
-      "16": 5,
-      "17": 4,
-      "18": 3,
+      "15": 6,
+      "16": 6,
+      "17": 5,
+      "18": 4,
       "19": 4,
-      "20": 4,
+      "20": 5,
       "21": 4,
       "22": 3,
       "23": 2
@@ -61138,6 +61828,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,5,4,4,4,4,3,6,6,5,4,4,5,4,3,2]
       },
       {
         "route": "32",
@@ -61178,13 +61875,13 @@
       "12": 4,
       "13": 3,
       "14": 4,
-      "15": 4,
+      "15": 6,
       "16": 5,
-      "17": 3,
+      "17": 6,
       "18": 4,
       "19": 4,
       "20": 4,
-      "21": 4,
+      "21": 5,
       "22": 3,
       "23": 2
     },
@@ -61194,6 +61891,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,5,4,4,4,3,4,6,5,6,4,4,4,5,3,2]
       },
       {
         "route": "32",
@@ -61234,13 +61938,13 @@
       "12": 5,
       "13": 4,
       "14": 4,
-      "15": 4,
+      "15": 6,
       "16": 5,
       "17": 6,
       "18": 6,
       "19": 6,
       "20": 4,
-      "21": 4,
+      "21": 5,
       "22": 5,
       "23": 3
     },
@@ -61250,6 +61954,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,0,3,4,5,4,4,4,4,4,4,6,5,6,4,4,4,5,3,2]
       },
       {
         "route": "32",
@@ -62692,7 +63403,7 @@
       "6": 4,
       "7": 6,
       "8": 6,
-      "9": 5,
+      "9": 6,
       "10": 4,
       "11": 4,
       "12": 4,
@@ -62714,6 +63425,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,0,4,6,6,6,4,4,4,4,4,5,6,5,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -62751,16 +63469,16 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 4,
-      "8": 4,
-      "9": 4,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
       "10": 4,
       "11": 4,
       "12": 4,
       "13": 4,
       "14": 4,
-      "15": 3,
+      "15": 5,
       "16": 6,
       "17": 6,
       "18": 6,
@@ -62776,6 +63494,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,0,4,6,6,6,4,4,4,4,4,5,6,5,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -62807,16 +63532,16 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 4,
-      "8": 4,
-      "9": 4,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
       "10": 4,
       "11": 4,
       "12": 4,
       "13": 4,
       "14": 4,
-      "15": 3,
+      "15": 5,
       "16": 5,
       "17": 7,
       "18": 6,
@@ -62832,6 +63557,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,0,4,6,6,6,4,4,4,4,4,5,5,6,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -62919,22 +63651,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 1,
       "23": 2
     },
@@ -62944,6 +63676,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,1,3,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,6,6,4,4,4,4,4,4,6,6,4,4,4,4,1,2]
       },
       {
         "route": "32",
@@ -62969,22 +63708,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 1,
       "23": 2
     },
@@ -62994,6 +63733,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,1,3,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,6,6,4,4,4,4,4,4,6,6,4,4,4,4,1,2]
       },
       {
         "route": "32",
@@ -63019,22 +63765,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 1,
       "23": 2
     },
@@ -63044,6 +63790,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,1,3,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,6,6,4,4,4,4,4,4,6,6,4,4,4,4,1,2]
       },
       {
         "route": "32",
@@ -63069,22 +63822,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
       "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "19": 4,
+      "20": 3,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -63100,6 +63853,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,1,3,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,6,6,4,4,4,4,4,4,6,6,4,4,3,4,2,2]
       },
       {
         "route": "32",
@@ -63125,22 +63885,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
       "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "19": 4,
+      "20": 3,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -63156,6 +63916,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,1,3,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,6,6,4,4,4,4,4,4,6,6,4,4,3,4,2,2]
       },
       {
         "route": "32",
@@ -63181,22 +63948,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
       "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "19": 4,
+      "20": 3,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -63212,6 +63979,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,3,3,3,2,2,2,2,2,1,3,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,6,6,4,4,4,4,4,4,6,6,4,4,3,4,2,2]
       },
       {
         "route": "32",
@@ -63237,22 +64011,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 3,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 4,
+      "6": 4,
+      "7": 5,
+      "8": 7,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 5,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 6,
       "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "19": 3,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -63268,6 +64042,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,2,4,2,2,2,3,2,2,1,3,2,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,5,7,5,4,4,5,4,4,4,6,6,4,3,4,4,2,2]
       },
       {
         "route": "32",
@@ -70648,6 +71429,13 @@
         "hourly_trips": [0,0,0,0,0,0,1,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,0,0]
       },
       {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,1,3,6,4,4,4,4,4,4,4,5,6,5,4,4,4,4,3,2]
+      },
+      {
         "route": "32",
         "direction": "0",
         "headsign": "Seattle Center Fremont",
@@ -73790,22 +74578,22 @@
       "4": 0,
       "5": 1,
       "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
-      "22": 2,
+      "7": 5,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
+      "22": 3,
       "23": 2
     },
     "routes": [
@@ -73814,6 +74602,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,5,4,4,4,4,4,4,5,6,6,4,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -73839,22 +74634,22 @@
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 2,
+      "6": 4,
+      "7": 5,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 4,
+      "21": 4,
       "22": 2,
       "23": 2
     },
@@ -73864,6 +74659,13 @@
         "direction": "1",
         "headsign": "University District Fremont",
         "hourly_trips": [0,0,0,0,0,0,2,2,3,3,2,2,2,2,2,2,2,3,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "1",
+        "headsign": "University District Fremont",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,5,6,6,4,4,4,4,4,5,5,6,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -77436,25 +78238,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 5,
+      "18": 7,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -77462,6 +78264,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,5,7,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -77486,25 +78295,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 5,
+      "18": 7,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -77512,6 +78321,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,5,7,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -77536,25 +78352,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 3,
-      "20": 2,
-      "21": 2,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 5,
+      "18": 6,
+      "19": 5,
+      "20": 3,
+      "21": 3,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -77562,6 +78378,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,5,6,5,3,3,2,2]
       },
       {
         "route": "132",
@@ -77586,25 +78409,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 3,
-      "20": 2,
-      "21": 2,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 5,
+      "18": 6,
+      "19": 5,
+      "20": 3,
+      "21": 3,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -77612,6 +78435,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,5,6,5,3,3,2,2]
       },
       {
         "route": "132",
@@ -77636,25 +78466,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 3,
-      "20": 2,
-      "21": 2,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 5,
+      "18": 6,
+      "19": 5,
+      "20": 3,
+      "21": 3,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -77662,6 +78492,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,5,6,5,3,3,2,2]
       },
       {
         "route": "132",
@@ -77686,25 +78523,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 3,
-      "20": 2,
-      "21": 2,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 6,
+      "17": 5,
+      "18": 6,
+      "19": 5,
+      "20": 3,
+      "21": 3,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -77712,6 +78549,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,2,3,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,4,4,7,6,6,4,4,4,4,4,4,6,5,6,5,3,3,2,2]
       },
       {
         "route": "132",
@@ -77736,21 +78580,21 @@
       "2": 1,
       "3": 1,
       "4": 1,
-      "5": 2,
+      "5": 4,
       "6": 4,
-      "7": 5,
-      "8": 5,
-      "9": 5,
+      "7": 7,
+      "8": 6,
+      "9": 6,
       "10": 4,
       "11": 4,
       "12": 4,
-      "13": 4,
+      "13": 5,
       "14": 4,
       "15": 6,
       "16": 9,
       "17": 10,
       "18": 6,
-      "19": 4,
+      "19": 5,
       "20": 4,
       "21": 4,
       "22": 4,
@@ -77780,6 +78624,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,4,2,3,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,3,2,2,4,4,4,4,4,4,4,4,6,4,5,3,2,2,2,2]
       },
       {
         "route": "26",
@@ -77854,6 +78705,13 @@
         "hourly_trips": [0,0,0,0,0,2,1,4,4,4,3,2,2,2,2,2,2,3,3,3,2,1,1,1]
       },
       {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,4,3,7,6,6,4,4,4,5,4,4,4,6,6,5,4,3,2,2]
+      },
+      {
         "route": "132",
         "direction": "1",
         "headsign": "Downtown Seattle South Park",
@@ -77900,25 +78758,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 2
+      "5": 2,
+      "6": 6,
+      "7": 6,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 3
     },
     "routes": [
       {
@@ -77926,6 +78784,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [0,0,0,0,0,1,3,3,2,2,2,2,2,2,2,2,2,2,2,2,3,1,1,2]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [0,1,0,0,0,2,6,6,4,4,4,4,4,4,4,4,4,4,4,4,5,3,3,3]
       },
       {
         "route": "132",
@@ -77950,25 +78815,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "5": 2,
+      "6": 6,
+      "7": 6,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -77976,6 +78841,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,1,3,3,2,2,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,2,6,6,4,4,4,4,4,4,4,4,4,4,4,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -78000,25 +78872,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "5": 2,
+      "6": 6,
+      "7": 6,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -78026,6 +78898,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,1,3,3,2,2,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,2,6,6,4,4,4,4,4,4,4,4,4,4,4,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -78050,25 +78929,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "5": 2,
+      "6": 6,
+      "7": 6,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -78076,6 +78955,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,1,3,3,2,2,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,2,6,6,4,4,4,4,4,4,4,4,4,4,4,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -78100,25 +78986,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 2,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "5": 2,
+      "6": 6,
+      "7": 6,
+      "8": 4,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -78126,6 +79012,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,1,3,3,2,2,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,2,6,6,4,4,4,4,4,4,4,4,4,4,4,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -107694,10 +108587,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,7,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -108080,10 +108986,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,7,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -108520,10 +109439,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,3,2,1,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,7,5,3,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -108944,10 +109876,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,3,2,1,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,7,5,3,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -110880,10 +111825,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,2,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,6,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -111232,10 +112190,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,2,3,2,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,7,7,4,4,4,4,4,4,4,5,7,6,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -111452,10 +112423,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,7,7,4,4,4,4,4,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -111936,10 +112920,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,7,7,4,4,4,4,4,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -112500,10 +113497,23 @@
         "hourly_trips": [2,1,0,0,0,2,4,5,4,4,4,4,4,4,4,5,6,5,4,4,4,4,2,2]
       },
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,1,1,1,4,4,4,4,4,4,4,4,4,3,2,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,2,0,1,1,1,2,8,7,4,4,4,4,4,4,4,5,5,7,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,0,0,0,1,4,3,0,0,0,0,0,0,0,2,3,4,4,2,2,2,2]
       },
       {
         "route": "5",
@@ -112558,6 +113568,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2]
       },
       {
         "route": "26",
@@ -112638,6 +113655,13 @@
         "hourly_trips": [0,0,0,0,0,1,3,3,2,3,2,2,2,2,2,2,2,2,2,2,2,1,1,1]
       },
       {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,6,6,4,4,4,4,4,4,4,4,4,4,4,5,4,3,2,2]
+      },
+      {
         "route": "132",
         "direction": "0",
         "headsign": "Burien Transit Center South Park",
@@ -112694,10 +113718,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,7,7,4,4,4,4,4,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -114106,10 +115143,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,1,5,4,4,4,4,4,4,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,3,8,7,4,4,4,4,4,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -114300,10 +115350,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,1,5,4,4,4,4,4,4,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,0,2,0,1,1,3,8,7,4,4,4,4,4,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,0,1,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -114344,10 +115407,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,1,5,4,4,4,4,4,4,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,0,2,0,1,1,3,8,7,4,4,4,4,4,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,0,1,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -114388,10 +115464,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,1,4,4,4,4,5,4,4,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,0,2,0,1,1,3,7,7,4,4,5,4,4,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,0,1,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -114432,10 +115521,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,1,4,4,4,4,4,4,5,4,4,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,0,2,0,1,1,3,7,7,4,4,4,4,5,4,4,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,0,1,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -114476,10 +115578,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,1,4,4,4,4,4,4,4,4,5,2,2,3,2,2,2,2,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,0,2,0,1,1,3,7,7,4,4,4,4,4,4,5,5,6,7,5,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,0,1,0,0,0,2,3,3,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       }
     ]
   },
@@ -117412,10 +118527,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,5,2,2,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,5,5,6,7,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -117474,10 +118602,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,5,2,2,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,5,5,6,7,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -117530,10 +118671,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,7,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -117586,10 +118740,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,7,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -117642,10 +118809,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [0,0,1,0,1,1,2,4,4,4,4,4,4,4,4,4,3,2,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,1,1,0,1,1,4,8,6,4,4,4,4,4,4,4,6,6,7,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,2,4,2,0,0,0,0,0,0,0,3,4,4,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -117742,10 +118922,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,2,3,4,4,4,4,4,5,3,4,4,2,2,3,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,4,4,4,4,4,4,4,6,5,6,6,4,4,5,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,2,2,2,2,2,2,2,2]
       },
       {
         "route": "13",
@@ -117792,10 +118985,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,5,3,3,4,4,4,4,4,4,4,4,4,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,6,8,5,4,4,4,4,4,4,5,6,6,6,4,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,3,3,2,1,0,0,0,0,0,1,2,2,2,2,2,2,2,2]
       },
       {
         "route": "13",
@@ -117842,10 +119048,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,5,3,3,4,4,4,4,4,4,4,4,4,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,6,8,5,4,4,4,4,4,4,5,6,6,5,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,3,3,2,1,0,0,0,0,0,1,2,2,1,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -117898,10 +119117,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,5,3,3,4,4,4,4,4,4,4,4,4,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,6,8,5,4,4,4,4,4,4,4,7,6,5,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,3,3,2,1,0,0,0,0,0,0,3,2,1,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -117954,10 +119186,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,5,3,3,4,4,4,4,4,4,4,3,5,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,5,9,5,4,4,4,4,4,4,4,7,5,6,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,2,4,2,1,0,0,0,0,0,0,3,2,1,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -118010,10 +119255,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,4,4,3,4,4,4,4,4,4,4,3,5,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,5,8,6,4,4,4,4,4,4,4,7,5,6,5,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,2,4,2,1,0,0,0,0,0,0,3,2,1,3,2,2,2,2]
       },
       {
         "route": "13",
@@ -119828,10 +121086,23 @@
         "hourly_trips": [2,1,0,0,0,2,4,5,4,4,4,4,4,4,4,5,5,6,4,4,4,4,2,2]
       },
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,1,1,1,3,5,4,4,4,4,4,4,4,3,2,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,2,0,1,1,1,2,7,8,4,4,4,4,4,4,4,5,5,7,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,0,0,0,1,4,3,0,0,0,0,0,0,0,2,3,4,4,2,2,2,2]
       },
       {
         "route": "5",
@@ -119886,6 +121157,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2]
       },
       {
         "route": "26",
@@ -119984,6 +121262,13 @@
         "hourly_trips": [0,0,0,0,0,1,3,3,2,3,2,2,2,2,2,2,2,2,2,2,1,1,2,1]
       },
       {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,6,6,4,4,4,4,4,4,4,4,4,4,4,4,4,3,3,2]
+      },
+      {
         "route": "132",
         "direction": "0",
         "headsign": "Burien Transit Center South Park",
@@ -120046,10 +121331,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,5,3,5,3,2,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,3,6,9,4,4,4,4,4,4,4,6,6,6,5,4,4,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,2,3,3,1,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -120634,10 +121932,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,5,3,5,3,2,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,9,4,4,4,4,4,4,4,6,6,6,5,4,4,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,3,1,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -120854,10 +122165,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,5,2,6,3,2,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,9,4,4,4,4,4,4,4,6,5,7,5,4,4,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,3,1,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -121278,10 +122602,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,5,2,5,4,2,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,5,4,4,4,4,4,4,6,5,6,6,4,4,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -121814,10 +123151,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,5,2,5,3,3,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,5,4,4,4,4,4,4,6,5,6,5,5,4,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -122034,10 +123384,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,4,3,5,3,3,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,5,4,4,4,4,4,4,5,6,6,5,5,4,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -122078,10 +123441,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,4,3,5,3,2,3,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,5,4,4,4,4,4,4,5,6,6,5,4,5,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -122134,10 +123510,23 @@
         "hourly_trips": [2,1,0,0,0,2,4,5,3,5,4,4,4,4,4,5,5,6,4,4,4,4,2,2]
       },
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,1,3,4,3,5,6,6,6,6,6,6,4,5,3,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [2,2,0,1,1,3,8,7,8,8,8,8,8,8,8,8,9,6,7,6,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,0,0,0,4,4,3,2,2,2,2,2,2,4,4,3,4,4,2,2,2,2]
       },
       {
         "route": "7",
@@ -122232,10 +123621,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,3,3,4,4,4,4,4,4,3,5,3,2,3,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,5,4,4,4,4,4,4,5,6,6,5,4,5,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,3,1,2,2,2,2,2,2]
       }
     ]
   },
@@ -122876,10 +124278,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,2,3,4,4,5,4,4,4,3,5,3,2,3,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,4,4,4,4,5,4,4,5,5,7,5,4,5,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,2,2,2,2,2,2,2,2]
       }
     ]
   },
@@ -122898,7 +124313,7 @@
       "2": 1,
       "3": 1,
       "4": 1,
-      "5": 2,
+      "5": 3,
       "6": 6,
       "7": 6,
       "8": 8,
@@ -122913,7 +124328,7 @@
       "17": 8,
       "18": 5,
       "19": 4,
-      "20": 4,
+      "20": 5,
       "21": 4,
       "22": 4,
       "23": 4
@@ -122930,6 +124345,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2]
       },
       {
         "route": "26",
@@ -122972,6 +124394,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [0,0,0,0,0,1,3,3,2,3,2,2,2,2,2,2,2,2,2,2,2,1,1,2]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [0,1,0,0,0,3,5,6,5,4,4,4,4,4,4,4,4,4,4,4,5,3,2,3]
       },
       {
         "route": "132",
@@ -123030,10 +124459,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,2,3,4,4,5,4,3,5,3,5,3,2,3,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,4,4,4,4,5,4,3,6,5,7,5,4,5,4,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,2,2,2,2,2,2,2,2]
       }
     ]
   },
@@ -123074,10 +124516,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,2,3,4,4,4,4,4,5,3,4,4,2,2,3,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,4,4,4,4,4,4,4,6,5,6,6,4,4,5,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,2,2,2,2,2,2,2,2]
       }
     ]
   },
@@ -123118,10 +124573,23 @@
     },
     "routes": [
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,3,6,2,3,4,4,4,4,4,5,3,4,4,2,2,3,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [1,1,1,0,1,2,7,8,4,4,4,4,4,4,4,6,5,6,6,4,4,5,2,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,1,4,2,2,1,0,0,0,0,0,1,2,2,2,2,2,2,2,2]
       }
     ]
   },
@@ -123526,7 +124994,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,2,3,3,3,2,2,2,2,2,2,4,2,2,2,2,2,2,2]
@@ -124348,10 +125816,23 @@
         "hourly_trips": [2,1,0,0,0,1,5,4,4,5,4,4,4,4,4,5,5,5,4,4,4,4,2,3]
       },
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,1,2,5,3,5,6,6,6,6,6,6,4,4,4,3,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [3,2,0,1,1,2,9,7,8,8,8,8,8,8,8,8,8,7,7,5,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,4,4,3,2,2,2,2,2,2,4,4,3,4,3,2,2,2,2]
       },
       {
         "route": "7",
@@ -127708,25 +129189,25 @@
       "2": 0,
       "3": 0,
       "4": 1,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 3,
-      "15": 2,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 3,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 5,
+      "15": 4,
+      "16": 6,
+      "17": 5,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -127734,6 +129215,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,3,2,3,2,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,1,3,4,7,6,6,4,4,4,4,5,4,6,5,6,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -127758,25 +129246,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 3,
-      "15": 2,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 5,
+      "15": 4,
+      "16": 5,
+      "17": 6,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -127784,6 +129272,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,3,2,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,4,4,7,6,6,4,4,4,4,5,4,5,6,6,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -127808,25 +129303,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 3,
-      "15": 2,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 5,
+      "15": 4,
+      "16": 5,
+      "17": 6,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -127834,6 +129329,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,3,2,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,4,4,7,6,6,4,4,4,4,5,4,5,6,6,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -127858,25 +129360,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 3,
-      "15": 2,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 5,
+      "15": 4,
+      "16": 5,
+      "17": 6,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -127884,6 +129386,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,3,2,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,4,4,7,6,6,4,4,4,4,5,4,5,6,6,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -127908,25 +129417,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 3,
-      "15": 2,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 5,
+      "15": 4,
+      "16": 5,
+      "17": 6,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -127934,6 +129443,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,3,2,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,4,4,7,6,6,4,4,4,4,5,4,5,6,6,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -127958,25 +129474,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 3,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 6,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -127984,6 +129500,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,6,6,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -128008,25 +129531,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 5,
+      "18": 7,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -128034,6 +129557,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,5,7,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -128058,25 +129588,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 2,
-      "6": 2,
-      "7": 4,
-      "8": 4,
-      "9": 4,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 3,
-      "16": 3,
-      "17": 3,
-      "18": 4,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "5": 4,
+      "6": 4,
+      "7": 7,
+      "8": 6,
+      "9": 6,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 5,
+      "16": 5,
+      "17": 5,
+      "18": 7,
+      "19": 4,
+      "20": 4,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -128084,6 +129614,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,2,2,4,4,4,2,2,2,2,2,3,2,3,3,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [2,0,0,0,0,4,4,7,6,6,4,4,4,4,4,5,5,5,7,4,4,2,2,2]
       },
       {
         "route": "132",
@@ -128108,25 +129645,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "5": 2,
+      "6": 6,
+      "7": 5,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -128134,6 +129671,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,1,3,2,3,2,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,2,6,5,5,4,4,4,4,4,4,4,4,4,4,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -128158,25 +129702,25 @@
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "5": 2,
+      "6": 6,
+      "7": 5,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -128184,6 +129728,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,1,3,2,3,2,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,2,6,5,5,4,4,4,4,4,4,4,4,4,4,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -128209,24 +129760,24 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "6": 6,
+      "7": 6,
+      "8": 5,
+      "9": 4,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -128234,6 +129785,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,3,3,3,2,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,1,6,6,5,4,4,4,4,4,4,4,4,4,4,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -128259,24 +129817,24 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 3,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "6": 6,
+      "7": 5,
+      "8": 5,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 3,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 5,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -128284,6 +129842,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,3,3,2,3,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,1,6,5,5,5,4,4,4,3,4,4,4,4,5,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -128309,24 +129874,24 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 3,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "6": 6,
+      "7": 5,
+      "8": 5,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 4,
+      "13": 3,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 5,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -128334,6 +129899,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,3,3,2,3,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,1,6,5,5,5,4,4,4,3,4,4,4,4,5,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -128359,24 +129931,24 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 3,
-      "19": 2,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "6": 6,
+      "7": 5,
+      "8": 5,
+      "9": 5,
+      "10": 4,
+      "11": 4,
+      "12": 3,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 5,
+      "19": 4,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -128384,6 +129956,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,3,3,2,3,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,1,6,5,5,5,4,4,3,4,4,4,4,4,5,4,5,3,3,2]
       },
       {
         "route": "132",
@@ -128409,24 +129988,24 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 3,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "6": 6,
+      "7": 5,
+      "8": 5,
+      "9": 5,
+      "10": 4,
+      "11": 3,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 5,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -128434,6 +130013,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,3,3,2,3,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,1,6,5,5,5,4,3,4,4,4,4,4,4,4,5,5,3,3,2]
       },
       {
         "route": "132",
@@ -132944,6 +134530,13 @@
         "hourly_trips": [0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
       },
       {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3]
+      },
+      {
         "route": "26",
         "direction": "1",
         "headsign": "Downtown Seattle ",
@@ -133020,6 +134613,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [0,0,0,0,0,1,3,3,2,3,2,2,2,2,2,2,2,2,2,2,2,1,1,2]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [0,1,0,0,0,3,5,6,5,4,4,4,4,4,4,4,4,4,4,4,5,3,2,3]
       },
       {
         "route": "132",
@@ -137285,26 +138885,26 @@
       "1": 0,
       "2": 0,
       "3": 0,
-      "4": 1,
-      "5": 2,
-      "6": 4,
-      "7": 3,
-      "8": 4,
-      "9": 3,
-      "10": 2,
-      "11": 3,
-      "12": 2,
-      "13": 2,
-      "14": 3,
-      "15": 2,
-      "16": 3,
-      "17": 3,
-      "18": 2,
-      "19": 2,
-      "20": 2,
-      "21": 1,
-      "22": 1,
-      "23": 1
+      "4": 2,
+      "5": 4,
+      "6": 7,
+      "7": 5,
+      "8": 6,
+      "9": 5,
+      "10": 4,
+      "11": 5,
+      "12": 4,
+      "13": 4,
+      "14": 5,
+      "15": 4,
+      "16": 6,
+      "17": 6,
+      "18": 4,
+      "19": 4,
+      "20": 3,
+      "21": 2,
+      "22": 2,
+      "23": 2
     },
     "routes": [
       {
@@ -137312,6 +138912,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,1,2,4,3,4,3,2,3,2,2,2,2,3,3,2,2,1,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,2,4,7,5,6,5,4,5,4,4,5,4,6,6,4,4,3,2,2,2]
       },
       {
         "route": "132",
@@ -138346,10 +139953,23 @@
         "hourly_trips": [1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       },
       {
+        "route": "3",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [1,1,0,1,0,3,4,4,5,6,6,6,6,6,6,4,4,3,4,2,2,2,2,2]
+      },
+      {
         "route": "3/4",
         "direction": "0",
         "headsign": "Downtown Seattle ",
+        "combined": true,
         "hourly_trips": [3,2,0,1,0,3,8,8,8,8,8,8,8,8,8,8,8,6,8,5,4,4,4,4]
+      },
+      {
+        "route": "4",
+        "direction": "0",
+        "headsign": "Downtown Seattle ",
+        "hourly_trips": [2,1,0,0,0,0,4,4,3,2,2,2,2,2,2,4,4,3,4,3,2,2,2,2]
       },
       {
         "route": "7",
@@ -139293,30 +140913,30 @@
     "lon": -122.333954,
     "code": null,
     "hourly_trips": {
-      "0": 1,
+      "0": 2,
       "1": 1,
       "2": 0,
       "3": 0,
       "4": 0,
       "5": 0,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "9": 2,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 2,
-      "20": 3,
-      "21": 3,
-      "22": 2,
-      "23": 1
+      "6": 4,
+      "7": 6,
+      "8": 6,
+      "9": 4,
+      "10": 3,
+      "11": 4,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 4,
+      "20": 5,
+      "21": 5,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -139324,6 +140944,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,2,3,3,2,2,2,2,2,2,2,2,2,2,2,2,3,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,6,4,3,4,4,4,4,4,4,4,4,4,5,5,3,2]
       },
       {
         "route": "132",
@@ -141894,6 +143521,13 @@
         "hourly_trips": [0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
       },
       {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,0,0,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3]
+      },
+      {
         "route": "26",
         "direction": "1",
         "headsign": "Downtown Seattle ",
@@ -141946,6 +143580,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [0,0,0,0,0,1,3,3,2,2,2,2,2,2,2,2,2,2,2,3,2,1,1,2]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [0,1,0,0,0,2,6,6,5,3,4,4,4,4,4,4,4,4,4,5,5,3,2,3]
       },
       {
         "route": "132",
@@ -147758,7 +149399,7 @@
         "hourly_trips": [1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       },
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Only ",
         "hourly_trips": [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0]
@@ -153463,7 +155104,7 @@
       "3": 1,
       "4": 1,
       "5": 3,
-      "6": 5,
+      "6": 6,
       "7": 8,
       "8": 13,
       "9": 11,
@@ -153496,7 +155137,7 @@
         "hourly_trips": [1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
       },
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "0",
         "headsign": "Downtown Only ",
         "hourly_trips": [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0]
@@ -153572,6 +155213,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle ",
         "hourly_trips": [0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+      },
+      {
+        "route": "24/33",
+        "direction": "1",
+        "headsign": "Downtown Seattle ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,0,0,1,3,1,0,0,0,0,0,0,0,0,0,0,0,0,1,3]
       },
       {
         "route": "26",
@@ -153656,6 +155304,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [0,0,0,0,0,1,3,3,2,2,2,2,2,2,2,2,2,2,2,2,3,1,1,2]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [0,1,0,0,0,2,6,6,4,4,4,4,4,4,4,4,4,4,4,4,5,3,3,3]
       },
       {
         "route": "132",
@@ -154617,24 +156272,24 @@
       "3": 0,
       "4": 0,
       "5": 1,
-      "6": 3,
-      "7": 3,
-      "8": 3,
-      "9": 3,
-      "10": 2,
-      "11": 2,
-      "12": 2,
-      "13": 2,
-      "14": 2,
-      "15": 2,
-      "16": 2,
-      "17": 2,
-      "18": 2,
-      "19": 3,
-      "20": 3,
-      "21": 2,
-      "22": 2,
-      "23": 1
+      "6": 6,
+      "7": 5,
+      "8": 5,
+      "9": 5,
+      "10": 4,
+      "11": 3,
+      "12": 4,
+      "13": 4,
+      "14": 4,
+      "15": 4,
+      "16": 4,
+      "17": 4,
+      "18": 4,
+      "19": 5,
+      "20": 5,
+      "21": 3,
+      "22": 3,
+      "23": 2
     },
     "routes": [
       {
@@ -154642,6 +156297,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,3,3,2,3,2,2,2,2,2,2,2,2,2,2,3,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,1,0,0,0,1,6,5,5,5,4,3,4,4,4,4,4,4,4,5,5,3,3,2]
       },
       {
         "route": "132",
@@ -156045,17 +157707,17 @@
       "1": 0,
       "2": 0,
       "3": 0,
-      "4": 1,
-      "5": 3,
-      "6": 4,
+      "4": 2,
+      "5": 5,
+      "6": 6,
       "7": 6,
       "8": 5,
-      "9": 4,
-      "10": 4,
+      "9": 5,
+      "10": 5,
       "11": 4,
       "12": 4,
       "13": 4,
-      "14": 4,
+      "14": 5,
       "15": 4,
       "16": 6,
       "17": 6,
@@ -156072,6 +157734,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,1,2,4,4,3,3,3,2,2,2,2,2,3,3,2,2,1,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,2,5,6,6,5,5,5,4,4,4,5,4,6,6,4,4,3,2,2,2]
       },
       {
         "route": "132",
@@ -156103,7 +157772,7 @@
       "3": 1,
       "4": 2,
       "5": 2,
-      "6": 3,
+      "6": 4,
       "7": 6,
       "8": 6,
       "9": 6,
@@ -156117,8 +157786,8 @@
       "17": 9,
       "18": 9,
       "19": 6,
-      "20": 4,
-      "21": 4,
+      "20": 5,
+      "21": 5,
       "22": 4,
       "23": 4
     },
@@ -156146,6 +157815,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [1,0,0,0,0,0,2,3,2,2,3,2,2,2,1,2,2,2,3,2,2,3,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [2,1,0,0,0,0,4,6,4,5,4,4,4,4,3,4,4,4,5,4,5,5,3,2]
       },
       {
         "route": "132",
@@ -158016,7 +159692,7 @@
       "2": 1,
       "3": 1,
       "4": 1,
-      "5": 2,
+      "5": 3,
       "6": 5,
       "7": 6,
       "8": 6,
@@ -158038,7 +159714,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "3",
         "direction": "1",
         "headsign": "Seattle Pacific University Queen Anne",
         "hourly_trips": [0,0,0,1,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -158072,6 +159748,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,2,2,2,2,2,2,1,2,2,2,3,4,2,3,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,3,4,4,4,4,4,3,4,4,4,5,7,6,5,4,4,4,4,2]
       },
       {
         "route": "26",
@@ -158150,6 +159833,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,0,3,2,2,0,0,0,0,0,0,0,0,1,1,0,0,0,0]
       },
       {
         "route": "132",
@@ -160576,10 +162266,23 @@
         "hourly_trips": [0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,1,1,1,0,2,4,5,5,6,5,7,6,6,6,6,3,5,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,1,1,1,0,4,7,8,8,9,7,9,8,8,8,9,7,6,6,4,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,3,3,3,3,2,2,2,2,2,3,4,1,3,2,2,2,2,2]
       },
       {
         "route": "7",
@@ -163932,6 +165635,13 @@
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,3,4,2,3,2,2,2,2,2]
       },
       {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,4,4,4,4,4,4,4,4,5,7,6,5,4,4,4,4,2]
+      },
+      {
         "route": "26",
         "direction": "0",
         "headsign": "Northgate Transit Center East Green Lake",
@@ -164056,6 +165766,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,0,2,2,2,1,0,0,0,0,0,0,0,1,1,0,0,0,0]
       },
       {
         "route": "132",
@@ -168788,10 +170505,23 @@
         "hourly_trips": [0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,1,1,1,0,2,4,5,5,5,6,6,6,6,6,6,4,5,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [4,1,1,1,0,4,7,8,8,8,8,8,8,8,8,9,7,7,6,4,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,0,0,0,0,2,3,3,3,3,2,2,2,2,2,3,3,2,3,2,2,2,2,2]
       },
       {
         "route": "7",
@@ -174644,6 +176374,13 @@
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,3,3,3,3,2,2,2,2,2]
       },
       {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,4,4,4,4,4,4,4,4,5,6,7,5,4,4,4,4,2]
+      },
+      {
         "route": "26",
         "direction": "0",
         "headsign": "Northgate Transit Center East Green Lake",
@@ -174774,6 +176511,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,0,2,2,2,1,0,0,0,0,0,0,0,1,1,0,0,0,0]
       },
       {
         "route": "132",
@@ -182382,10 +184126,23 @@
         "hourly_trips": [1,1,0,0,1,2,2,3,3,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,1,1,0,1,2,3,5,5,6,6,6,6,6,6,5,5,5,3,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [3,2,1,0,1,4,6,8,8,9,8,8,8,8,8,8,8,7,5,4,5,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,2,3,3,3,3,2,2,2,2,2,3,3,2,2,2,3,2,2,2]
       },
       {
         "route": "7",
@@ -194884,6 +196641,13 @@
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,3,3,3,3,2,2,2,2,2]
       },
       {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,4,4,4,4,4,4,4,4,5,6,7,5,4,4,4,4,2]
+      },
+      {
         "route": "26",
         "direction": "0",
         "headsign": "Northgate Transit Center East Green Lake",
@@ -203636,10 +205400,23 @@
         "hourly_trips": [1,1,0,0,1,2,2,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [2,1,1,0,1,1,4,5,5,5,6,6,7,6,5,6,4,5,4,2,2,2,1,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [3,2,1,0,1,3,7,8,8,8,8,8,9,8,7,9,7,7,6,4,4,4,4,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [1,1,0,0,0,2,3,3,3,3,2,2,2,2,2,3,3,2,2,2,2,2,3,2]
       },
       {
         "route": "5",
@@ -203694,6 +205471,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,3,3,3,3,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,4,4,4,4,4,4,4,4,5,6,7,5,4,4,4,4,2]
       },
       {
         "route": "26",
@@ -209698,10 +211482,23 @@
         "hourly_trips": [1,1,0,0,1,2,2,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
       },
       {
+        "route": "3",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,0,1,0,1,1,4,5,3,3,4,4,4,4,4,5,3,5,3,2,2,2,0,0]
+      },
+      {
         "route": "3/4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
+        "combined": true,
         "hourly_trips": [0,1,1,0,1,3,7,8,4,4,4,4,4,4,4,7,5,6,5,4,4,4,3,2]
+      },
+      {
+        "route": "4",
+        "direction": "1",
+        "headsign": "Downtown Seattle East Jefferson Street",
+        "hourly_trips": [0,1,0,0,0,2,3,3,1,1,0,0,0,0,0,2,2,1,2,2,2,2,3,2]
       },
       {
         "route": "5",
@@ -209744,6 +211541,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,3,3,3,3,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,4,4,4,4,4,4,4,4,4,5,6,7,5,4,4,4,4,2]
       },
       {
         "route": "26",
@@ -219008,7 +220812,7 @@
       "2": 1,
       "3": 1,
       "4": 1,
-      "5": 2,
+      "5": 3,
       "6": 5,
       "7": 6,
       "8": 6,
@@ -219064,6 +220868,13 @@
         "direction": "0",
         "headsign": "West Magnolia ",
         "hourly_trips": [0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,4,2,3,2,2,2,2,2]
+      },
+      {
+        "route": "24/33",
+        "direction": "0",
+        "headsign": "West Magnolia ",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,3,2,2,4,4,4,4,4,4,4,4,5,5,4,4,2,2,2,2]
       },
       {
         "route": "26",
@@ -219136,6 +220947,13 @@
         "direction": "1",
         "headsign": "Downtown Seattle Highland Park",
         "hourly_trips": [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
+      },
+      {
+        "route": "131/132",
+        "direction": "1",
+        "headsign": "Downtown Seattle Highland Park",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,2,0,3,2,2,0,0,0,0,0,0,0,0,1,1,0,0,0,0]
       },
       {
         "route": "132",
@@ -288635,7 +290453,7 @@
       "3": 1,
       "4": 1,
       "5": 3,
-      "6": 6,
+      "6": 7,
       "7": 11,
       "8": 15,
       "9": 10,
@@ -288690,6 +290508,13 @@
         "direction": "0",
         "headsign": "Burien Transit Center Highland Park",
         "hourly_trips": [0,0,0,0,0,1,4,2,2,3,2,2,2,2,2,2,2,2,2,2,2,1,1,1]
+      },
+      {
+        "route": "131/132",
+        "direction": "0",
+        "headsign": "Burien Transit Center Highland Park",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,3,7,5,4,4,4,4,4,4,4,4,4,4,4,5,4,3,2,2]
       },
       {
         "route": "132",
@@ -296324,6 +298149,13 @@
         "hourly_trips": [0,0,0,0,0,0,1,2,2,3,2,2,2,2,2,2,3,2,3,2,2,2,0,0]
       },
       {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,3,5,4,5,4,4,4,4,4,5,6,5,5,4,4,4,2,2]
+      },
+      {
         "route": "32",
         "direction": "0",
         "headsign": "Seattle Center Fremont",
@@ -296396,6 +298228,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,1,2,2,3,2,2,2,2,2,2,3,2,3,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,3,5,4,5,4,4,4,4,4,6,6,4,5,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -296472,6 +298311,13 @@
         "hourly_trips": [0,0,0,0,0,0,1,2,2,3,2,2,2,2,2,2,3,2,3,2,2,2,0,0]
       },
       {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,3,5,4,5,4,4,4,4,4,5,6,5,5,4,4,4,2,2]
+      },
+      {
         "route": "32",
         "direction": "0",
         "headsign": "Seattle Center Fremont",
@@ -296546,6 +298392,13 @@
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,3,3,2,2,2,2,2,1,0]
       },
       {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,5,4,4,4,4,4,4,6,6,5,4,4,4,4,3,2]
+      },
+      {
         "route": "32",
         "direction": "0",
         "headsign": "Seattle Center Fremont",
@@ -296618,6 +298471,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,1,2,3,2,2,2,2,2,2,2,3,3,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,3,5,5,4,4,4,4,4,4,6,6,5,4,4,4,4,2,2]
       },
       {
         "route": "32",
@@ -345000,7 +346860,7 @@
     },
     "routes": [
       {
-        "route": "3/4",
+        "route": "4",
         "direction": "1",
         "headsign": "Downtown Seattle East Jefferson Street",
         "hourly_trips": [2,0,0,0,0,2,3,3,3,2,2,2,2,2,2,3,3,2,2,2,2,2,2,2]
@@ -355748,7 +357608,7 @@
       "12": 5,
       "13": 6,
       "14": 5,
-      "15": 5,
+      "15": 6,
       "16": 6,
       "17": 7,
       "18": 6,
@@ -355764,6 +357624,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,0,3,2,2,2,2,2,2,2,3,3,2,2,2,2,2,1,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [1,0,0,0,0,1,2,5,5,4,4,4,4,4,4,6,6,5,4,4,4,4,3,2]
       },
       {
         "route": "32",
@@ -364820,6 +366687,13 @@
         "direction": "0",
         "headsign": "Central Magnolia Fremont",
         "hourly_trips": [0,0,0,0,0,0,1,3,2,2,2,2,2,2,2,2,3,3,2,2,2,2,0,0]
+      },
+      {
+        "route": "31/32",
+        "direction": "0",
+        "headsign": "Central Magnolia Fremont",
+        "combined": true,
+        "hourly_trips": [0,0,0,0,0,1,3,6,4,4,4,4,4,4,4,5,6,5,4,4,4,4,3,2]
       },
       {
         "route": "32",
