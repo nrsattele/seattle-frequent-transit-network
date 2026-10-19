@@ -124,6 +124,66 @@ function mergeWalksheds(polygons: any[]): any {
   return union;
 }
 
+const SEATTLE_POPULATION = 737015; // Seattle 2020 Census count
+const POPULATION_GRID_SIZE = 24; // Walkshed is cut into this many cells per side for population served
+
+/**
+ * Population living inside a walkshed, from census blocks prepared as { feature, population, area, bbox }
+ *
+ * Partially covered blocks count in proportion to the area covered, which assumes people are spread evenly across
+ * each block (an approximation: people cluster in buildings, not parking lots).
+ *
+ * Intersecting every block with the whole walkshed takes 10-15s, since each intersection scans the walkshed's full
+ * outline. Instead the walkshed is cut into a grid of small pieces once, and each block is intersected only with the
+ * pieces its bounding box overlaps. Same result in about 1s.
+ */
+function populationInWalkshed(walkshed: any, blocks: any[]): number {
+  const turf = window.turf;
+  const [x0, y0, x1, y1] = turf.bbox(walkshed);
+  const n = POPULATION_GRID_SIZE;
+  const dx = (x1 - x0) / n;
+  const dy = (y1 - y0) / n;
+
+  // Clip the walkshed to each grid cell, dropping the empty rings bboxClip leaves behind
+  const cells: any[] = [];
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      const clipped = turf.bboxClip(walkshed, [x0 + i * dx, y0 + j * dy, x0 + (i + 1) * dx, y0 + (j + 1) * dy]);
+      const geometry = clipped.geometry;
+      const polygons = (geometry.type === 'MultiPolygon' ? geometry.coordinates : [geometry.coordinates])
+        .map((polygon: any[]) => polygon.filter(ring => ring.length >= 4))
+        .filter((polygon: any[]) => polygon.length > 0);
+      cells.push(polygons.length > 0 ? turf.multiPolygon(polygons) : null);
+    }
+  }
+
+  let population = 0;
+  for (const block of blocks) {
+    const [bx0, by0, bx1, by1] = block.bbox;
+    if (bx1 < x0 || bx0 > x1 || by1 < y0 || by0 > y1) continue;
+
+    const i0 = Math.max(0, Math.floor((bx0 - x0) / dx));
+    const i1 = Math.min(n - 1, Math.floor((bx1 - x0) / dx));
+    const j0 = Math.max(0, Math.floor((by0 - y0) / dy));
+    const j1 = Math.min(n - 1, Math.floor((by1 - y0) / dy));
+    let coveredArea = 0;
+    for (let i = i0; i <= i1; i++) {
+      for (let j = j0; j <= j1; j++) {
+        const cell = cells[i * n + j];
+        if (!cell) continue;
+        try {
+          const part = turf.intersect(block.feature, cell);
+          if (part) coveredArea += turf.area(part);
+        } catch {
+          // Skip pieces that cause geometry errors
+        }
+      }
+    }
+    population += block.population * Math.min(1, coveredArea / block.area);
+  }
+  return population;
+}
+
 /**
  * Load a script at most once per page, resolving when its global is available.
  *
@@ -210,7 +270,7 @@ export default function SeattleTransitVisualizer() {
   const markersLayerRef = useRef<any>(null); // Layer group holding the stop markers, so tiers mode can hide them by zoom
   // In-bounds merged walkshed per active headway, and its ring: the part not covered by the next tighter headway
   const tierPolygonsRef = useRef<{ headway: number; polygon: any; ring: any }[]>([]);
-  const mergedPolygonRef = useRef<any>(null); // Single mode's merged walkshed, used for population served
+  const censusCacheRef = useRef<{ geometries: any; seattleBlocks: any[] } | null>(null); // Census file, loaded once per page
   const mergedPolygonOutOfBoundsRef = useRef<any>(null); // Out-of-bounds portion of the loosest active headway
 
   // Library loading state - tracks when external CDN libraries are ready
@@ -736,7 +796,6 @@ export default function SeattleTransitVisualizer() {
     }
 
     tierPolygonsRef.current = tierPolygons;
-    mergedPolygonRef.current = mode === 'single' ? tierPolygons[0].polygon : null;
     mergedPolygonOutOfBoundsRef.current = outOfBounds; // Loosest headway's, which contains the others
 
     setStats({ tiers: tierStats });
@@ -863,104 +922,63 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Load US Census population data and calculate how many people live within walksheds
+   * Load US Census population data and calculate how many people live within each active headway's walkshed
    *
    * - Local GeoJSON file: Census block geometries with population counts for King County
-   *   (KING_COUNTY_BLOCK_2020_POPULATION.geojson in base_data directory)
-   *
-   * - Load census blocks with population data from local file
-   * - Filter to only Seattle blocks using `Place`
-   * - Use Turf.js to check which blocks intersect with walkshed polygon
-   * - For partial overlaps, allocate population proportionally based on intersection area
-   * - Sum allocated population across all intersecting blocks
-   * - Calculate percentage of Seattle's total population served
-   *
-   * NOTE: Proportional allocation assumes population is evenly distributed across each
-   * census block, which is an approximation (people cluster in buildings, not parking lots).
+   *   (KING_COUNTY_BLOCK_2020_POPULATION.geojson in base_data directory), fetched once per page
+   * - Only Seattle blocks with people count (filtered by `Place`)
+   * - Single mode gets one number; tiers mode gets one per tier, each including the more frequent tiers
+   * - Percentages are of Seattle's total population
    */
-  async function loadCensusData(walkshedPolygon: any) {
+  async function loadCensusData() {
     if (!turfLoaded || !window.turf) return;
 
     setLoadingCensus(true);
 
     try {
-      // STEP 1: Load census block geometries with population data from base_data directory
-      const censusUrl = `${import.meta.env.BASE_URL}base_data/KING_COUNTY_BLOCK_2020_POPULATION.geojson`;
-      console.log(`Loading census data from: ${censusUrl}`);
+      if (!censusCacheRef.current) {
+        const censusUrl = `${import.meta.env.BASE_URL}base_data/KING_COUNTY_BLOCK_2020_POPULATION.geojson`;
+        console.log(`Loading census data from: ${censusUrl}`);
 
-      const censusResponse = await fetch(censusUrl);
-      if (!censusResponse.ok) {
-        setCensusData({
-          error: 'Census data file not found. Please add KING_COUNTY_BLOCK_2020_POPULATION.geojson to base_data/'
-        });
-        setLoadingCensus(false);
-        return;
+        const censusResponse = await fetch(censusUrl);
+        if (!censusResponse.ok) {
+          setCensusData({
+            error: 'Census data file not found. Please add KING_COUNTY_BLOCK_2020_POPULATION.geojson to base_data/'
+          });
+          return;
+        }
+
+        const geometries = await censusResponse.json();
+        console.log(`Loaded ${geometries.features?.length || 0} census blocks`);
+
+        // Prepare populated Seattle blocks once, with the area and bounding box the calculation needs
+        const seattleBlocks = (geometries.features || [])
+          .filter((block: any) => block.properties.Place === 'Seattle' && parseInt(block.properties.TOT_POP || '0') > 0)
+          .map((block: any) => ({
+            feature: block,
+            population: parseInt(block.properties.TOT_POP),
+            area: window.turf.area(block),
+            bbox: window.turf.bbox(block)
+          }));
+        censusCacheRef.current = { geometries, seattleBlocks };
+      } else {
+        // Let the loading indicator paint before the synchronous calculation
+        await new Promise(resolve => setTimeout(resolve, 0));
       }
 
-      const blockGeometries = await censusResponse.json();
-      console.log(`Loaded ${blockGeometries.features?.length || 0} census blocks`);
-
-      // STEP 2: Calculate which census blocks intersect with walkshed
-      // For each block, check if it overlaps with the merged walkshed polygon
-      let populationInWalkshed = 0;
-      let blocksInWalkshed = 0;
-
-      blockGeometries.features?.forEach((block: any) => {
-        const population = parseInt(
-          block.properties.TOT_POP ||
-          '0'
-        );
-
-        if (block.properties.Place !== 'Seattle' || population < 1) {
-          return; // Skip blocks outside Seattle
-        }
-
-        try {
-          // Check if this census block intersects with the walkshed polygon
-          const intersects = window.turf.booleanIntersects(block, walkshedPolygon);
-          if (intersects) {
-            // If block is fully inside the walkshed, use full population (skip expensive intersect)
-            if (window.turf.booleanWithin(block, walkshedPolygon)) {
-              populationInWalkshed += population;
-              blocksInWalkshed++;
-            } else {
-              // Block partially overlaps — calculate proportional population
-              const blockArea = window.turf.area(block);
-              const intersection = window.turf.intersect(block, walkshedPolygon);
-
-              if (intersection) {
-                const intersectionArea = window.turf.area(intersection);
-                const ratio = intersectionArea / blockArea;
-                populationInWalkshed += population * ratio;
-                blocksInWalkshed++;
-              } else {
-                // Fallback: if intersection calculation fails but booleanIntersects was true,
-                // use full population
-                populationInWalkshed += population;
-                blocksInWalkshed++;
-              }
-            }
-          }
-        } catch (err) {
-          // Skip blocks that cause geometry errors
-          console.debug(`Skipping block due to geometry error:`, err);
-        }
+      const { geometries, seattleBlocks } = censusCacheRef.current;
+      const tiers = tierPolygonsRef.current.map(({ headway: tierHeadway, polygon }) => {
+        const population = polygon ? populationInWalkshed(polygon, seattleBlocks) : 0;
+        return {
+          headway: tierHeadway,
+          population: Math.round(population).toLocaleString(),
+          populationPercent: (population / SEATTLE_POPULATION * 100).toFixed(1)
+        };
       });
 
       // Store census blocks for visualization
-      setCensusBlocks(blockGeometries);
-
-      // Calculate percentage of Seattle population served
-      const seattlePopulation = 737015; // Seattle 2020 Census count
-      const populationPercent = ((populationInWalkshed / seattlePopulation) * 100).toFixed(1);
-
-      // Update UI with population statistics
-      setCensusData({
-        population: populationInWalkshed.toLocaleString(),
-        populationPercent: populationPercent,
-        blocksCount: blocksInWalkshed
-      });
-
+      setCensusBlocks(geometries);
+      setCensusData({ tiers });
     } catch (err: any) {
       setCensusData({
         error: 'Could not load census data: ' + err.message
@@ -986,7 +1004,6 @@ export default function SeattleTransitVisualizer() {
     setCensusBlocks(null);
     setShowCensusBlocks(false);
     tierPolygonsRef.current = [];
-    mergedPolygonRef.current = null;
     mergedPolygonOutOfBoundsRef.current = null;
     fitToStopsRef.current = true;
 
@@ -1147,16 +1164,31 @@ export default function SeattleTransitVisualizer() {
           <div className="flex gap-8 items-center flex-wrap">
             {mode === 'tiers' ? (
               <>
-                {/* Per-tier legend with stop count and area coverage (cumulative: each tier includes the more frequent ones) */}
-                {stats.tiers.map((tier: any) => (
-                  <div key={tier.headway} className="flex items-center gap-2">
-                    {tierSwatch(tier.headway)}
-                    <span className="text-gray-600 text-sm">Every {tier.headway} min:</span>
-                    <span className="text-lg font-bold text-gray-800">{tier.coveragePercent}%</span>
-                    <span className="text-gray-500 text-xs">({tier.stopCount} stops)</span>
-                  </div>
-                ))}
-                <span className="text-gray-500 text-xs">Coverage by area, each tier including the more frequent ones. Zoom in to see stops.</span>
+                {/* Per-tier legend with stop count, area coverage and population served once calculated
+                    (cumulative: each tier includes the more frequent ones) */}
+                {stats.tiers.map((tier: any) => {
+                  const tierPopulation = censusData?.tiers?.find((t: any) => t.headway === tier.headway);
+                  return (
+                    <div key={tier.headway} className="flex items-center gap-2">
+                      {tierSwatch(tier.headway)}
+                      <span className="text-gray-600 text-sm">Every {tier.headway} min:</span>
+                      <span className="text-lg font-bold text-gray-800">{tier.coveragePercent}%</span>
+                      <span className="text-gray-500 text-xs -ml-1">area</span>
+                      {tierPopulation && (
+                        <>
+                          <span className="text-lg font-bold text-gray-800" title={`${tierPopulation.population} people`}>
+                            {tierPopulation.populationPercent}%
+                          </span>
+                          <span className="text-gray-500 text-xs -ml-1">people</span>
+                        </>
+                      )}
+                      <span className="text-gray-500 text-xs">({tier.stopCount} stops)</span>
+                    </div>
+                  );
+                })}
+                <span className="text-gray-500 text-xs">
+                  Share of Seattle within a 10-minute walk, each tier including the more frequent ones. Zoom in to see stops.
+                </span>
               </>
             ) : (
               <>
@@ -1173,12 +1205,12 @@ export default function SeattleTransitVisualizer() {
                 </div>
               </>
             )}
-            {/* Population metrics - shown when census data loads successfully */}
-            {censusData && !censusData.error && (
+            {/* Population metrics - shown when census data loads successfully (tiers mode shows them per tier above) */}
+            {mode === 'single' && censusData?.tiers && (
               <div>
                 <span className="text-gray-600 text-sm">Population Served:</span>
-                <span className="ml-2 text-2xl font-bold text-purple-600">{censusData.populationPercent}%</span>
-                <span className="text-gray-500 text-xs ml-1">({censusData.population} people)</span>
+                <span className="ml-2 text-2xl font-bold text-purple-600">{censusData.tiers[0].populationPercent}%</span>
+                <span className="text-gray-500 text-xs ml-1">({censusData.tiers[0].population} people)</span>
               </div>
             )}
             {/* Census error message if data failed to load */}
@@ -1188,9 +1220,9 @@ export default function SeattleTransitVisualizer() {
               </div>
             )}
             {/* Button to calculate population served (only shown when walkshed is ready and census hasn't been loaded yet) */}
-            {!censusData && !loadingCensus && mergedPolygonRef.current && (
+            {!censusData && !loadingCensus && tierPolygonsRef.current.some(tier => tier.polygon) && (
               <button
-                onClick={() => loadCensusData(mergedPolygonRef.current)}
+                onClick={() => loadCensusData()}
                 className="px-4 py-2 rounded text-sm bg-purple-100 text-purple-700 hover:bg-purple-200"
               >
                 Calculate Population Served
