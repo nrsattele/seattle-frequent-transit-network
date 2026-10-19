@@ -32,6 +32,24 @@ const PRESETS: Record<Preset, { label: string; hours: readonly [number, number] 
 
 const HEADWAYS = [10, 15, 20, 30, 60]; // Minutes between buses, offered in the headway dropdown
 
+// One color per headway, used in both single and tiers mode so a headway always looks the same.
+// The tier colors stay distinguishable in every pair under red-green colorblindness, and the cool hues stay clear
+// of the yellow/orange/red population density layer. The purple is darker than the blue so the two don't merge
+// for colorblind viewers. 10 min keeps the blue of the original single-headway map.
+// 20 min only appears in single mode, never beside the tiers, so it's a neutral slate rather than a fifth hue.
+const HEADWAY_COLORS: Record<number, string> = {
+  10: '#2563eb', // blue
+  15: '#0b8f6a', // bluish green
+  20: '#475569', // slate
+  30: '#6d3c9e', // purple
+  60: '#62bbe9', // sky blue
+};
+
+// Tiers mode draws nested walksheds for these headways, tightest first, each as a ring outside the tighter tier
+const TIER_HEADWAYS = [10, 15, 30, 60];
+const TIER_FILL_OPACITY = 0.35;
+const TIER_MARKER_MIN_ZOOM = 14; // In tiers mode, stop markers would hide the bands when zoomed out
+
 // Format an hour of the day (0-24) for display, e.g. 6 -> "6am", 15 -> "3pm", 0 or 24 -> "midnight"
 function formatHour(hour: number): string {
   if (hour % 24 === 0) return 'midnight';
@@ -165,21 +183,35 @@ export default function SeattleTransitVisualizer() {
 
   // Frequency selection - which time of day and how often buses must come for a stop to count
   const [preset, setPreset] = useState<Preset>(Preset.AllDay);
-  const [headway, setHeadway] = useState<number>(10); // Minutes between buses
+  const [headway, setHeadway] = useState<number>(10); // Minutes between buses, in single mode
+  const [mode, setMode] = useState<'single' | 'tiers'>('single'); // One headway, or nested bands for TIER_HEADWAYS
+  const modeRef = useRef(mode); // For the map's zoom handler, which outlives renders
+  modeRef.current = mode;
 
-  // Stops meeting the selected frequency. Changing year, preset or headway re-filters without re-fetching.
-  const frequentStops = useMemo(
-    () => yearStops.filter(stop => qualifies(stop.hourlyTrips, preset, headway)),
-    [yearStops, preset, headway]
-  );
+  // The headways being drawn, tightest first. Single mode is a one-tier list so both modes share the same code.
+  const activeHeadways = mode === 'tiers' ? TIER_HEADWAYS : [headway];
+
+  // Stops meeting the loosest active headway, and the tightest active headway each one meets.
+  // Changing year, preset, headway or mode re-filters without re-fetching.
+  const { frequentStops, bestHeadway } = useMemo(() => {
+    const bestHeadway = new Map<string, number>();
+    for (const stop of yearStops) {
+      const tightest = activeHeadways.find(h => qualifies(stop.hourlyTrips, preset, h));
+      if (tightest !== undefined) bestHeadway.set(stop.id, tightest);
+    }
+    return { frequentStops: yearStops.filter(stop => bestHeadway.has(stop.id)), bestHeadway };
+  }, [yearStops, preset, headway, mode]);
 
   // React refs - maintain references to DOM elements and map objects
   const mapRef = useRef<HTMLDivElement>(null); // Container for Leaflet map
   const leafletMapRef = useRef<any>(null); // Leaflet map instance
   const canvasRendererRef = useRef<any>(null); // Shared canvas renderer, so thousands of stop markers stay fast
   const fitToStopsRef = useRef<boolean>(true); // Zoom to fit the stops on the next draw (set when the year changes)
-  const mergedPolygonRef = useRef<any>(null); // Combined walkshed polygon for visualization
-  const mergedPolygonOutOfBoundsRef = useRef<any>(null); // Out-of-bounds walkshed portions
+  const markersLayerRef = useRef<any>(null); // Layer group holding the stop markers, so tiers mode can hide them by zoom
+  // In-bounds merged walkshed per active headway, and its ring: the part not covered by the next tighter headway
+  const tierPolygonsRef = useRef<{ headway: number; polygon: any; ring: any }[]>([]);
+  const mergedPolygonRef = useRef<any>(null); // Single mode's merged walkshed, used for population served
+  const mergedPolygonOutOfBoundsRef = useRef<any>(null); // Out-of-bounds portion of the loosest active headway
 
   // Library loading state - tracks when external CDN libraries are ready
   const [leafletLoaded, setLeafletLoaded] = useState<boolean>(false); // Mapping library
@@ -344,6 +376,9 @@ export default function SeattleTransitVisualizer() {
     map.createPane('stops');
     map.getPane('stops').style.zIndex = '450';
     canvasRendererRef.current = L.canvas({ padding: 0.5, pane: 'stops' });
+
+    markersLayerRef.current = L.layerGroup();
+    map.on('zoomend', updateMarkerVisibility);
   }
 
   /**
@@ -413,6 +448,7 @@ export default function SeattleTransitVisualizer() {
     const map = leafletMapRef.current;
 
     // Clear existing layers (circles, markers, polygons) to avoid duplicates
+    markersLayerRef.current.clearLayers();
     map.eachLayer(layer => {
       if (layer instanceof L.Circle || layer instanceof L.CircleMarker || layer instanceof L.GeoJSON) {
         map.removeLayer(layer);
@@ -450,26 +486,38 @@ export default function SeattleTransitVisualizer() {
       }).addTo(map);
     }
 
-    // Draw merged walkshed polygon (combined ½ mile walking areas within Seattle)
-    // This shows the total area with access to frequent transit
-    if (mergedPolygonRef.current) {
-      L.geoJSON(mergedPolygonRef.current, {
-        style: {
-          fillColor: '#3b82f6', // Blue fill
+    // Draw merged walkshed polygons within Seattle (combined 10-minute walking areas), in the headway's color.
+    // Single mode: one area. Tiers mode: one ring per headway, so each area shows exactly one tier's color.
+    // Over population density, tiers are outlines of the full tier instead, so the density colors show through.
+    const tiers = mode === 'tiers';
+    const tierOutlines = tiers && showCensusBlocks && !!censusBlocks;
+    [...tierPolygonsRef.current].reverse().forEach(({ headway: tierHeadway, polygon, ring }) => {
+      const shape = tiers && !tierOutlines ? ring : polygon;
+      if (!shape) return;
+      const color = HEADWAY_COLORS[tierHeadway];
+      L.geoJSON(shape, {
+        style: tiers ? {
+          fillColor: color,
+          fillOpacity: tierOutlines ? 0 : TIER_FILL_OPACITY,
+          color,
+          weight: tierOutlines ? 3 : 1,
+          opacity: tierOutlines ? 1 : 0.8
+        } : {
+          fillColor: color,
           fillOpacity: 0.25, // Semi-transparent
-          color: '#2563eb', // Darker blue border
+          color,
           weight: 2,
           opacity: 0.8
         }
       }).addTo(map);
-    }
+    });
 
     // Add individual stop markers with tooltips showing stop name and ID
     const bounds = [];
     frequentStops.forEach(stop => {
       bounds.push([stop.lat, stop.lon]);
 
-      // Different styling for future stops vs existing stops
+      // Different styling for future stops vs existing stops. Existing stops take their headway's color.
       const isFuture = stop.isFuture === true;
       const markerOptions = isFuture ? {
         radius: 6,
@@ -480,27 +528,43 @@ export default function SeattleTransitVisualizer() {
         dashArray: '3, 3' // Dashed border to indicate future
       } : {
         radius: 5,
-        fillColor: '#1e40af', // Dark blue for existing stops
+        fillColor: HEADWAY_COLORS[bestHeadway.get(stop.id)!], // The color of the tightest headway the stop meets
         fillOpacity: 1,
         color: 'white', // White border for contrast
         weight: 2
       };
 
       // Create circle marker for each frequent transit stop
+      const tierLine = tiers ? `<br><small>Every ${bestHeadway.get(stop.id)} min or better</small>` : '';
       const tooltip = isFuture
-        ? `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small>`
-        : `${stop.name}<br><small>ID: ${stop.id}</small>`;
+        ? `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small>${tierLine}`
+        : `${stop.name}<br><small>ID: ${stop.id}</small>${tierLine}`;
 
       L.circleMarker([stop.lat, stop.lon], { ...markerOptions, renderer: canvasRendererRef.current })
         .bindTooltip(tooltip)
-        .addTo(map);
+        .addTo(markersLayerRef.current);
     });
+    updateMarkerVisibility();
 
     // Auto-zoom map to show all stops with padding, only after a year change so preset/headway changes keep the view
     if (fitToStopsRef.current && bounds.length > 0) {
       map.fitBounds(bounds, { padding: [50, 50] });
       fitToStopsRef.current = false;
     }
+  }
+
+  /**
+   * Show stop markers, except in tiers mode below TIER_MARKER_MIN_ZOOM where they'd hide the bands.
+   * Also called on every zoom, so it reads mode from a ref rather than state.
+   */
+  function updateMarkerVisibility() {
+    const map = leafletMapRef.current;
+    const markers = markersLayerRef.current;
+    if (!map || !markers) return;
+
+    const show = modeRef.current !== 'tiers' || map.getZoom() >= TIER_MARKER_MIN_ZOOM;
+    if (show && !map.hasLayer(markers)) markers.addTo(map);
+    if (!show && map.hasLayer(markers)) map.removeLayer(markers);
   }
 
   /**
@@ -532,40 +596,33 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Calculate walkshed coverage from frequent stops
-   *
-   * Uses pre-computed isochrones when available, falls back to circular buffers
+   * Walkshed polygon for each stop - pre-computed isochrones when available, circular buffers otherwise
    */
-  function calculateWalkshedCoverage(stopList: any[], boundary: any = null) {
-    if (!turfLoaded || !window.turf || stopList.length === 0) {
-      return {
-        mergedPolygon: null,
-        mergedPolygonOutOfBounds: null,
-        coveragePercent: '0'
-      };
-    }
+  function walkshedsForStops(stopList: any[]): any[] {
+    return stopList.map((stop: any) => {
+      const isochronePolygon = findIsochroneForStop(stop, selectedYear);
 
+      if (isochronePolygon) {
+        // Use pre-computed 10-minute isochrone
+        return isochronePolygon;
+      } else {
+        // Fall back to half-mile circular buffer
+        return window.turf.circle(
+          [stop.lon, stop.lat],
+          HALF_MILE_METERS / 1000,
+          { steps: 32, units: 'kilometers' }
+        );
+      }
+    });
+  }
+
+  /**
+   * Clip a merged walkshed to the city limits and calculate coverage
+   *
+   * Returns the part inside Seattle, the part outside, and the inside area as a percentage of the city
+   */
+  function clipToCity(union: any, boundary: any = null) {
     try {
-      // Create walksheds - use isochrones if available, otherwise circles
-      const walksheds = stopList.map((stop: any) => {
-        const isochronePolygon = findIsochroneForStop(stop, selectedYear);
-
-        if (isochronePolygon) {
-          // Use pre-computed 10-minute isochrone
-          return isochronePolygon;
-        } else {
-          // Fall back to half-mile circular buffer
-          return window.turf.circle(
-            [stop.lon, stop.lat],
-            HALF_MILE_METERS / 1000,
-            { steps: 32, units: 'kilometers' }
-          );
-        }
-      });
-
-      // Merge all overlapping walksheds into a single polygon
-      const union = mergeWalksheds(walksheds);
-
       let mergedPolygon = null;
       let mergedPolygonOutOfBounds = null;
       let coveragePercent = '0';
@@ -630,36 +687,59 @@ export default function SeattleTransitVisualizer() {
       return { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent };
     } catch (err) {
       console.error('Error calculating walkshed coverage:', err);
-      // Fallback: Simple calculation
-      const totalWalkshedArea = stopList.length * Math.PI * Math.pow(HALF_MILE_METERS, 2);
-      const seattleAreaSqMeters = 217000000;
-      return {
-        mergedPolygon: null,
-        mergedPolygonOutOfBounds: null,
-        coveragePercent: (totalWalkshedArea / seattleAreaSqMeters * 100).toFixed(1) + '+'
-      };
+      return { mergedPolygon: null, mergedPolygonOutOfBounds: null, coveragePercent: '0' };
     }
   }
 
   /**
-   * Recalculate walksheds when Seattle boundary becomes available
+   * Recalculate walksheds for each active headway
    *
-   * This is called when the boundary loads after GTFS data has been processed
+   * Runs when stops, isochrones or the boundary change. Tiers are nested, so each headway's walkshed is the
+   * tighter headway's walkshed plus only the stops that newly qualify, rather than a fresh merge of every stop.
    */
   function recalculateWalksheds() {
-    if (!seattleBoundary) return;
+    if (!seattleBoundary || !turfLoaded || !window.turf) return;
 
-    console.log('Recalculating with boundary:', seattleBoundary.type);
-    const { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent } =
-      calculateWalkshedCoverage(frequentStops, seattleBoundary);
+    let union = null;
+    let outOfBounds = null;
+    const tierPolygons = [];
+    const tierStats = [];
+    for (const tierHeadway of activeHeadways) {
+      const tierStops = frequentStops.filter(stop => bestHeadway.get(stop.id)! <= tierHeadway);
+      const newStops = frequentStops.filter(stop => bestHeadway.get(stop.id) === tierHeadway);
+      if (newStops.length > 0) {
+        const merged = mergeWalksheds(walkshedsForStops(newStops));
+        union = union ? mergeWalksheds([union, merged]) : merged;
+      }
 
-    mergedPolygonRef.current = mergedPolygon;
-    mergedPolygonOutOfBoundsRef.current = mergedPolygonOutOfBounds;
+      const { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent } = union
+        ? clipToCity(union, seattleBoundary)
+        : { mergedPolygon: null, mergedPolygonOutOfBounds: null, coveragePercent: '0' };
+      outOfBounds = mergedPolygonOutOfBounds;
 
-    setStats({
-      stopCount: frequentStops.length,
-      coveragePercent: parseFloat(coveragePercent) > 100 ? '100+' : coveragePercent
-    });
+      // Ring: this tier minus the tighter tier, so each area is drawn in exactly one tier's color
+      const tighter = tierPolygons[tierPolygons.length - 1]?.polygon;
+      let ring = mergedPolygon;
+      if (mergedPolygon && tighter) {
+        try {
+          ring = window.turf.difference(mergedPolygon, tighter);
+        } catch (err) {
+          console.error('Tier ring difference failed, drawing the full tier:', err);
+        }
+      }
+      tierPolygons.push({ headway: tierHeadway, polygon: mergedPolygon, ring });
+      tierStats.push({
+        headway: tierHeadway,
+        stopCount: tierStops.length,
+        coveragePercent: parseFloat(coveragePercent) > 100 ? '100+' : coveragePercent
+      });
+    }
+
+    tierPolygonsRef.current = tierPolygons;
+    mergedPolygonRef.current = mode === 'single' ? tierPolygons[0].polygon : null;
+    mergedPolygonOutOfBoundsRef.current = outOfBounds; // Loosest headway's, which contains the others
+
+    setStats({ tiers: tierStats });
 
     // Redraw the map to show updated walksheds with isochrones
     if (leafletMapRef.current) {
@@ -905,6 +985,7 @@ export default function SeattleTransitVisualizer() {
     setYearStops([]);
     setCensusBlocks(null);
     setShowCensusBlocks(false);
+    tierPolygonsRef.current = [];
     mergedPolygonRef.current = null;
     mergedPolygonOutOfBoundsRef.current = null;
     fitToStopsRef.current = true;
@@ -922,7 +1003,7 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Handle preset or headway change
+   * Handle preset, headway or mode change
    *
    * frequentStops re-filters on its own and the effects redraw the map and walksheds.
    * Population served describes the previous walkshed, so clear it.
@@ -937,7 +1018,24 @@ export default function SeattleTransitVisualizer() {
     setCensusData(null);
   }
 
+  function handleModeChange(newMode: 'single' | 'tiers') {
+    setMode(newMode);
+    setCensusData(null);
+  }
+
   const [presetStart, presetEnd] = PRESETS[preset].hours;
+  const presetHours = `${formatHour(presetStart)}–${formatHour(presetEnd)}`;
+
+  // Legend swatch for a tier, drawn like its band on the map: a translucent fill, or an outline over population density
+  function tierSwatch(tierHeadway: number) {
+    const color = HEADWAY_COLORS[tierHeadway];
+    const outline = showCensusBlocks && censusBlocks;
+    return (
+      <span className="relative inline-block w-4 h-4 rounded-sm overflow-hidden align-middle" style={{ border: `${outline ? 3 : 1}px solid ${color}` }}>
+        {!outline && <span className="absolute inset-0" style={{ backgroundColor: color, opacity: TIER_FILL_OPACITY }} />}
+      </span>
+    );
+  }
 
   /**
    * RENDER: Main component UI
@@ -950,7 +1048,9 @@ export default function SeattleTransitVisualizer() {
           <div className="flex-1">
             <h1 className="text-2xl font-bold">Seattle Frequent Transit Access</h1>
             <p className="text-blue-100 text-sm mt-1">
-              Stops with service every {headway} minutes, {formatHour(presetStart)}–{formatHour(presetEnd)} weekdays + 10-minute walksheds
+              {mode === 'tiers'
+                ? `Stops by how often buses come, ${presetHours} weekdays + 10-minute walksheds`
+                : `Stops with service every ${headway} minutes, ${presetHours} weekdays + 10-minute walksheds`}
             </p>
           </div>
           {/* Year selector dropdown */}
@@ -987,19 +1087,37 @@ export default function SeattleTransitVisualizer() {
               );
             })}
           </div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm text-blue-100">Every</label>
-            <select
-              value={headway}
-              onChange={(e) => handleHeadwayChange(Number(e.target.value))}
-              className="px-3 py-1 rounded bg-blue-700 text-white border border-blue-500 hover:bg-blue-800 cursor-pointer"
-            >
-              {HEADWAYS.map((minutes) => (
-                <option key={minutes} value={minutes}>{minutes}</option>
-              ))}
-            </select>
-            <span className="text-sm text-blue-100">min or better</span>
+          {/* Mode toggle - nested tiers, or a single headway */}
+          <div className="flex gap-1">
+            {(['tiers', 'single'] as const).map(value => (
+              <button
+                key={value}
+                onClick={() => handleModeChange(value)}
+                className={`px-3 py-1 rounded text-sm border ${
+                  mode === value
+                    ? 'bg-white text-blue-700 border-white font-semibold'
+                    : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
+                }`}
+              >
+                {value === 'tiers' ? 'Tiers' : 'Single'}
+              </button>
+            ))}
           </div>
+          {mode === 'single' && (
+            <div className="flex items-center gap-2">
+              <label className="text-sm text-blue-100">Every</label>
+              <select
+                value={headway}
+                onChange={(e) => handleHeadwayChange(Number(e.target.value))}
+                className="px-3 py-1 rounded bg-blue-700 text-white border border-blue-500 hover:bg-blue-800 cursor-pointer"
+              >
+                {HEADWAYS.map((minutes) => (
+                  <option key={minutes} value={minutes}>{minutes}</option>
+                ))}
+              </select>
+              <span className="text-sm text-blue-100">min or better</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -1027,17 +1145,34 @@ export default function SeattleTransitVisualizer() {
       {stats && (
         <div className="bg-white border-b shadow-sm p-4">
           <div className="flex gap-8 items-center flex-wrap">
-            {/* Stop count metric */}
-            <div>
-              <span className="text-gray-600 text-sm">Frequent Transit Stops:</span>
-              <span className="ml-2 text-2xl font-bold text-blue-600">{stats.stopCount}</span>
-            </div>
-            {/* Area coverage metric (percentage of Seattle covered by walksheds) */}
-            <div>
-              <span className="text-gray-600 text-sm">Coverage (by area):</span>
-              <span className="ml-2 text-2xl font-bold text-green-600">{stats.coveragePercent}%</span>
-              <span className="text-gray-500 text-xs ml-1">(merged walksheds)</span>
-            </div>
+            {mode === 'tiers' ? (
+              <>
+                {/* Per-tier legend with stop count and area coverage (cumulative: each tier includes the more frequent ones) */}
+                {stats.tiers.map((tier: any) => (
+                  <div key={tier.headway} className="flex items-center gap-2">
+                    {tierSwatch(tier.headway)}
+                    <span className="text-gray-600 text-sm">Every {tier.headway} min:</span>
+                    <span className="text-lg font-bold text-gray-800">{tier.coveragePercent}%</span>
+                    <span className="text-gray-500 text-xs">({tier.stopCount} stops)</span>
+                  </div>
+                ))}
+                <span className="text-gray-500 text-xs">Coverage by area, each tier including the more frequent ones. Zoom in to see stops.</span>
+              </>
+            ) : (
+              <>
+                {/* Stop count metric */}
+                <div>
+                  <span className="text-gray-600 text-sm">Frequent Transit Stops:</span>
+                  <span className="ml-2 text-2xl font-bold text-blue-600">{stats.tiers[0].stopCount}</span>
+                </div>
+                {/* Area coverage metric (percentage of Seattle covered by walksheds) */}
+                <div>
+                  <span className="text-gray-600 text-sm">Coverage (by area):</span>
+                  <span className="ml-2 text-2xl font-bold text-green-600">{stats.tiers[0].coveragePercent}%</span>
+                  <span className="text-gray-500 text-xs ml-1">(merged walksheds)</span>
+                </div>
+              </>
+            )}
             {/* Population metrics - shown when census data loads successfully */}
             {censusData && !censusData.error && (
               <div>
