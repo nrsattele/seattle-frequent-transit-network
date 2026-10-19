@@ -2,13 +2,15 @@
  * Extract all unique stops from GTFS feeds
  *
  * This script reads the GTFS ZIP files directly and extracts all stops,
- * merging Metro and Sound Transit into a single comprehensive list.
+ * merging Metro and Sound Transit into a single comprehensive list, with
+ * trips per hour on a representative Wednesday. The site applies the
+ * frequency rules, so every stop is kept.
  *
  * Usage:
- *   node extract-all-stops.js
+ *   node extract-all-stops.js [year]
  *
  * Output:
- *   base_data/all_stops.json
+ *   public/base_data/all_stops_{year}.json
  */
 
 import JSZip from 'jszip';

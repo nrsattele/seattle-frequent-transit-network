@@ -3,12 +3,31 @@ A map visualizing access to frequent transit in Seattle
 
 ## Overview
 
-This project analyzes GTFS (General Transit Feed Specification) data to identify and visualize "frequent transit" stops - stops with high-frequency service throughout the day.
+This project analyzes GTFS (General Transit Feed Specification) data to map how often buses and trains come at each stop, and how much of Seattle lives within a 10-minute walk of that service. It defaults to the city's frequent transit network (every 10 minutes, 6am-7pm weekdays), and you can pick other times of day and headways.
 
-**Frequent Transit Definition:**
-- 4+ trips per hour between 6am-7pm on a represenative weekday
-- Averages 5.8+ trips per hour (76+ total trips during the window)
-- Note it isn't actually 6 trips per hour all day to get around some data inconsitencies and to maintain parity with city-produced maps.
+## How frequency is measured
+
+Everything uses trips per hour at each stop on a representative weekday (the first Wednesday of the feed's service period).
+
+**Time of day presets** (Evening, Late night and Overnight follow the time bands in [SDOT's Frequent Transit Network targets](https://www.seattle.gov/transportation/projects-and-programs/programs/transit-program/seattle-transit-measure/the-frequent-transit-network)):
+
+| Preset | Hours |
+|---|---|
+| All day (default) | 6am-7pm |
+| AM peak | 6-9am |
+| Midday | 9am-3pm |
+| PM peak | 3-7pm |
+| Evening | 7-9pm |
+| Late night | 9pm-midnight |
+| Overnight | midnight-6am |
+
+**Headways:** 10, 15, 20, 30 and 60 minutes.
+
+**Rule:** a stop meets a headway when, over the preset's hours, it averages at least 60/headway trips per hour and no single hour drops below the next looser headway:
+
+The averaging forgives routes that ramp up slowly at the start of service without letting real gaps through. All day + 10 minutes needs 77 trips in total rather than 6 × 13 = 78, which matches the city's frequent transit maps.
+
+**Which trips count:** each stop is judged by its best single route and direction, so a corridor served by several less frequent routes isn't added together. The one exception is Routes 3 and 4, which run as one combined service and count together (`combinableRoutes` in `extract-all-stops.js`).
 
 ## flow
 
@@ -18,8 +37,8 @@ This project analyzes GTFS (General Transit Feed Specification) data to identify
 - Reads GTFS ZIP files (stops, trips, stop_times, calendar, calendar_dates)
 - Calculates hourly trip frequencies for each stop on a representative Wednesday
 - Aggregates to maximum frequency across all routes at each stop
-- Outputs: `base_data/all_stops_{year}.json` with pre-calculated frequencies
-- 2027 is a scenario, not a feed: it extracts only the hand-made stops in `base_data/future_stops/future_stops_2027.json`, which the site layers on top of the 2026 data
+- Outputs: `base_data/all_stops_{year}.json` with pre-calculated frequencies for every stop (the site applies the frequency rules)
+- 2027 is a scenario, not a feed: it extracts only the hand-made stops in `base_data/future_stops/future_stops_2027.json`, which the site layers on top of the 2026 data. Every enabled future stop is kept, whatever its frequency.
 
 **Run:**
 ```bash
@@ -44,10 +63,13 @@ node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or 2027
 **File:** `seattle-transit-access.tsx`
 
 - Loads pre-processed data from all_stops JSON files
-- Filters stops meeting frequent transit criteria
-- Visualizes 10-minute walksheds (using pre-computed isochrones or circles)
-- Calculates coverage statistics and population served
-- Interactive map with year selection (2020, 2025, 2026, 2027)
+- Year selector (2020, 2025, 2026, 2027) and time of day preset buttons
+- **Single mode:** one headway, picked from a dropdown. Each headway has its own color, used in both modes.
+- **Tiers mode:** nested bands for every 10, 15, 30 and 60 minutes, so you can see all levels of service at once. Stop markers appear from zoom 14 and their tooltips show the stop's tier.
+- Visualizes 10-minute walksheds (using pre-computed isochrones or circles), merged per headway
+- Coverage: share of Seattle's area within a 10-minute walk, per headway
+- Population served (on request): share of Seattle's 2020 population within a 10-minute walk, from census blocks. The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
+- Population density layer, available once population is calculated. Tiers draw as outlines over it.
 
 **Run:**
 ```bash

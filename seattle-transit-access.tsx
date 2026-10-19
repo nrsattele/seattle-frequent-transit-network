@@ -208,11 +208,12 @@ function loadScriptOnce(src: string, globalName: 'L' | 'turf'): Promise<void> {
 /**
  * Seattle Transit Visualizer
  *
- * This component visualizes "frequent transit" stops on a map with a walkshed around them.
+ * This component maps transit stops by how often buses come, with a 10-minute walkshed around each.
  * - Loads pre-processed stop data with per-hour trip frequencies from all_stops JSON files
- * - Filters stops that meet frequent transit criteria
- * - Visualizes 10-minute walksheds (pre-computed isochrones or circle buffers)
- * - Integrates US Census data to calculate population served
+ * - Filters stops by a time-of-day preset and headway (see PRESETS and qualifies())
+ * - Single mode shows one headway; tiers mode shows nested bands for TIER_HEADWAYS
+ * - Visualizes 10-minute walksheds (pre-computed isochrones or circle buffers), merged per headway
+ * - Integrates US Census data to calculate population served, on request
  * - Displays coverage statistics and interactive map
  * - Supports future year scenario for 2027 w/ planned transit expansions hard coded in future_stops JSON
  *
@@ -493,14 +494,14 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Draw frequent transit stops and walkshed coverage on the map
+   * Draw qualifying stops and walkshed coverage on the map
    *
    * Layers (in order):
    * 1. Seattle city boundary (thin gray outline)
    * 2. Census blocks (if enabled, colored by population density)
    * 3. Out-of-bounds walkshed portions (gray, faded)
-   * 4. In-bounds merged walkshed polygon (blue shaded area showing combined coverage)
-   * 5. Individual stop markers (dark blue circles with tooltips)
+   * 4. In-bounds merged walksheds in each headway's color (one area in single mode, rings in tiers mode)
+   * 5. Individual stop markers in their headway's color, in their own pane above the walksheds
    *
    */
   function drawStops() {
@@ -777,14 +778,21 @@ export default function SeattleTransitVisualizer() {
         : { mergedPolygon: null, mergedPolygonOutOfBounds: null, coveragePercent: '0' };
       outOfBounds = mergedPolygonOutOfBounds;
 
-      // Ring: this tier minus the tighter tier, so each area is drawn in exactly one tier's color
+      // Ring: this tier minus the tighter tier, so each area is drawn in exactly one tier's color.
+      // Nearly identical edges (points differing in the 14th decimal place) can make the difference fail; rounding
+      // both shapes to 6 decimal places (~10cm) and retrying fixes every case seen across the years and presets.
       const tighter = tierPolygons[tierPolygons.length - 1]?.polygon;
       let ring = mergedPolygon;
       if (mergedPolygon && tighter) {
         try {
           ring = window.turf.difference(mergedPolygon, tighter);
-        } catch (err) {
-          console.error('Tier ring difference failed, drawing the full tier:', err);
+        } catch {
+          try {
+            const round = (shape: any) => window.turf.truncate(shape, { precision: 6 });
+            ring = window.turf.difference(round(mergedPolygon), round(tighter));
+          } catch (err) {
+            console.error('Tier ring difference failed, drawing the full tier:', err);
+          }
         }
       }
       tierPolygons.push({ headway: tierHeadway, polygon: mergedPolygon, ring });
@@ -1250,7 +1258,7 @@ export default function SeattleTransitVisualizer() {
 
       {/* Footer with methodology explanation */}
       <div className="bg-gray-100 p-3 text-xs text-gray-600 border-t">
-        <p>10 min walksheds shown as merged blue area. Coverage calculated by merging overlapping walksheds (no double-counting).</p>
+        <p>Shaded areas are within a 10-minute walk of a qualifying stop. Coverage and population count only the part inside Seattle; gray areas are outside the city.</p>
       </div>
     </div>
   );
