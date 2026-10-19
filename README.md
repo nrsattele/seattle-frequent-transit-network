@@ -38,7 +38,7 @@ The averaging forgives routes that ramp up slowly at the start of service withou
 
 - Reads GTFS ZIP files (stops, trips, stop_times, calendar, calendar_dates)
 - Calculates hourly trip frequencies for each stop on a representative Wednesday
-- Aggregates to maximum frequency across all routes at each stop
+- Aggregates to the maximum frequency across all routes at each stop, hour by hour, and also saves each route and direction (route number, most common destination, trips per hour) for the stop popups
 - Outputs: `base_data/all_stops_{year}.json` with pre-calculated frequencies for every stop (the site applies the frequency rules)
 - 2027 is a scenario, not a feed: it extracts only the hand-made stops in `base_data/future_stops/future_stops_2027.json`, which the site layers on top of the 2026 data. Every enabled future stop is kept, whatever its frequency.
 

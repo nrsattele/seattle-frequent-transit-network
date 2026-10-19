@@ -612,10 +612,15 @@ export default function SeattleTransitVisualizer() {
       };
 
       // Create circle marker for each frequent transit stop
-      const tierLine = tiers ? `<br><small>Every ${bestHeadway.get(stop.id)} min or better</small>` : '';
-      const tooltip = isFuture
-        ? `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small>${tierLine}`
-        : `${stop.name}<br><small>ID: ${stop.id}</small>${tierLine}`;
+      // Built on hover rather than up front, since there can be thousands of markers
+      const tooltip = () => {
+        const stopHeadway = bestHeadway.get(stop.id)!;
+        if (isFuture) {
+          const tierLine = tiers ? `<br><small>Every ${stopHeadway} min or better</small>` : '';
+          return `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small>${tierLine}`;
+        }
+        return `${stop.name}<br><small>ID: ${stop.id}</small>${stopRoutesSummary(stop, stopHeadway)}`;
+      };
 
       L.circleMarker([stop.lat, stop.lon], { ...markerOptions, renderer: canvasRendererRef.current })
         .bindTooltip(tooltip)
@@ -628,6 +633,40 @@ export default function SeattleTransitVisualizer() {
       map.fitBounds(bounds, { padding: [50, 50] });
       fitToStopsRef.current = false;
     }
+  }
+
+  /**
+   * Tooltip lines about the routes at a stop: every route number serving it, and which route gives it its headway.
+   *
+   * A stop's hourly trips are the highest count hour by hour across its routes and directions, so a stop can meet a
+   * headway without any single route doing so (e.g. one route covers 6am and another the rest of the day). In that
+   * case the routes that supply the busiest hours are listed as combined.
+   */
+  function stopRoutesSummary(stop: any, stopHeadway: number): string {
+    const routes: any[] = stop.routes || [];
+    if (routes.length === 0) return '';
+
+    const routeNames = [...new Set(routes.map(r => r.route))];
+    const lines = [`Routes: ${routeNames.join(', ')}`];
+
+    const single = routes.filter(r => qualifies(r.hourly_trips, preset, stopHeadway));
+    if (single.length > 0) {
+      const via = single.map(r => `${r.route}${r.headsign ? ` to ${r.headsign}` : ''}`).join('; ');
+      lines.push(`Every ${stopHeadway} min or better on ${via}`);
+    } else {
+      // Routes that supply the stop's count in at least one hour of the preset
+      const [start, end] = PRESETS[preset].hours;
+      const contributing = routes.filter(r => {
+        for (let h = start; h < end; h++) {
+          const trips = r.hourly_trips[h] || 0;
+          if (trips > 0 && trips === (stop.hourlyTrips[h.toString()] || 0)) return true;
+        }
+        return false;
+      });
+      const names = [...new Set(contributing.map(r => r.route))].join(' + ');
+      lines.push(`Every ${stopHeadway} min or better with ${names} combined (no single route does on its own)`);
+    }
+    return lines.map(line => `<br><small>${line}</small>`).join('');
   }
 
   /**
@@ -887,7 +926,8 @@ export default function SeattleTransitVisualizer() {
       name: s.name,
       lat: s.lat,
       lon: s.lon,
-      hourlyTrips: s.hourly_trips
+      hourlyTrips: s.hourly_trips,
+      routes: s.routes || [] // Each route and direction serving the stop, with its own hourly_trips
     }));
 
     // Load and add future stops if this is a future year scenario

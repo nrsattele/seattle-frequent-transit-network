@@ -135,11 +135,20 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
     }).data;
   }
 
+  // Parse routes.txt (optional) for the route numbers riders know, e.g. "8" rather than route_id "100275"
+  const routeNames = new Map();
+  const routesFile = zip.file('routes.txt');
+  if (routesFile) {
+    Papa.parse(await routesFile.async('text'), { header: true, skipEmptyLines: true, dynamicTyping: false }).data
+      .forEach(r => routeNames.set(r.route_id, r.route_short_name || r.route_long_name || r.route_id));
+  }
+
   // Calculate frequencies
-  const stopFrequencies = calculateStopFrequencies(
+  const { frequencies: stopFrequencies, routes: stopRoutes } = calculateStopFrequencies(
     parsedStopTimes.data,
     parsedTrips.data,
-    getRelevantServiceIds(parsedCalendar.data, calendarDates)
+    getRelevantServiceIds(parsedCalendar.data, calendarDates),
+    routeNames
   );
 
   // Combine stop data with frequencies
@@ -153,7 +162,8 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
       lat: parseFloat(s.stop_lat),
       lon: parseFloat(s.stop_lon),
       code: s.stop_code || null,
-      hourly_trips: stopFrequencies.get(s.stop_id) || {}
+      hourly_trips: stopFrequencies.get(s.stop_id) || {},
+      routes: stopRoutes.get(s.stop_id) || []
     }))
     .filter(s => !isNaN(s.lat) && !isNaN(s.lon));
 
@@ -163,12 +173,15 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
 /**
  * Calculate hourly trip frequencies for each stop given the active service IDs.
  * Tracks each stop+route+direction combination separately, then aggregates to get
- * the maximum frequency across all route/direction combinations for each stop.
+ * the maximum frequency across all route/direction combinations for each stop, hour by hour.
+ *
+ * Returns { frequencies, routes }: frequencies maps stop_id -> hourly trips (the per-hour maximum), and routes maps
+ * stop_id -> each route and direction serving the stop, with its own hourly trips (for the site's stop popups).
  */
-function calculateStopFrequencies(stopTimes, trips, activeServiceIds) {
+function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames = new Map()) {
   if (activeServiceIds.size === 0) {
     console.warn('No active weekday service IDs found');
-    return new Map();
+    return { frequencies: new Map(), routes: new Map() };
   }
 
   // Create trip lookup
@@ -177,7 +190,8 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds) {
     tripInfo[t.trip_id] = {
       route_id: t.route_id,
       direction_id: t.direction_id,
-      service_id: t.service_id
+      service_id: t.service_id,
+      headsign: t.trip_headsign || ''
     };
   });
 
@@ -232,9 +246,12 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds) {
           stop_id: stopId,
           route_id: route_id,
           direction_id: trip.direction_id,
-          tripTimes: {} // Map of trip_id -> hour (count each trip only once)
+          tripTimes: {}, // Map of trip_id -> hour (count each trip only once)
+          headsigns: {} // Trips per headsign, to label the direction with its most common destination
         };
       }
+      const headsigns = stopRouteDirectionHeadways[key].headsigns;
+      headsigns[trip.headsign] = (headsigns[trip.headsign] || 0) + 1;
 
       // Count each trip only once per stop+route+direction
       if (!stopRouteDirectionHeadways[key].tripTimes[tripId]) {
@@ -248,13 +265,23 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds) {
   // Now aggregate by stop: for each stop, take the MAXIMUM frequency across all route/direction combinations
   // This gives us the best service frequency available at each stop
   const stopMaxFrequencies = new Map();
+  const stopRoutes = new Map();
 
-  Object.values(stopRouteDirectionHeadways).forEach(({ stop_id, tripTimes }) => {
+  Object.values(stopRouteDirectionHeadways).forEach(({ stop_id, route_id, direction_id, tripTimes, headsigns }) => {
     // Convert trip sets to counts per hour
     const hourlyTrips = {};
     for (let h = 0; h < 24; h++) {
       hourlyTrips[h] = tripTimes[h] ? tripTimes[h].size : 0;
     }
+
+    // Record this route and direction for the stop. Combined routes (e.g. "100173|100219") become "3/4".
+    if (!stopRoutes.has(stop_id)) stopRoutes.set(stop_id, []);
+    stopRoutes.get(stop_id).push({
+      route: route_id.split('|').map(id => routeNames.get(id) || id).join('/'),
+      direction: direction_id,
+      headsign: Object.entries(headsigns).sort((a, b) => b[1] - a[1])[0][0],
+      hourly_trips: Array.from({ length: 24 }, (_, h) => hourlyTrips[h])
+    });
 
     // If we haven't seen this stop yet, or this route/direction has better frequency, update it
     if (!stopMaxFrequencies.has(stop_id)) {
@@ -278,7 +305,12 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds) {
     result.set(stopId, hourlyTripsStr);
   }
 
-  return result;
+  // Sort each stop's routes by route number, then direction, so the popup reads in a stable order
+  for (const routes of stopRoutes.values()) {
+    routes.sort((a, b) => a.route.localeCompare(b.route, undefined, { numeric: true }) || (a.direction || '').localeCompare(b.direction || ''));
+  }
+
+  return { frequencies: result, routes: stopRoutes };
 }
 
 /**
@@ -449,7 +481,9 @@ async function main() {
 
   // Save to file
   console.log(`\nSaving to ${OUTPUT_FILE}...`);
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(mergedStops, null, 2));
+  // Pretty-print, but keep each route's 24 hourly trip counts on one line so the file stays compact
+  const json = JSON.stringify(mergedStops, null, 2).replace(/\[\s+([\d,\s]+?)\s+\]/g, (_, nums) => `[${nums.replace(/\s+/g, '')}]`);
+  fs.writeFileSync(OUTPUT_FILE, json);
 
   const stats = fs.statSync(OUTPUT_FILE);
   console.log(`Saved ${mergedStops.length} stops`);
