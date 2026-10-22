@@ -140,7 +140,19 @@ function mergeWalksheds(polygons: any[]): any {
   return union;
 }
 
-const SEATTLE_POPULATION = 737015; // Seattle 2020 Census count
+// Areas that coverage and population are measured within
+enum Area {
+  Seattle,
+  KingCounty,
+}
+
+// Boundary files exclude major bodies of water, so coverage is a share of land. `place` filters census blocks by
+// their Place field (null = every block). Populations are 2020 Census counts.
+const AREAS: Record<Area, { label: string; boundaryFile: string; population: number; place: string | null }> = {
+  [Area.Seattle]: { label: 'Seattle', boundaryFile: 'seattle-city-limits.geojson', population: 737015, place: 'Seattle' },
+  [Area.KingCounty]: { label: 'King County', boundaryFile: 'king-county-limits.geojson', population: 2269675, place: null },
+};
+
 const POPULATION_GRID_SIZE = 24; // Walkshed is cut into this many cells per side for population served
 
 /**
@@ -243,7 +255,9 @@ export default function SeattleTransitVisualizer() {
   const [yearStops, setYearStops] = useState<any[]>([]); // Every stop for the selected year (incl. future stops), with hourlyTrips
   const [stats, setStats] = useState<any>(null); // Calculated coverage statistics
   const [censusData, setCensusData] = useState<any>(null); // Population data from US Census
-  const [seattleBoundary, setSeattleBoundary] = useState<any>(null); // Seattle city limits polygon
+  const [area, setArea] = useState<Area>(Area.Seattle); // Area that coverage and population are measured within
+  const [boundaries, setBoundaries] = useState<Partial<Record<Area, any>>>({}); // Boundary polygons, loaded per area on first use
+  const boundary = boundaries[area] ?? null; // Selected area's boundary
   const [isochrones, setIsochrones] = useState<Map<string, any>>(new Map()); // Pre-computed walksheds keyed by stop_id
   const [censusBlocks, setCensusBlocks] = useState<any>(null); // Census blocks with population for visualization
 
@@ -284,10 +298,12 @@ export default function SeattleTransitVisualizer() {
   const leafletMapRef = useRef<any>(null); // Leaflet map instance
   const canvasRendererRef = useRef<any>(null); // Shared canvas renderer, so thousands of stop markers stay fast
   const fitToStopsRef = useRef<boolean>(true); // Zoom to fit the stops on the next draw (set when the year changes)
+  const fitToAreaRef = useRef<boolean>(false); // Zoom to fit the area's boundary on the next draw (set when the area changes)
   const markersLayerRef = useRef<any>(null); // Layer group holding the stop markers, so tiers mode can hide them by zoom
   // In-bounds merged walkshed per active headway, and its ring: the part not covered by the next tighter headway
   const tierPolygonsRef = useRef<{ headway: number; polygon: any; ring: any }[]>([]);
-  const censusCacheRef = useRef<{ geometries: any; seattleBlocks: any[] } | null>(null); // Census file, loaded once per page
+  // Census file, loaded once per page, with each area's populated blocks prepared on first use
+  const censusCacheRef = useRef<{ geometries: any; blocksByArea: Partial<Record<Area, any[]>> } | null>(null);
   const mergedPolygonOutOfBoundsRef = useRef<any>(null); // Out-of-bounds portion of the loosest active headway
 
   // Library loading state - tracks when external CDN libraries are ready
@@ -346,7 +362,7 @@ export default function SeattleTransitVisualizer() {
     if (yearStops.length > 0 && leafletMapRef.current) {
       drawStops();
     }
-  }, [frequentStops, seattleBoundary, showCensusBlocks]);
+  }, [frequentStops, boundary, showCensusBlocks]);
 
   /**
    * Effect: Auto-load pre-processed stop data when year changes
@@ -397,28 +413,30 @@ export default function SeattleTransitVisualizer() {
   }, [selectedYear]);
 
   /**
-   * Effect: Load Seattle city boundary GeoJSON
+   * Effect: Load the selected area's boundary GeoJSON, the first time the area is selected
    *
-   * This boundary is used to clip walksheds and calculate accurate coverage within the city limits.
+   * This boundary is used to clip walksheds and calculate accurate coverage within the area.
    */
   useEffect(() => {
-    async function loadSeattleBoundary() {
+    if (boundaries[area]) return;
+    async function loadBoundary() {
+      const { label, boundaryFile } = AREAS[area];
       try {
-        const response = await fetch(`${import.meta.env.BASE_URL}base_data/seattle-city-limits.geojson`);
+        const response = await fetch(`${import.meta.env.BASE_URL}base_data/${boundaryFile}`);
         if (response.ok) {
-          const boundary = await response.json();
-          console.log('Seattle boundary loaded successfully');
-          setSeattleBoundary(boundary);
+          const loaded = await response.json();
+          console.log(`${label} boundary loaded successfully`);
+          setBoundaries(previous => ({ ...previous, [area]: loaded }));
         }
       } catch (err) {
-        console.error('Could not load Seattle boundary:', err);
+        console.error(`Could not load ${label} boundary:`, err);
       }
     }
-    loadSeattleBoundary();
-  }, []);
+    loadBoundary();
+  }, [area]);
 
   /**
-   * Effect: Recalculate walksheds when Seattle boundary loads OR when stops/isochrones load
+   * Effect: Recalculate walksheds when the area's boundary loads OR when stops/isochrones load
    *
    * This handles multiple scenarios:
    * 1. Boundary loads after GTFS data is already processed
@@ -427,10 +445,10 @@ export default function SeattleTransitVisualizer() {
    * 4. Preset or headway changes (including to a selection with no qualifying stops)
    */
   useEffect(() => {
-    if (seattleBoundary && yearStops.length > 0 && isochrones.size > 0 && turfLoaded && window.turf) {
+    if (boundary && yearStops.length > 0 && isochrones.size > 0 && turfLoaded && window.turf) {
       recalculateWalksheds();
     }
-  }, [seattleBoundary, frequentStops, isochrones, turfLoaded]);
+  }, [boundary, frequentStops, isochrones, turfLoaded]);
 
   /**
    * Initialize the Leaflet map with OpenStreetMap tiles
@@ -461,11 +479,12 @@ export default function SeattleTransitVisualizer() {
   /**
    * Draw census blocks colored by population density
    *
-   * Only shows blocks in Seattle with population > 0
+   * Only shows blocks in the selected area with population > 0
    * Color intensity based on population density (people per square meter)
    */
   function drawCensusBlocks(map: any, L: any) {
     if (!censusBlocks || !censusBlocks.features) return;
+    const place = AREAS[area].place;
 
     // Helper function to get color based on density in square miles
     function getColor(density: number): string {
@@ -479,7 +498,7 @@ export default function SeattleTransitVisualizer() {
     // Draw each census block
     L.geoJSON(censusBlocks, {
       filter: (feature: any) => {
-        return feature.properties.Place === 'Seattle' &&
+        return (place === null || feature.properties.Place === place) &&
                parseInt(feature.properties.TOT_POP || '0') > 0;
       },
       style: (feature: any) => {
@@ -532,9 +551,9 @@ export default function SeattleTransitVisualizer() {
       }
     });
 
-    // Draw Seattle city boundary for reference
-    if (seattleBoundary) {
-      L.geoJSON(seattleBoundary, {
+    // Draw the selected area's boundary for reference, zooming to it after an area change
+    if (boundary) {
+      const boundaryLayer = L.geoJSON(boundary, {
         style: {
           fillColor: 'transparent',
           color: '#494d53a1', // Gray outline
@@ -542,6 +561,10 @@ export default function SeattleTransitVisualizer() {
           opacity: 0.6
         }
       }).addTo(map);
+      if (fitToAreaRef.current) {
+        map.fitBounds(boundaryLayer.getBounds(), { padding: [20, 20] });
+        fitToAreaRef.current = false;
+      }
     }
 
     // Draw census blocks with population density coloring (if enabled)
@@ -734,24 +757,25 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Clip a merged walkshed to the city limits and calculate coverage
+   * Clip a merged walkshed to the selected area's boundary and calculate coverage
    *
-   * Returns the part inside Seattle, the part outside, and the inside area as a percentage of the city
+   * Returns the part inside the area, the part outside (only if withOutside, since only the loosest tier's is drawn
+   * and the cut is slow against a detailed boundary like King County's), and the inside area as a percentage of the area
    */
-  function clipToCity(union: any, boundary: any = null) {
+  function clipToArea(union: any, boundary: any = null, withOutside = true) {
     try {
       let mergedPolygon = null;
       let mergedPolygonOutOfBounds = null;
       let coveragePercent = '0';
 
-      // If Seattle boundary is available, clip walksheds to city limits
+      // If the boundary is available, clip walksheds to it
       if (boundary) {
-        const seattleBoundaryAreaSqMeters = window.turf.area(boundary.features[0]);
+        const boundaryAreaSqMeters = window.turf.area(boundary.features[0]);
         try {
           // Simplify the boundary for faster intersection (tolerance = 0.001 degrees ~= 100m)
           const simplifiedBoundary = window.turf.simplify(boundary.features[0], {tolerance: 0.001, highQuality: false});
 
-          // Calculate intersection (walkshed area within Seattle)
+          // Calculate intersection (walkshed area within the area)
           let clipped = null;
           try {
             clipped = window.turf.intersect(union, simplifiedBoundary);
@@ -759,46 +783,38 @@ export default function SeattleTransitVisualizer() {
             console.error('turf.intersect failed:', intersectErr);
           }
 
-          // Calculate difference (walkshed area outside Seattle)
-          try {
-            const diff = window.turf.difference(
-              union,
-              simplifiedBoundary
-            );
-            console.log('Difference result:', diff);
-            mergedPolygonOutOfBounds = diff;
-          } catch (diffErr) {
-            console.error('Difference operation failed (may be no out-of-bounds area):', diffErr);
+          // Calculate difference (walkshed area outside the area)
+          if (withOutside) {
+            try {
+              mergedPolygonOutOfBounds = window.turf.difference(union, simplifiedBoundary);
+            } catch (diffErr) {
+              console.error('Difference operation failed (may be no out-of-bounds area):', diffErr);
+            }
           }
 
           if (clipped) {
             mergedPolygon = clipped;
 
-            // Calculate coverage using actual Seattle boundary area (use original, not simplified)
+            // Calculate coverage using the actual boundary area (use original, not simplified)
             const clippedAreaSqMeters = window.turf.area(clipped);
-            coveragePercent = (clippedAreaSqMeters / seattleBoundaryAreaSqMeters * 100).toFixed(1);
+            coveragePercent = (clippedAreaSqMeters / boundaryAreaSqMeters * 100).toFixed(1);
           } else {
-            // No intersection - all walksheds are outside Seattle
-            console.log('No intersection found - all walksheds outside Seattle');
+            // No intersection - all walksheds are outside the area
+            console.log('No intersection found - all walksheds outside the area');
             mergedPolygon = null;
             mergedPolygonOutOfBounds = union;
             coveragePercent = '0';
           }
         } catch (err) {
           // If clipping fails, fall back to unclipped calculation
-          console.error('Clipping to Seattle boundary failed, using full walkshed:', err);
+          console.error('Clipping to the boundary failed, using full walkshed:', err);
           mergedPolygon = union;
-          const areaSqMeters = window.turf.area(union);
-          const seattleAreaSqMeters = 217000000;
-          coveragePercent = (areaSqMeters / seattleAreaSqMeters * 100).toFixed(1);
+          coveragePercent = (window.turf.area(union) / boundaryAreaSqMeters * 100).toFixed(1);
         }
       } else {
-        // No boundary available, use full walkshed
-        console.log('Seattle boundary not loaded yet');
+        // No boundary available, use full walkshed (coverage is unknown without an area to divide by)
+        console.log('Boundary not loaded yet');
         mergedPolygon = union;
-        const areaSqMeters = window.turf.area(union);
-        const seattleAreaSqMeters = 217000000;
-        coveragePercent = (areaSqMeters / seattleAreaSqMeters * 100).toFixed(1);
       }
 
       return { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent };
@@ -815,7 +831,7 @@ export default function SeattleTransitVisualizer() {
    * tighter headway's walkshed plus only the stops that newly qualify, rather than a fresh merge of every stop.
    */
   function recalculateWalksheds() {
-    if (!seattleBoundary || !turfLoaded || !window.turf) return;
+    if (!boundary || !turfLoaded || !window.turf) return;
 
     let union = null;
     let outOfBounds = null;
@@ -830,25 +846,21 @@ export default function SeattleTransitVisualizer() {
       }
 
       const { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent } = union
-        ? clipToCity(union, seattleBoundary)
+        ? clipToArea(union, boundary, tierHeadway === activeHeadways[activeHeadways.length - 1])
         : { mergedPolygon: null, mergedPolygonOutOfBounds: null, coveragePercent: '0' };
       outOfBounds = mergedPolygonOutOfBounds;
 
       // Ring: this tier minus the tighter tier, so each area is drawn in exactly one tier's color.
-      // Nearly identical edges (points differing in the 14th decimal place) can make the difference fail; rounding
-      // both shapes to 6 decimal places (~10cm) and retrying fixes every case seen across the years and presets.
+      // Nearly identical edges (points differing in the 14th decimal place) can make the difference fail, slowly
+      // (sometimes only after a stack overflow), so both shapes are rounded to 6 decimal places (~10cm) first.
       const tighter = tierPolygons[tierPolygons.length - 1]?.polygon;
       let ring = mergedPolygon;
       if (mergedPolygon && tighter) {
         try {
-          ring = window.turf.difference(mergedPolygon, tighter);
-        } catch {
-          try {
-            const round = (shape: any) => window.turf.truncate(shape, { precision: 6 });
-            ring = window.turf.difference(round(mergedPolygon), round(tighter));
-          } catch (err) {
-            console.error('Tier ring difference failed, drawing the full tier:', err);
-          }
+          const round = (shape: any) => window.turf.truncate(shape, { precision: 6 });
+          ring = window.turf.difference(round(mergedPolygon), round(tighter));
+        } catch (err) {
+          console.error('Tier ring difference failed, drawing the full tier:', err);
         }
       }
       tierPolygons.push({ headway: tierHeadway, polygon: mergedPolygon, ring });
@@ -991,9 +1003,9 @@ export default function SeattleTransitVisualizer() {
    *
    * - Local GeoJSON file: Census block geometries with population counts for King County
    *   (KING_COUNTY_BLOCK_2020_POPULATION.geojson in base_data directory), fetched once per page
-   * - Only Seattle blocks with people count (filtered by `Place`)
+   * - Only the selected area's blocks with people count (filtered by `Place`, or every block for King County)
    * - Single mode gets one number; tiers mode gets one per tier, each including the more frequent tiers
-   * - Percentages are of Seattle's total population
+   * - Percentages are of the area's total population
    */
   async function loadCensusData() {
     if (!turfLoaded || !window.turf) return;
@@ -1001,6 +1013,7 @@ export default function SeattleTransitVisualizer() {
     setLoadingCensus(true);
 
     try {
+      let loadedNow = false;
       if (!censusCacheRef.current) {
         const censusUrl = `${import.meta.env.BASE_URL}base_data/KING_COUNTY_BLOCK_2020_POPULATION.geojson`;
         console.log(`Loading census data from: ${censusUrl}`);
@@ -1016,28 +1029,36 @@ export default function SeattleTransitVisualizer() {
         const geometries = await censusResponse.json();
         console.log(`Loaded ${geometries.features?.length || 0} census blocks`);
 
-        // Prepare populated Seattle blocks once, with the area and bounding box the calculation needs
-        const seattleBlocks = (geometries.features || [])
-          .filter((block: any) => block.properties.Place === 'Seattle' && parseInt(block.properties.TOT_POP || '0') > 0)
+        censusCacheRef.current = { geometries, blocksByArea: {} };
+        loadedNow = true;
+      }
+      if (!loadedNow) {
+        // Let the loading indicator paint before the synchronous calculation
+        await new Promise(resolve => setTimeout(resolve, 0));
+      }
+
+      // Prepare the area's populated blocks once, with the area and bounding box the calculation needs
+      const cache = censusCacheRef.current;
+      const { place, population: areaPopulation } = AREAS[area];
+      if (!cache.blocksByArea[area]) {
+        cache.blocksByArea[area] = (cache.geometries.features || [])
+          .filter((block: any) => (place === null || block.properties.Place === place) && parseInt(block.properties.TOT_POP || '0') > 0)
           .map((block: any) => ({
             feature: block,
             population: parseInt(block.properties.TOT_POP),
             area: window.turf.area(block),
             bbox: window.turf.bbox(block)
           }));
-        censusCacheRef.current = { geometries, seattleBlocks };
-      } else {
-        // Let the loading indicator paint before the synchronous calculation
-        await new Promise(resolve => setTimeout(resolve, 0));
       }
 
-      const { geometries, seattleBlocks } = censusCacheRef.current;
+      const blocks = cache.blocksByArea[area]!;
+      const geometries = cache.geometries;
       const tiers = tierPolygonsRef.current.map(({ headway: tierHeadway, polygon }) => {
-        const population = polygon ? populationInWalkshed(polygon, seattleBlocks) : 0;
+        const population = polygon ? populationInWalkshed(polygon, blocks) : 0;
         return {
           headway: tierHeadway,
           population: Math.round(population).toLocaleString(),
-          populationPercent: (population / SEATTLE_POPULATION * 100).toFixed(1)
+          populationPercent: (population / areaPopulation * 100).toFixed(1)
         };
       });
 
@@ -1105,6 +1126,16 @@ export default function SeattleTransitVisualizer() {
     setCensusData(null);
   }
 
+  // Changing area re-clips walksheds to its boundary (loaded on first use) and zooms the map to it
+  function handleAreaChange(newArea: Area) {
+    if (newArea === area) return;
+    setArea(newArea);
+    setCensusData(null);
+    fitToAreaRef.current = true;
+  }
+
+  const areaLabel = AREAS[area].label;
+
   const [presetStart, presetEnd] = PRESETS[preset].hours;
   const presetHours = `${formatHour(presetStart)}–${formatHour(presetEnd)}`;
 
@@ -1128,15 +1159,33 @@ export default function SeattleTransitVisualizer() {
       <div className="bg-blue-600 text-white p-4 shadow-lg">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
-            <h1 className="text-2xl font-bold">Seattle Frequent Transit Access</h1>
+            <h1 className="text-2xl font-bold">{areaLabel} Frequent Transit Access</h1>
             <p className="text-blue-100 text-sm mt-1">
               {mode === 'tiers'
                 ? `Stops by how often buses come, ${presetHours} weekdays + 10-minute walksheds`
                 : `Stops with service every ${headway} minutes, ${presetHours} weekdays + 10-minute walksheds`}
             </p>
           </div>
-          {/* Year selector dropdown */}
-          <div className="flex items-center gap-2">
+          {/* Area toggle and year selector dropdown */}
+          <div className="flex items-center gap-2 flex-wrap justify-end">
+            <div className="flex gap-1">
+              {Object.entries(AREAS).map(([key, { label }]) => {
+                const value = Number(key) as Area;
+                return (
+                  <button
+                    key={key}
+                    onClick={() => handleAreaChange(value)}
+                    className={`px-3 py-1.5 rounded text-sm border ${
+                      area === value
+                        ? 'bg-white text-blue-700 border-white font-semibold'
+                        : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
             <label className="text-sm text-blue-100">Year:</label>
             <select
               value={selectedYear}
@@ -1252,7 +1301,7 @@ export default function SeattleTransitVisualizer() {
                   );
                 })}
                 <span className="text-gray-500 text-xs">
-                  Share of Seattle within a 10-minute walk, each tier including the more frequent ones. Zoom in to see stops.
+                  Share of {areaLabel} within a 10-minute walk, each tier including the more frequent ones. Zoom in to see stops.
                 </span>
               </>
             ) : (
@@ -1262,7 +1311,7 @@ export default function SeattleTransitVisualizer() {
                   <span className="text-gray-600 text-sm">Frequent Transit Stops:</span>
                   <span className="ml-2 text-2xl font-bold text-blue-600">{stats.tiers[0].stopCount}</span>
                 </div>
-                {/* Area coverage metric (percentage of Seattle covered by walksheds) */}
+                {/* Area coverage metric (percentage of the selected area covered by walksheds) */}
                 <div>
                   <span className="text-gray-600 text-sm">Coverage (by area):</span>
                   <span className="ml-2 text-2xl font-bold text-green-600">{stats.tiers[0].coveragePercent}%</span>
@@ -1315,7 +1364,7 @@ export default function SeattleTransitVisualizer() {
 
       {/* Footer with methodology explanation */}
       <div className="bg-gray-100 p-3 text-xs text-gray-600 border-t">
-        <p>Shaded areas are within a 10-minute walk of a qualifying stop. Coverage and population count only the part inside Seattle; dashed gray areas are outside the city.</p>
+        <p>Shaded areas are within a 10-minute walk of a qualifying stop. Coverage and population count only the part inside {areaLabel}; dashed gray areas are outside it.</p>
       </div>
     </div>
   );

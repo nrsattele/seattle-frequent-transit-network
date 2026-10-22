@@ -1,5 +1,5 @@
 # gtfs-frequency-map
-A map visualizing access to frequent transit in Seattle
+A map visualizing access to frequent transit in Seattle and King County
 
 ## Overview
 
@@ -69,8 +69,9 @@ node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or 2027
 - **Single mode:** one headway, picked from a dropdown. Each headway has its own color, used in both modes.
 - **Tiers mode:** nested bands for every 10, 15, 30, 60 and 120 minutes, so you can see all levels of service at once. Stop markers appear from zoom 14 and their tooltips show the stop's tier.
 - Visualizes 10-minute walksheds (using pre-computed isochrones or circles), merged per headway
-- Coverage: share of Seattle's area within a 10-minute walk, per headway
-- Population served (on request): share of Seattle's 2020 population within a 10-minute walk, from census blocks. The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
+- **Area:** Seattle (default) or King County. Coverage and population are measured within the selected area's boundary (`seattle-city-limits.geojson` or `king-county-limits.geojson`); walksheds outside it are drawn dashed gray. Stops are shown county-wide either way.
+- Coverage: share of the area's land within a 10-minute walk, per headway. County-wide this stays small (2.2% at every 10 minutes in 2026), since most of King County is forest and farmland.
+- Population served (on request): share of the area's 2020 population within a 10-minute walk, from census blocks (Seattle: 737,015; King County: 2,269,675). The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
 - Population density layer, available once population is calculated. Tiers draw as outlines over it.
 
 **Run:**
