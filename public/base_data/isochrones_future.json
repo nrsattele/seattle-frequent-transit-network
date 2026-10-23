@@ -2,10 +2,10 @@
   "generated_at": "2026-01-04T20:04:00.227Z",
   "isochrones": [
     {
-      "stop_id": "future_2027_001",
-      "original_id": "future_2027_001",
+      "stop_id": "future_001",
+      "original_id": "future_001",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "U District",
       "coordinates": {
         "lon": -122.31352647407182,
@@ -189,10 +189,10 @@
       }
     },
     {
-      "stop_id": "future_2027_002",
-      "original_id": "future_2027_002",
+      "stop_id": "future_002",
+      "original_id": "future_002",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "U District",
       "coordinates": {
         "lon": -122.31405719583358,
@@ -380,10 +380,10 @@
       }
     },
     {
-      "stop_id": "future_2027_003",
-      "original_id": "future_2027_003",
+      "stop_id": "future_003",
+      "original_id": "future_003",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "U District",
       "coordinates": {
         "lon": -122.31574730674946,
@@ -583,10 +583,10 @@
       }
     },
     {
-      "stop_id": "future_2027_004",
-      "original_id": "future_2027_004",
+      "stop_id": "future_004",
+      "original_id": "future_004",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "U District",
       "coordinates": {
         "lon": -122.31793562352706,
@@ -782,10 +782,10 @@
       }
     },
     {
-      "stop_id": "future_2027_005",
-      "original_id": "future_2027_005",
+      "stop_id": "future_005",
+      "original_id": "future_005",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "U District",
       "coordinates": {
         "lon": -122.31661166989277,
@@ -997,10 +997,10 @@
       }
     },
     {
-      "stop_id": "future_2027_006",
-      "original_id": "future_2027_006",
+      "stop_id": "future_006",
+      "original_id": "future_006",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "Fuhrman Ave E",
       "coordinates": {
         "lon": -122.32162962872027,
@@ -1268,10 +1268,10 @@
       }
     },
     {
-      "stop_id": "future_2027_007",
-      "original_id": "future_2027_007",
+      "stop_id": "future_007",
+      "original_id": "future_007",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "E Hamlin St",
       "coordinates": {
         "lon": -122.32589686695984,
@@ -1495,10 +1495,10 @@
       }
     },
     {
-      "stop_id": "future_2027_008",
-      "original_id": "future_2027_008",
+      "stop_id": "future_008",
+      "original_id": "future_008",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "E Lynn St",
       "coordinates": {
         "lon": -122.32590681041889,
@@ -1686,10 +1686,10 @@
       }
     },
     {
-      "stop_id": "future_2027_009",
-      "original_id": "future_2027_009",
+      "stop_id": "future_009",
+      "original_id": "future_009",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "E Garfield St",
       "coordinates": {
         "lon": -122.32568608555847,
@@ -1893,10 +1893,10 @@
       }
     },
     {
-      "stop_id": "future_2027_010",
-      "original_id": "future_2027_010",
+      "stop_id": "future_010",
+      "original_id": "future_010",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "Aloha St",
       "coordinates": {
         "lon": -122.33258878699637,
@@ -2104,10 +2104,10 @@
       }
     },
     {
-      "stop_id": "future_2027_011",
-      "original_id": "future_2027_011",
+      "stop_id": "future_011",
+      "original_id": "future_011",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "Harrison St",
       "coordinates": {
         "lon": -122.33434546219692,
@@ -2279,10 +2279,10 @@
       }
     },
     {
-      "stop_id": "future_2027_012",
-      "original_id": "future_2027_012",
+      "stop_id": "future_012",
+      "original_id": "future_012",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "Virginia St",
       "coordinates": {
         "lon": -122.33345998081857,
@@ -2474,10 +2474,10 @@
       }
     },
     {
-      "stop_id": "future_2027_013",
-      "original_id": "future_2027_013",
+      "stop_id": "future_013",
+      "original_id": "future_013",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "9th Ave",
       "coordinates": {
         "lon": -122.33543143354436,
@@ -2653,10 +2653,10 @@
       }
     },
     {
-      "stop_id": "future_2027_014",
-      "original_id": "future_2027_014",
+      "stop_id": "future_014",
+      "original_id": "future_014",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "7th Ave",
       "coordinates": {
         "lon": -122.3360753743477,
@@ -2844,10 +2844,10 @@
       }
     },
     {
-      "stop_id": "future_2027_015",
-      "original_id": "future_2027_015",
+      "stop_id": "future_015",
+      "original_id": "future_015",
       "feed": "future",
-      "dataset": "2027",
+      "dataset": "future",
       "stop_name": "6th Ave",
       "coordinates": {
         "lon": -122.3384881625163,
@@ -3014,504 +3014,6 @@
               [
                 -122.337488,
                 47.622192
-              ]
-            ]
-          ],
-          "type": "Polygon"
-        },
-        "type": "Feature"
-      }
-    },
-    {
-      "stop_id": "future_2027_016",
-      "original_id": "future_2027_016",
-      "feed": "future",
-      "dataset": "2027",
-      "stop_name": "Pinehurst Station",
-      "coordinates": {
-        "lon": -122.32377023851807,
-        "lat": 47.72391068859437
-      },
-      "isochrone_5min": {
-        "properties": {
-          "fill-opacity": 0.33,
-          "fillColor": "#9fbf40",
-          "opacity": 0.33,
-          "fill": "#9fbf40",
-          "fillOpacity": 0.33,
-          "color": "#9fbf40",
-          "contour": 5,
-          "metric": "time"
-        },
-        "geometry": {
-          "coordinates": [
-            [
-              [
-                -122.32377,
-                47.728803
-              ],
-              [
-                -122.32458,
-                47.723721
-              ],
-              [
-                -122.325057,
-                47.723624
-              ],
-              [
-                -122.32577,
-                47.724678
-              ],
-              [
-                -122.327669,
-                47.723911
-              ],
-              [
-                -122.327883,
-                47.722911
-              ],
-              [
-                -122.32677,
-                47.721982
-              ],
-              [
-                -122.324619,
-                47.722062
-              ],
-              [
-                -122.32377,
-                47.719817
-              ],
-              [
-                -122.32177,
-                47.720836
-              ],
-              [
-                -122.32077,
-                47.720406
-              ],
-              [
-                -122.319597,
-                47.720738
-              ],
-              [
-                -122.319619,
-                47.721911
-              ],
-              [
-                -122.318499,
-                47.722911
-              ],
-              [
-                -122.320183,
-                47.723911
-              ],
-              [
-                -122.318883,
-                47.724911
-              ],
-              [
-                -122.323306,
-                47.725375
-              ],
-              [
-                -122.323185,
-                47.727496
-              ],
-              [
-                -122.32377,
-                47.728803
-              ]
-            ]
-          ],
-          "type": "Polygon"
-        },
-        "type": "Feature"
-      },
-      "isochrone_10min": {
-        "properties": {
-          "fill-opacity": 0.33,
-          "fillColor": "#bf4040",
-          "opacity": 0.33,
-          "fill": "#bf4040",
-          "fillOpacity": 0.33,
-          "color": "#bf4040",
-          "contour": 10,
-          "metric": "time"
-        },
-        "geometry": {
-          "coordinates": [
-            [
-              [
-                -122.32277,
-                47.732474
-              ],
-              [
-                -122.32442,
-                47.729911
-              ],
-              [
-                -122.32477,
-                47.728153
-              ],
-              [
-                -122.32677,
-                47.728576
-              ],
-              [
-                -122.32777,
-                47.727238
-              ],
-              [
-                -122.330172,
-                47.726911
-              ],
-              [
-                -122.330967,
-                47.725107
-              ],
-              [
-                -122.333684,
-                47.722911
-              ],
-              [
-                -122.33177,
-                47.721648
-              ],
-              [
-                -122.329521,
-                47.72116
-              ],
-              [
-                -122.328419,
-                47.719262
-              ],
-              [
-                -122.32577,
-                47.718748
-              ],
-              [
-                -122.325099,
-                47.71924
-              ],
-              [
-                -122.324699,
-                47.721982
-              ],
-              [
-                -122.324307,
-                47.717911
-              ],
-              [
-                -122.324915,
-                47.716911
-              ],
-              [
-                -122.32377,
-                47.715472
-              ],
-              [
-                -122.32177,
-                47.717333
-              ],
-              [
-                -122.32077,
-                47.716618
-              ],
-              [
-                -122.31877,
-                47.717508
-              ],
-              [
-                -122.31777,
-                47.716996
-              ],
-              [
-                -122.31677,
-                47.718085
-              ],
-              [
-                -122.31577,
-                47.717741
-              ],
-              [
-                -122.314232,
-                47.718911
-              ],
-              [
-                -122.313437,
-                47.720911
-              ],
-              [
-                -122.314016,
-                47.721665
-              ],
-              [
-                -122.314885,
-                47.721796
-              ],
-              [
-                -122.315692,
-                47.722989
-              ],
-              [
-                -122.316485,
-                47.722625
-              ],
-              [
-                -122.317079,
-                47.722911
-              ],
-              [
-                -122.31634,
-                47.72348
-              ],
-              [
-                -122.316151,
-                47.725911
-              ],
-              [
-                -122.315643,
-                47.726783
-              ],
-              [
-                -122.314858,
-                47.726911
-              ],
-              [
-                -122.31553,
-                47.727151
-              ],
-              [
-                -122.31577,
-                47.72796
-              ],
-              [
-                -122.31877,
-                47.727486
-              ],
-              [
-                -122.319482,
-                47.725623
-              ],
-              [
-                -122.323084,
-                47.725597
-              ],
-              [
-                -122.322431,
-                47.729911
-              ],
-              [
-                -122.32277,
-                47.732474
-              ]
-            ]
-          ],
-          "type": "Polygon"
-        },
-        "type": "Feature"
-      }
-    },
-    {
-      "stop_id": "future_2027_017",
-      "original_id": "future_2027_017",
-      "feed": "future",
-      "dataset": "2027",
-      "stop_name": "Judkins Park Station",
-      "coordinates": {
-        "lon": -122.30487902960992,
-        "lat": 47.59025353478169
-      },
-      "isochrone_5min": {
-        "properties": {
-          "fill-opacity": 0.33,
-          "fillColor": "#9fbf40",
-          "opacity": 0.33,
-          "fill": "#9fbf40",
-          "fillOpacity": 0.33,
-          "color": "#9fbf40",
-          "contour": 5,
-          "metric": "time"
-        },
-        "geometry": {
-          "coordinates": [
-            [
-              [
-                -122.301879,
-                47.591394
-              ],
-              [
-                -122.302896,
-                47.59127
-              ],
-              [
-                -122.303879,
-                47.590059
-              ],
-              [
-                -122.304241,
-                47.590891
-              ],
-              [
-                -122.307879,
-                47.591033
-              ],
-              [
-                -122.308879,
-                47.589893
-              ],
-              [
-                -122.310247,
-                47.590254
-              ],
-              [
-                -122.310164,
-                47.588969
-              ],
-              [
-                -122.309879,
-                47.588616
-              ],
-              [
-                -122.307663,
-                47.58847
-              ],
-              [
-                -122.304879,
-                47.586244
-              ],
-              [
-                -122.303879,
-                47.586012
-              ],
-              [
-                -122.301306,
-                47.588254
-              ],
-              [
-                -122.301786,
-                47.589254
-              ],
-              [
-                -122.300862,
-                47.590254
-              ],
-              [
-                -122.301879,
-                47.591394
-              ]
-            ]
-          ],
-          "type": "Polygon"
-        },
-        "type": "Feature"
-      },
-      "isochrone_10min": {
-        "properties": {
-          "fill-opacity": 0.33,
-          "fillColor": "#bf4040",
-          "opacity": 0.33,
-          "fill": "#bf4040",
-          "fillOpacity": 0.33,
-          "color": "#bf4040",
-          "contour": 10,
-          "metric": "time"
-        },
-        "geometry": {
-          "coordinates": [
-            [
-              [
-                -122.301879,
-                47.594461
-              ],
-              [
-                -122.305879,
-                47.593052
-              ],
-              [
-                -122.307879,
-                47.593683
-              ],
-              [
-                -122.309879,
-                47.593704
-              ],
-              [
-                -122.310248,
-                47.593254
-              ],
-              [
-                -122.309502,
-                47.592631
-              ],
-              [
-                -122.309474,
-                47.590848
-              ],
-              [
-                -122.31018,
-                47.590952
-              ],
-              [
-                -122.31166,
-                47.592472
-              ],
-              [
-                -122.312879,
-                47.592741
-              ],
-              [
-                -122.31353,
-                47.590254
-              ],
-              [
-                -122.310977,
-                47.586254
-              ],
-              [
-                -122.309879,
-                47.585366
-              ],
-              [
-                -122.307879,
-                47.585133
-              ],
-              [
-                -122.305722,
-                47.583254
-              ],
-              [
-                -122.302879,
-                47.582572
-              ],
-              [
-                -122.300879,
-                47.583121
-              ],
-              [
-                -122.299735,
-                47.585109
-              ],
-              [
-                -122.297879,
-                47.586335
-              ],
-              [
-                -122.296292,
-                47.588254
-              ],
-              [
-                -122.297075,
-                47.589254
-              ],
-              [
-                -122.296112,
-                47.590254
-              ],
-              [
-                -122.301879,
-                47.594461
               ]
             ]
           ],

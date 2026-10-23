@@ -40,12 +40,12 @@ The averaging forgives routes that ramp up slowly at the start of service withou
 - Calculates hourly trip frequencies for each stop on a representative Wednesday
 - Aggregates to the maximum frequency across all routes at each stop, hour by hour, and also saves each route and direction (route number, most common destination, trips per hour) for the stop popups
 - Outputs: `base_data/all_stops_{year}.json` (weekday) and `base_data/all_stops_{year}_{saturday|sunday}.json`, with pre-calculated frequencies for every stop (the site applies the frequency rules)
-- 2027 is a scenario, not a feed: it extracts only the hand-made stops in `base_data/future_stops/future_stops_2027.json`, which the site layers on top of the 2026 data. Every enabled future stop is kept, whatever its frequency.
+- `future` is a scenario, not a feed (labeled "Future" on the site): it extracts only the hand-made stops in `base_data/future_stops/future_stops.json` (planned projects not yet in a feed: the RapidRide J Line today), which the site layers on top of the 2026 data. Every enabled future stop is kept, whatever its frequency.
 
 **Run:**
 ```bash
 cd isochrone-generation
-node extract-all-stops.js [year] [day]  # year: 2020, 2025, 2026, or 2027; day: weekday (default), saturday or sunday (2027 is weekday only)
+node extract-all-stops.js [year] [day]  # year: 2020, 2025, 2026, or future; day: weekday (default), saturday or sunday (future is weekday only)
 ```
 
 ### 2: Isochrone setup
@@ -58,14 +58,14 @@ node extract-all-stops.js [year] [day]  # year: 2020, 2025, 2026, or 2027; day: 
 **Run:**
 ```bash
 cd isochrone-generation
-node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or 2027
+node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or future
 ```
 
 ### 3: Website!
 **File:** `seattle-transit-access.tsx`
 
 - Loads pre-processed data from all_stops JSON files
-- Year selector (2020, 2025, 2026, 2027), day buttons (Weekday, Saturday, Sunday; each loads that day's stop file) and time of day preset buttons. The 2027 future stops only have weekday trips, so weekends reuse them.
+- Year selector (2020, 2025, 2026, Future), day buttons (Weekday, Saturday, Sunday; each loads that day's stop file) and time of day preset buttons. The Future stops only have weekday trips, so weekends reuse them.
 - **Single mode:** one headway, picked from a dropdown. Each headway has its own color, used in both modes.
 - **Tiers mode:** nested bands for every 10, 15, 30, 60 and 120 minutes, so you can see all levels of service at once. Stop markers appear from zoom 14 and their tooltips show the stop's tier.
 - Visualizes 10-minute walksheds (using pre-computed isochrones or circles), merged per headway
@@ -85,4 +85,4 @@ npm run dev
 2. Add a `GTFS_FILES_{year}` entry to `GTFS_FILES_BY_YEAR` in `extract-all-stops.js`
 3. Run `node extract-all-stops.js {year}`, then `node generate-isochrones.js {year}` (needs `MAPBOX_ACCESS_TOKEN`; calls Mapbox once per stop)
 4. Add the year to `availableYears` in `seattle-transit-access.tsx`
-5. To move the future scenario onto the new year, update `FUTURE_SCENARIO_BASE_YEAR` in `seattle-transit-access.tsx` and `GTFS_YEAR` in `extract-all-stops.js`, then disable any future stops that now appear in the real feed and re-run `node extract-all-stops.js 2027`
+5. To move the future scenario onto the new year, update `FUTURE_SCENARIO_BASE_YEAR` in `seattle-transit-access.tsx` and `GTFS_YEAR` in `extract-all-stops.js`, then disable any future stops that now appear in the real feed and re-run `node extract-all-stops.js future`

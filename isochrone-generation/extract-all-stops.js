@@ -7,7 +7,7 @@
  * applies the frequency rules, so every stop is kept.
  *
  * Usage:
- *   node extract-all-stops.js [year] [weekday|saturday|sunday]
+ *   node extract-all-stops.js [year|future] [weekday|saturday|sunday]
  *
  * Output:
  *   public/base_data/all_stops_{year}.json (weekday, the default)
@@ -61,22 +61,22 @@ if (!SERVICE_DAYS[DAY]) {
   console.error(`Unknown day "${DAY}". Options: ${Object.keys(SERVICE_DAYS).join(', ')}`);
   process.exit(1);
 }
-if (DATASET === '2027' && DAY !== 'weekday') {
-  // 2027 only extracts the hand-made future stops, which don't depend on the day
-  console.error('2027 only has weekday future stops; run it without a day.');
+if (DATASET === 'future' && DAY !== 'weekday') {
+  // future only extracts the hand-made future stops, which don't depend on the day
+  console.error('future only has weekday future stops; run it without a day.');
   process.exit(1);
 }
 
-// For 2027, use 2026 GTFS as base and add future stops
+// For future, use 2026 GTFS as base and add future stops
 // Keep in sync with FUTURE_SCENARIO_BASE_YEAR in seattle-transit-access.tsx.
-const GTFS_YEAR = DATASET === '2027' ? '2026' : DATASET;
+const GTFS_YEAR = DATASET === 'future' ? '2026' : DATASET;
 const GTFS_FILES = GTFS_FILES_BY_YEAR[GTFS_YEAR];
 if (!GTFS_FILES) {
-  console.error(`No GTFS files configured for ${GTFS_YEAR}. Options: ${Object.keys(GTFS_FILES_BY_YEAR).join(', ')}, 2027`);
+  console.error(`No GTFS files configured for ${GTFS_YEAR}. Options: ${Object.keys(GTFS_FILES_BY_YEAR).join(', ')}, future`);
   process.exit(1);
 }
 const OUTPUT_FILE = `../public/base_data/all_stops_${DATASET}${DAY === 'weekday' ? '' : `_${DAY}`}.json`;
-const FUTURE_STOPS_FILE = `../public/base_data/future_stops/future_stops_${DATASET}.json`;
+const FUTURE_STOPS_FILE = '../public/base_data/future_stops/future_stops.json';
 
 /**
  * Extract stops from a single GTFS ZIP file with frequency calculation
@@ -440,9 +440,8 @@ function getRelevantServiceIds(calendar, calendarDates = [], serviceDay = { colu
  * Load future stops from JSON file (for future year scenarios)
  */
 function loadFutureStops(dataset) {
-  // Only load future stops for years that have them
-  const futureYears = ['2027'];
-  if (!futureYears.includes(dataset)) {
+  // Only the future dataset has future stops
+  if (dataset !== 'future') {
     return [];
   }
 
@@ -494,8 +493,8 @@ async function main() {
 
   let allStopArrays = [];
 
-  // For 2027, only extract future stops (GTFS stops from the base year already have isochrones)
-  if (DATASET === '2027') {
+  // For future, only extract future stops (GTFS stops from the base year already have isochrones)
+  if (DATASET === 'future') {
     console.log(`Extracting only NEW future stops for ${DATASET} (${GTFS_YEAR} GTFS stops already have isochrones)\n`);
 
     const futureStops = loadFutureStops(DATASET);
