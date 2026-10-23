@@ -7,7 +7,7 @@ This project analyzes GTFS (General Transit Feed Specification) data to map how 
 
 ## How frequency is measured
 
-Everything uses trips per hour at each stop on a representative weekday (the first Wednesday of the feed's service period).
+Everything uses trips per hour at each stop on a representative day: a Wednesday for weekdays, plus a Saturday and a Sunday, each the first such day of the feed's service period. The time of day presets are the same on every day, so weekend "All day" (from 6am) is held back by service that starts later.
 
 **Time of day presets** (Evening, Late night and Overnight follow the time bands in [SDOT's Frequent Transit Network targets](https://www.seattle.gov/transportation/projects-and-programs/programs/transit-program/seattle-transit-measure/the-frequent-transit-network)):
 
@@ -23,13 +23,13 @@ Everything uses trips per hour at each stop on a representative weekday (the fir
 
 **Headways:** 10, 15, 20, 30, 60 and 120 minutes.
 
-**Rule:** a stop meets a headway when, over the preset's hours, it averages at least 60/headway trips per hour and no single hour drops below the next looser headway:
+**Rule:** a stop meets a headway when, over the preset's hours, it averages at least 60/headway trips per hour and no single hour drops below the next looser headway.
 
-The averaging forgives routes that ramp up slowly at the start of service without letting real gaps through. All day + 10 minutes needs 77 trips in total rather than 6 × 13 = 78, which matches the city's frequent transit maps.
+The averaging forgives routes that ramp up slowly at the start of service without letting real gaps through. Presets of 6 hours or more (All day, Midday, Overnight) may also fall one trip short of the average's total: that's how the city's frequent transit maps count All day at 10 minutes (77 trips rather than 6 × 13 = 78). Shorter presets get no slack, since one trip there is a big share of the window.
 
 120 minutes can't be checked hour by hour (that would be half a trip per hour), so instead every 2-hour stretch in the preset's hours needs at least one trip.
 
-**Which trips count:** each stop is judged by its best single route and direction, so a corridor served by several less frequent routes isn't added together. The exceptions are routes which run as one combined service and count together (`combinableRoutes` in `extract-all-stops.js`).
+**Which trips count:** each stop is judged by its best single route and direction, so a corridor served by several less frequent routes isn't added together. The exceptions are routes which run as one combined service and count together (`COMBINABLE_ROUTES` in `extract-all-stops.js`).
 
 ## flow
 
@@ -39,13 +39,13 @@ The averaging forgives routes that ramp up slowly at the start of service withou
 - Reads GTFS ZIP files (stops, trips, stop_times, calendar, calendar_dates)
 - Calculates hourly trip frequencies for each stop on a representative Wednesday
 - Aggregates to the maximum frequency across all routes at each stop, hour by hour, and also saves each route and direction (route number, most common destination, trips per hour) for the stop popups
-- Outputs: `base_data/all_stops_{year}.json` with pre-calculated frequencies for every stop (the site applies the frequency rules)
+- Outputs: `base_data/all_stops_{year}.json` (weekday) and `base_data/all_stops_{year}_{saturday|sunday}.json`, with pre-calculated frequencies for every stop (the site applies the frequency rules)
 - 2027 is a scenario, not a feed: it extracts only the hand-made stops in `base_data/future_stops/future_stops_2027.json`, which the site layers on top of the 2026 data. Every enabled future stop is kept, whatever its frequency.
 
 **Run:**
 ```bash
 cd isochrone-generation
-node extract-all-stops.js [year]  # year: 2020, 2025, 2026, or 2027
+node extract-all-stops.js [year] [day]  # year: 2020, 2025, 2026, or 2027; day: weekday (default), saturday or sunday (2027 is weekday only)
 ```
 
 ### 2: Isochrone setup
@@ -65,7 +65,7 @@ node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or 2027
 **File:** `seattle-transit-access.tsx`
 
 - Loads pre-processed data from all_stops JSON files
-- Year selector (2020, 2025, 2026, 2027) and time of day preset buttons
+- Year selector (2020, 2025, 2026, 2027), day buttons (Weekday, Saturday, Sunday; each loads that day's stop file) and time of day preset buttons. The 2027 future stops only have weekday trips, so weekends reuse them.
 - **Single mode:** one headway, picked from a dropdown. Each headway has its own color, used in both modes.
 - **Tiers mode:** nested bands for every 10, 15, 30, 60 and 120 minutes, so you can see all levels of service at once. Stop markers appear from zoom 14 and their tooltips show the stop's tier.
 - Visualizes 10-minute walksheds (using pre-computed isochrones or circles), merged per headway

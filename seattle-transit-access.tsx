@@ -30,7 +30,21 @@ const PRESETS: Record<Preset, { label: string; hours: readonly [number, number] 
   [Preset.Overnight]: { label: 'Overnight', hours: [0, 6] },
 };
 
+// Days of service. Each has its own all_stops file from extract-all-stops.js (weekdays use a representative Wednesday).
+enum Day {
+  Weekday,
+  Saturday,
+  Sunday,
+}
+
+const DAYS: Record<Day, { label: string; plural: string; fileSuffix: string }> = {
+  [Day.Weekday]: { label: 'Weekday', plural: 'weekdays', fileSuffix: '' },
+  [Day.Saturday]: { label: 'Saturday', plural: 'Saturdays', fileSuffix: '_saturday' },
+  [Day.Sunday]: { label: 'Sunday', plural: 'Sundays', fileSuffix: '_sunday' },
+};
+
 const HEADWAYS = [10, 15, 20, 30, 60, 120]; // Minutes between buses, offered in the headway dropdown
+const LONG_WINDOW_HOURS = 6; // Presets this long (All day, Midday, Overnight) may fall one trip short of the average
 
 // One color per headway, used in both single and tiers mode so a headway always looks the same.
 // The tier colors stay distinguishable in every pair under red-green colorblindness, and the cool hues stay clear
@@ -66,8 +80,10 @@ function formatHour(hour: number): string {
  * looser headway in HEADWAYS. e.g. 15 minutes needs an average of 4 trips per hour with no hour under 3
  * (every 20 minutes). This forgives routes that ex: ramp up slowly in the morning.
  *
- * This generalizes the city-matched 10-minute rule: 4+ trips every hour (15 minutes) AND 77+ trips in total
- * from 6am-7pm. All day + 10 minutes keeps the city's 77-trip total rather than 6 x 13 = 78.
+ * Windows of LONG_WINDOW_HOURS or more may also fall one trip short of that total, which generalizes the
+ * city-matched 10-minute rule: 4+ trips every hour (15 minutes) AND 77+ trips from 6am-7pm, i.e. 6 x 13 - 1.
+ * Shorter windows get no slack, since one trip there is a big share (Evening at 30 minutes would otherwise pass
+ * with 2 trips then 1, hourly for half the window).
  *
  * Headways longer than an hour (120 min) can't be checked hour by hour, since that would need half a trip per hour.
  * Instead every stretch of that many hours in the window needs at least 1 trip. (60 minutes is unaffected: its
@@ -89,7 +105,8 @@ function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Pres
 
   const looserHeadway = HEADWAYS[HEADWAYS.indexOf(headway) + 1] ?? headway;
   const minTripsPerHour = 60 / looserHeadway;
-  const minTotalTrips = preset === Preset.AllDay && headway === 10 ? 77 : (60 / headway) * (end - start);
+  const hours = end - start;
+  const minTotalTrips = (60 / headway) * hours - (hours >= LONG_WINDOW_HOURS ? 1 : 0);
 
   let total = 0;
   for (let h = start; h < end; h++) {
@@ -99,6 +116,20 @@ function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Pres
   }
 
   return total >= minTotalTrips;
+}
+
+/**
+ * Does a stop meet the headway during the preset through a single route and direction, or an approved pair?
+ *
+ * Each stop's routes list has every route and direction serving it with its own hourly trips, plus an entry for
+ * each pair in COMBINABLE_ROUTES (extract-all-stops.js) that serves it, e.g. "31/32". Different routes are never
+ * mixed otherwise, not even hour by hour. Stops without a routes list (the hand-made 2027 future stops, each a
+ * single route) use their own hourly trips.
+ */
+function stopQualifies(stop: any, preset: Preset, headway: number): boolean {
+  const routes: any[] = stop.routes || [];
+  if (routes.length === 0) return qualifies(stop.hourlyTrips, preset, headway);
+  return routes.some(route => qualifies(route.hourly_trips, preset, headway));
 }
 
 /**
@@ -273,6 +304,7 @@ export default function SeattleTransitVisualizer() {
   const [availableYears] = useState<string[]>(['2020', '2025', '2026', '2027']);
 
   // Frequency selection - which time of day and how often buses must come for a stop to count
+  const [day, setDay] = useState<Day>(Day.Weekday);
   const [preset, setPreset] = useState<Preset>(Preset.AllDay);
   const [headway, setHeadway] = useState<number>(10); // Minutes between buses, in single mode
   const [mode, setMode] = useState<'single' | 'tiers'>('single'); // One headway, or nested bands for TIER_HEADWAYS
@@ -287,7 +319,7 @@ export default function SeattleTransitVisualizer() {
   const { frequentStops, bestHeadway } = useMemo(() => {
     const bestHeadway = new Map<string, number>();
     for (const stop of yearStops) {
-      const tightest = activeHeadways.find(h => qualifies(stop.hourlyTrips, preset, h));
+      const tightest = activeHeadways.find(h => stopQualifies(stop, preset, h));
       if (tightest !== undefined) bestHeadway.set(stop.id, tightest);
     }
     return { frequentStops: yearStops.filter(stop => bestHeadway.has(stop.id)), bestHeadway };
@@ -371,7 +403,7 @@ export default function SeattleTransitVisualizer() {
    */
   useEffect(() => {
     loadUploadedFile();
-  }, [selectedYear]);
+  }, [selectedYear, day]);
 
   /**
    * Effect: Load pre-computed isochrones for the selected year
@@ -659,11 +691,8 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Tooltip lines about the routes at a stop: every route number serving it, and which route gives it its headway.
-   *
-   * A stop's hourly trips are the highest count hour by hour across its routes and directions, so a stop can meet a
-   * headway without any single route doing so (e.g. one route covers 6am and another the rest of the day). In that
-   * case the routes that supply the busiest hours are listed as combined.
+   * Tooltip lines about the routes at a stop: every route number serving it, and which route (or approved pair) gives
+   * it its headway. Stops only qualify through a single route or pair (see stopQualifies), so there's always one.
    */
   function stopRoutesSummary(stop: any, stopHeadway: number): string {
     const routes: any[] = stop.routes || [];
@@ -675,20 +704,14 @@ export default function SeattleTransitVisualizer() {
     const single = routes.filter(r => qualifies(r.hourly_trips, preset, stopHeadway));
     if (single.length > 0) {
       // Combined pairs go to different places, so they're named without a destination
-      const via = single.map(r => `${r.route}${r.headsign && !r.combined ? ` to ${r.headsign}` : ''}`).join('; ');
-      lines.push(`Every ${stopHeadway} min or better on ${via}`);
-    } else {
-      // Routes that supply the stop's count in at least one hour of the preset
-      const [start, end] = PRESETS[preset].hours;
-      const contributing = routes.filter(r => {
-        for (let h = start; h < end; h++) {
-          const trips = r.hourly_trips[h] || 0;
-          if (trips > 0 && trips === (stop.hourlyTrips[h.toString()] || 0)) return true;
-        }
-        return false;
-      });
-      const names = [...new Set(contributing.map(r => r.route))].join(' + ');
-      lines.push(`Every ${stopHeadway} min or better with ${names} combined (no single route does on its own)`);
+      const names = single.map(r => `${r.route}${r.headsign && !r.combined ? ` to ${r.headsign}` : ''}`);
+      if (names.length === 1) {
+        lines.push(`Every ${stopHeadway} min or better on ${names[0]}`);
+      } else {
+        // One route per line, so several routes that each qualify don't read as being added together
+        lines.push(`Every ${stopHeadway} min or better on each of these, on its own:`);
+        lines.push(...names.map(name => `&nbsp;&nbsp;• ${name}`));
+      }
     }
     return lines.map(line => `<br><small>${line}</small>`).join('');
   }
@@ -887,11 +910,13 @@ export default function SeattleTransitVisualizer() {
    * Auto-load pre-processed stop data from all_stops JSON file
    *
    * Loads stop data with pre-calculated hourly trip frequencies from the
-   * all_stops_{year}.json files generated by extract-all-stops.js
+   * all_stops_{year}.json files generated by extract-all-stops.js, or all_stops_{year}_{saturday|sunday}.json
+   * for weekends
    *
-   * For 2027, loads base year GTFS data (since 2027 data doesn't exist yet)
+   * For 2027, loads base year GTFS data (since 2027 data doesn't exist yet). Its hand-made future stops only have
+   * weekday trips, so weekends reuse them.
    *
-   * File structure expected: /base_data/all_stops_{year}.json
+   * File structure expected: /base_data/all_stops_{year}{_saturday|_sunday}.json
    */
   async function loadUploadedFile() {
     setLoading(true);
@@ -900,7 +925,8 @@ export default function SeattleTransitVisualizer() {
     try {
       // For 2027, use base year GTFS data (since 2027 data doesn't exist yet)
       const gtfsYear = selectedYear === '2027' ? FUTURE_SCENARIO_BASE_YEAR : selectedYear;
-      const allStopsUrl = `${import.meta.env.BASE_URL}base_data/all_stops_${gtfsYear}.json`;
+      const stopsFile = `all_stops_${gtfsYear}${DAYS[day].fileSuffix}.json`;
+      const allStopsUrl = `${import.meta.env.BASE_URL}base_data/${stopsFile}`;
 
       if (selectedYear === '2027') {
         console.log(`Using ${FUTURE_SCENARIO_BASE_YEAR} GTFS data as base for 2027 scenario`);
@@ -909,7 +935,7 @@ export default function SeattleTransitVisualizer() {
 
       const response = await fetch(allStopsUrl);
       if (!response.ok) {
-        throw new Error(`all_stops_${gtfsYear}.json not found. Please run extract-all-stops.js first.`);
+        throw new Error(`${stopsFile} not found. Please run extract-all-stops.js first.`);
       }
 
       const allStops = await response.json();
@@ -1121,6 +1147,13 @@ export default function SeattleTransitVisualizer() {
     setCensusData(null);
   }
 
+  // Changing day loads that day's stop file; walksheds are the same, so the map keeps its view
+  function handleDayChange(newDay: Day) {
+    if (newDay === day) return;
+    setDay(newDay);
+    setCensusData(null);
+  }
+
   function handleModeChange(newMode: 'single' | 'tiers') {
     setMode(newMode);
     setCensusData(null);
@@ -1162,8 +1195,8 @@ export default function SeattleTransitVisualizer() {
             <h1 className="text-2xl font-bold">{areaLabel} Frequent Transit Access</h1>
             <p className="text-blue-100 text-sm mt-1">
               {mode === 'tiers'
-                ? `Stops by how often buses come, ${presetHours} weekdays + 10-minute walksheds`
-                : `Stops with service every ${headway} minutes, ${presetHours} weekdays + 10-minute walksheds`}
+                ? `Stops by how often buses come, ${presetHours} ${DAYS[day].plural} + 10-minute walksheds`
+                : `Stops with service every ${headway} minutes, ${presetHours} ${DAYS[day].plural} + 10-minute walksheds`}
             </p>
           </div>
           {/* Area toggle and year selector dropdown */}
@@ -1198,8 +1231,26 @@ export default function SeattleTransitVisualizer() {
             </select>
           </div>
         </div>
-        {/* Frequency controls - time of day preset buttons and headway dropdown */}
+        {/* Frequency controls - day, time of day preset buttons and headway dropdown */}
         <div className="flex items-center gap-x-4 gap-y-2 flex-wrap mt-3">
+          <div className="flex gap-1">
+            {Object.entries(DAYS).map(([key, { label }]) => {
+              const value = Number(key) as Day;
+              return (
+                <button
+                  key={key}
+                  onClick={() => handleDayChange(value)}
+                  className={`px-3 py-1 rounded text-sm border ${
+                    day === value
+                      ? 'bg-white text-blue-700 border-white font-semibold'
+                      : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
           <div className="flex flex-wrap gap-1">
             {Object.entries(PRESETS).map(([key, { label }]) => {
               const value = Number(key) as Preset;

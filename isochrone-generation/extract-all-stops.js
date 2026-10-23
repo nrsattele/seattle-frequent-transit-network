@@ -3,14 +3,15 @@
  *
  * This script reads the GTFS ZIP files directly and extracts all stops,
  * merging Metro and Sound Transit into a single comprehensive list, with
- * trips per hour on a representative Wednesday. The site applies the
- * frequency rules, so every stop is kept.
+ * trips per hour on a representative day (a Wednesday for weekdays). The site
+ * applies the frequency rules, so every stop is kept.
  *
  * Usage:
- *   node extract-all-stops.js [year]
+ *   node extract-all-stops.js [year] [weekday|saturday|sunday]
  *
  * Output:
- *   public/base_data/all_stops_{year}.json
+ *   public/base_data/all_stops_{year}.json (weekday, the default)
+ *   public/base_data/all_stops_{year}_{saturday|sunday}.json
  */
 
 import JSZip from 'jszip';
@@ -53,6 +54,19 @@ const GTFS_FILES_BY_YEAR = {
 // Choose which dataset to process (can be set via command line argument)
 const DATASET = process.argv[2] || '2025'; // Default to 2025
 
+// Day of service to count trips for. Weekdays use a representative Wednesday.
+const SERVICE_DAYS = { weekday: { column: 'wednesday', dayOfWeek: 3 }, saturday: { column: 'saturday', dayOfWeek: 6 }, sunday: { column: 'sunday', dayOfWeek: 0 } };
+const DAY = process.argv[3] || 'weekday';
+if (!SERVICE_DAYS[DAY]) {
+  console.error(`Unknown day "${DAY}". Options: ${Object.keys(SERVICE_DAYS).join(', ')}`);
+  process.exit(1);
+}
+if (DATASET === '2027' && DAY !== 'weekday') {
+  // 2027 only extracts the hand-made future stops, which don't depend on the day
+  console.error('2027 only has weekday future stops; run it without a day.');
+  process.exit(1);
+}
+
 // For 2027, use 2026 GTFS as base and add future stops
 // Keep in sync with FUTURE_SCENARIO_BASE_YEAR in seattle-transit-access.tsx.
 const GTFS_YEAR = DATASET === '2027' ? '2026' : DATASET;
@@ -61,7 +75,7 @@ if (!GTFS_FILES) {
   console.error(`No GTFS files configured for ${GTFS_YEAR}. Options: ${Object.keys(GTFS_FILES_BY_YEAR).join(', ')}, 2027`);
   process.exit(1);
 }
-const OUTPUT_FILE = `../public/base_data/all_stops_${DATASET}.json`;
+const OUTPUT_FILE = `../public/base_data/all_stops_${DATASET}${DAY === 'weekday' ? '' : `_${DAY}`}.json`;
 const FUTURE_STOPS_FILE = `../public/base_data/future_stops/future_stops_${DATASET}.json`;
 
 /**
@@ -158,7 +172,7 @@ async function extractStopsFromZip(zipPath, feedName, dataset) {
   const { frequencies: stopFrequencies, routes: stopRoutes } = calculateStopFrequencies(
     parsedStopTimes.data,
     parsedTrips.data,
-    getRelevantServiceIds(parsedCalendar.data, calendarDates),
+    getRelevantServiceIds(parsedCalendar.data, calendarDates, SERVICE_DAYS[DAY]),
     routeNames,
     feedName === 'metro' ? COMBINABLE_ROUTES : []
   );
@@ -346,24 +360,25 @@ function calculateStopFrequencies(stopTimes, trips, activeServiceIds, routeNames
 }
 
 /**
- * Get service IDs active on a representative weekday.
- * Picks the first Wednesday on or after the latest Wednesday service start date, then finds every
- * service running that day: calendar.txt entries that include Wednesday and cover the date, plus
+ * Get service IDs active on a representative day of the given day of week (Wednesday for weekdays).
+ * Picks the first such day on or after the latest start date among services that run on that day of week, then
+ * finds every service running that day: calendar.txt entries that include the day of week and cover the date, plus
  * calendar_dates.txt additions (exception_type 1), minus removals (exception_type 2).
  *
- * Wednesday-only matching (rather than requiring Mon-Fri) matters for feeds like Metro's 2026 feed,
+ * Wednesday-only matching for weekdays (rather than requiring Mon-Fri) matters for feeds like Metro's 2026 feed,
  * where the main weekday service is defined as Mon-Wed with Thu/Fri added via calendar_dates.
  */
-function getRelevantServiceIds(calendar, calendarDates = []) {
-  const weekdayServiceEntries = calendar.filter(c => c.wednesday === '1');
+function getRelevantServiceIds(calendar, calendarDates = [], serviceDay = { column: 'wednesday', dayOfWeek: 3 }) {
+  const { column, dayOfWeek } = serviceDay;
+  const dayServiceEntries = calendar.filter(c => c[column] === '1');
 
-  if (weekdayServiceEntries.length === 0) {
-    console.error('No Wednesday services found in calendar.txt');
+  if (dayServiceEntries.length === 0) {
+    console.error(`No ${column} services found in calendar.txt`);
     return new Set();
   }
 
   // Find the latest start date
-  const allStartDates = weekdayServiceEntries
+  const allStartDates = dayServiceEntries
     .map(s => s.start_date)
     .filter(d => d)
     .sort();
@@ -381,24 +396,24 @@ function getRelevantServiceIds(calendar, calendarDates = []) {
   const day = parseInt(latestStartDate.substring(6, 8));
   const startDate = new Date(year, month, day);
 
-  // Find the first Wednesday on or after the start date
-  let wednesdayDate = new Date(startDate);
-  while (wednesdayDate.getDay() !== 3) {
-    wednesdayDate.setDate(wednesdayDate.getDate() + 1);
+  // Find the first matching day of week on or after the start date
+  let representativeDate = new Date(startDate);
+  while (representativeDate.getDay() !== dayOfWeek) {
+    representativeDate.setDate(representativeDate.getDate() + 1);
   }
 
   // Format back to YYYYMMDD
-  const wednesdayDateStr =
-    wednesdayDate.getFullYear().toString() +
-    (wednesdayDate.getMonth() + 1).toString().padStart(2, '0') +
-    wednesdayDate.getDate().toString().padStart(2, '0');
+  const representativeDateStr =
+    representativeDate.getFullYear().toString() +
+    (representativeDate.getMonth() + 1).toString().padStart(2, '0') +
+    representativeDate.getDate().toString().padStart(2, '0');
 
-  // Find all service IDs active on this Wednesday
-  const activeServiceIds = new Set(weekdayServiceEntries
+  // Find all service IDs active on this day
+  const activeServiceIds = new Set(dayServiceEntries
     .filter(s => {
       const start = s.start_date || '0';
       const end = s.end_date || '99999999';
-      return wednesdayDateStr >= start && wednesdayDateStr <= end;
+      return representativeDateStr >= start && representativeDateStr <= end;
     })
     .map(s => s.service_id));
 
@@ -406,7 +421,7 @@ function getRelevantServiceIds(calendar, calendarDates = []) {
   let added = 0;
   let removed = 0;
   calendarDates
-    .filter(cd => cd.date === wednesdayDateStr)
+    .filter(cd => cd.date === representativeDateStr)
     .forEach(cd => {
       if (cd.exception_type === '1' && !activeServiceIds.has(cd.service_id)) {
         activeServiceIds.add(cd.service_id);
@@ -416,7 +431,7 @@ function getRelevantServiceIds(calendar, calendarDates = []) {
       }
     });
 
-  console.log(`  Found ${activeServiceIds.size} active weekday service(s) for ${wednesdayDateStr} (${added} added, ${removed} removed by calendar_dates)`);
+  console.log(`  Found ${activeServiceIds.size} active ${column} service(s) for ${representativeDateStr} (${added} added, ${removed} removed by calendar_dates)`);
 
   return activeServiceIds;
 }
