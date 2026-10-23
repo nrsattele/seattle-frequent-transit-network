@@ -148,5 +148,805 @@
     "lat": 47.61417392393024,
     "lon": -122.3384881625163,
     "route_name": "RapidRide J Line"
+  },
+  {
+    "id": "future_016",
+    "original_id": "future_016",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Renton Transit Center",
+    "lat": 47.480898,
+    "lon": -122.207907,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_017",
+    "original_id": "future_017",
+    "feed": "future",
+    "dataset": "future",
+    "name": "S 2nd St and Shattuck Ave (Southbound)",
+    "lat": 47.4814022100379,
+    "lon": -122.2146299052997,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_018",
+    "original_id": "future_018",
+    "feed": "future",
+    "dataset": "future",
+    "name": "S 3rd St and Shattuck Ave S (Northbound)",
+    "lat": 47.47971514430406,
+    "lon": -122.2157243226382,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_019",
+    "original_id": "future_019",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Rainier Ave S and S 4th Pl (Northbound)",
+    "lat": 47.47719861076088,
+    "lon": -122.2154509540546,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_020",
+    "original_id": "future_020",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Rainier Ave S and S 3rd Pl (Southbound)",
+    "lat": 47.47779952839069,
+    "lon": -122.2162056280412,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_021",
+    "original_id": "future_021",
+    "feed": "future",
+    "dataset": "future",
+    "name": "S Renton Park & Ride (Northbound)",
+    "lat": 47.47246629775298,
+    "lon": -122.2134205978382,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_022",
+    "original_id": "future_022",
+    "feed": "future",
+    "dataset": "future",
+    "name": "S Renton Park & Ride (Southbound)",
+    "lat": 47.47256571598841,
+    "lon": -122.2137122127387,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_023",
+    "original_id": "future_023",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S 15th St (Southbound)",
+    "lat": 47.46622485070859,
+    "lon": -122.2079875374019,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_024",
+    "original_id": "future_024",
+    "feed": "future",
+    "dataset": "future",
+    "name": "S Grady Way and Talbot Rd S (Southbound)",
+    "lat": 47.4724716401045,
+    "lon": -122.2094758713988,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_025",
+    "original_id": "future_025",
+    "feed": "future",
+    "dataset": "future",
+    "name": "S Grady Way and Talbot Rd S (Northbound)",
+    "lat": 47.47276346433686,
+    "lon": -122.2094895337998,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_026",
+    "original_id": "future_026",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S Puget Dr (Northbound)",
+    "lat": 47.46568991030106,
+    "lon": -122.2075376809778,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_027",
+    "original_id": "future_027",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S 23rd St (Southbound)",
+    "lat": 47.458725,
+    "lon": -122.21255,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_028",
+    "original_id": "future_028",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S 23rd St (Northbound)",
+    "lat": 47.45905151595824,
+    "lon": -122.2120810345965,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_029",
+    "original_id": "future_029",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S 32nd St (Southbound)",
+    "lat": 47.45094247328274,
+    "lon": -122.2116631555077,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_030",
+    "original_id": "future_030",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S 32nd St (Northbound)",
+    "lat": 47.45102762431726,
+    "lon": -122.2115089813952,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_031",
+    "original_id": "future_031",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE Carr Rd and Wells Ave S/ Mill Ave S/ 103rd Ave SE (Southbound)",
+    "lat": 47.44263526779898,
+    "lon": -122.203832539524,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_032",
+    "original_id": "future_032",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE Carr Rd and Wells Ave S/ Mill Ave S/ 103rd Ave SE (Northbound)",
+    "lat": 47.44284692001618,
+    "lon": -122.2039809709316,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_033",
+    "original_id": "future_033",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE Carr Rd and 105th Pl SE (Southbound)",
+    "lat": 47.44449627406057,
+    "lon": -122.2006533745322,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_034",
+    "original_id": "future_034",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE 180th St and 108th Ave SE (Southbound)",
+    "lat": 47.441366,
+    "lon": -122.198513,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_035",
+    "original_id": "future_035",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE 180th St and 108th Ave SE (Northbound)",
+    "lat": 47.441499,
+    "lon": -122.198726,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_036",
+    "original_id": "future_036",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 186th Ln (Southbound)",
+    "lat": 47.43664983662376,
+    "lon": -122.1971644006393,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_037",
+    "original_id": "future_037",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 186th Ln (Northbound)",
+    "lat": 47.43695142746183,
+    "lon": -122.1968423727254,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_038",
+    "original_id": "future_038",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 192nd St (Northbound)",
+    "lat": 47.43049,
+    "lon": -122.196925,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_039",
+    "original_id": "future_039",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S Carr Rd (Southbound)",
+    "lat": 47.44225937697594,
+    "lon": -122.2124458574071,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_040",
+    "original_id": "future_040",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S Carr Rd (Northbound)",
+    "lat": 47.44236027505558,
+    "lon": -122.2121246218168,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_041",
+    "original_id": "future_041",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S 37th St (Southbound)",
+    "lat": 47.44612183605826,
+    "lon": -122.2112466500301,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_042",
+    "original_id": "future_042",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Talbot Rd S and S 37th St (Northbound)",
+    "lat": 47.44673646104109,
+    "lon": -122.210911771467,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_043",
+    "original_id": "future_043",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE Carr Rd and 105th Ave SE (Northbound)",
+    "lat": 47.44472901582152,
+    "lon": -122.2008607979084,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_044",
+    "original_id": "future_044",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 208th St (Southbound)",
+    "lat": 47.41519214273309,
+    "lon": -122.1972580085318,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_045",
+    "original_id": "future_045",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 192nd St (Southbound)",
+    "lat": 47.4299665952906,
+    "lon": -122.1972264379885,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_046",
+    "original_id": "future_046",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 200th/201st St (Southbound)",
+    "lat": 47.42247413484795,
+    "lon": -122.1972413486478,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_047",
+    "original_id": "future_047",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 200th St (Northbound)",
+    "lat": 47.42280352701447,
+    "lon": -122.1969052945663,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_048",
+    "original_id": "future_048",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 208th St (Northbound)",
+    "lat": 47.41656367768542,
+    "lon": -122.1968610019902,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_049",
+    "original_id": "future_049",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 217th St/ SE 216th St (Southbound)",
+    "lat": 47.40791382239686,
+    "lon": -122.1972926569263,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_050",
+    "original_id": "future_050",
+    "feed": "future",
+    "dataset": "future",
+    "name": "108th Ave SE and SE 217th St/ SE 216th St (Northbound)",
+    "lat": 47.40852864587185,
+    "lon": -122.1969170330589,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_051",
+    "original_id": "future_051",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Benson Rd SE and SE 224th St (Southbound)",
+    "lat": 47.40137754111417,
+    "lon": -122.1997040759941,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_052",
+    "original_id": "future_052",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Benson Rd SE and SE 224th St (Northbound)",
+    "lat": 47.40145473487284,
+    "lon": -122.1990338601776,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_053",
+    "original_id": "future_053",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 228th St (Southbound)",
+    "lat": 47.3978854212347,
+    "lon": -122.2024078468107,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_054",
+    "original_id": "future_054",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 228th St (Northbound)",
+    "lat": 47.39814591357217,
+    "lon": -122.2020807860823,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_055",
+    "original_id": "future_055",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 235th St (Southbound)",
+    "lat": 47.3910899280996,
+    "lon": -122.2023471675366,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_056",
+    "original_id": "future_056",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 235th St (Northbound)",
+    "lat": 47.391083,
+    "lon": -122.202048,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_057",
+    "original_id": "future_057",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE 256th St and 101st Ave SE (Northbound)",
+    "lat": 47.3724745794016,
+    "lon": -122.2068201247363,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_058",
+    "original_id": "future_058",
+    "feed": "future",
+    "dataset": "future",
+    "name": "SE 256th St and 101st Ave SE (Southbound)",
+    "lat": 47.37266901650102,
+    "lon": -122.2069601819722,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_059",
+    "original_id": "future_059",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Canyon Dr SE and 94th Ave S (Northbound)",
+    "lat": 47.37881615496701,
+    "lon": -122.2160452053527,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_060",
+    "original_id": "future_060",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Canyon Dr SE and 94th Ave S (Southbound)",
+    "lat": 47.37890629636721,
+    "lon": -122.2157676769102,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_061",
+    "original_id": "future_061",
+    "feed": "future",
+    "dataset": "future",
+    "name": "E Smith St and E Titus St/ Jason Ave N (Southbound)",
+    "lat": 47.38347022304954,
+    "lon": -122.2261228700592,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_062",
+    "original_id": "future_062",
+    "feed": "future",
+    "dataset": "future",
+    "name": "E Smith St and E Titus St/ Jason Ave N (Northbound)",
+    "lat": 47.383196,
+    "lon": -122.22494,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_063",
+    "original_id": "future_063",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Kent Station (Northbound)",
+    "lat": 47.384476,
+    "lon": -122.232742,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_064",
+    "original_id": "future_064",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Kent Station (Southbound)",
+    "lat": 47.384915,
+    "lon": -122.232752,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_065",
+    "original_id": "future_065",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and E Meeker St (Southbound)",
+    "lat": 47.38144522594392,
+    "lon": -122.2311979555029,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_066",
+    "original_id": "future_066",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and E Meeker St (Northbound)",
+    "lat": 47.38183125334739,
+    "lon": -122.2309596990165,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_067",
+    "original_id": "future_067",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and E Willis St (Southbound)",
+    "lat": 47.37734687668426,
+    "lon": -122.2306090579095,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_068",
+    "original_id": "future_068",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and E Willis St (Northbound)",
+    "lat": 47.37731379378172,
+    "lon": -122.2303240946902,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_069",
+    "original_id": "future_069",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and S 259th St (Southbound)",
+    "lat": 47.36978601796075,
+    "lon": -122.2301005758887,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_070",
+    "original_id": "future_070",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and S 259th St (Northbound)",
+    "lat": 47.37037878530543,
+    "lon": -122.2298868644781,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_071",
+    "original_id": "future_071",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and S 266th St (Southbound)",
+    "lat": 47.364368,
+    "lon": -122.230052,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_072",
+    "original_id": "future_072",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Central Ave S and S 266th St (Northbound)",
+    "lat": 47.364672,
+    "lon": -122.229795,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_073",
+    "original_id": "future_073",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 240th St (Southbound)",
+    "lat": 47.38662008386691,
+    "lon": -122.2023617837552,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_074",
+    "original_id": "future_074",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 240th St (Northbound)",
+    "lat": 47.38743145770943,
+    "lon": -122.2020478209405,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_075",
+    "original_id": "future_075",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 248th St (Southbound)",
+    "lat": 47.37939275626574,
+    "lon": -122.2025319464184,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_076",
+    "original_id": "future_076",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 248th St (Northbound)",
+    "lat": 47.37999994456071,
+    "lon": -122.2021670338121,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_077",
+    "original_id": "future_077",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 253rd Pl (Southbound)",
+    "lat": 47.37405299662441,
+    "lon": -122.2025601021759,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_078",
+    "original_id": "future_078",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave SE and SE 253rd Pl (Northbound)",
+    "lat": 47.374755,
+    "lon": -122.202272,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_079",
+    "original_id": "future_079",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 49th St NE (Southbound)",
+    "lat": 47.35148195942165,
+    "lon": -122.227501279893,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_080",
+    "original_id": "future_080",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 49th St NE (Northbound)",
+    "lat": 47.35149131074648,
+    "lon": -122.2271872223439,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_081",
+    "original_id": "future_081",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 42nd St NE (Southbound)",
+    "lat": 47.344655,
+    "lon": -122.222464,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_082",
+    "original_id": "future_082",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 42nd St NE (Northbound)",
+    "lat": 47.344481,
+    "lon": -122.222178,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_083",
+    "original_id": "future_083",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 37th St NE (Southbound)",
+    "lat": 47.33985059803888,
+    "lon": -122.2224526328522,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_084",
+    "original_id": "future_084",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 37th St NE (Northbound)",
+    "lat": 47.34051206609921,
+    "lon": -122.2222043870109,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_085",
+    "original_id": "future_085",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 28th St NE (Southbound)",
+    "lat": 47.33177642801136,
+    "lon": -122.2217250278438,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_086",
+    "original_id": "future_086",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 28th St NE (Northbound)",
+    "lat": 47.33201455260375,
+    "lon": -122.2214677380267,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_087",
+    "original_id": "future_087",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 22nd St NE (Southbound)",
+    "lat": 47.32618610601024,
+    "lon": -122.221669536179,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_088",
+    "original_id": "future_088",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 22nd St NE (Northbound)",
+    "lat": 47.32618915377646,
+    "lon": -122.2214145917422,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_089",
+    "original_id": "future_089",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 15th St NE (Southbound)",
+    "lat": 47.32064312994214,
+    "lon": -122.2216213625844,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_090",
+    "original_id": "future_090",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 15th St NE (Northbound)",
+    "lat": 47.32149263869681,
+    "lon": -122.2213782963055,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_091",
+    "original_id": "future_091",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 9th St NE (Southbound)",
+    "lat": 47.31552645067387,
+    "lon": -122.223768849951,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_092",
+    "original_id": "future_092",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 9th St NE (Northbound)",
+    "lat": 47.31632119195324,
+    "lon": -122.2225317639845,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_093",
+    "original_id": "future_093",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 1st St N (Southbound)",
+    "lat": 47.30852201337158,
+    "lon": -122.22598867496,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_094",
+    "original_id": "future_094",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Way N and 1st St NE (Northbound)",
+    "lat": 47.30814479907698,
+    "lon": -122.2256613448468,
+    "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_095",
+    "original_id": "future_095",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Auburn Station",
+    "lat": 47.305772,
+    "lon": -122.232055,
+    "route_name": "RapidRide I Line"
   }
 ]
