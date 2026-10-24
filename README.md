@@ -40,7 +40,7 @@ The averaging forgives routes that ramp up slowly at the start of service withou
 - Calculates hourly trip frequencies for each stop on a representative Wednesday
 - Aggregates to the maximum frequency across all routes at each stop, hour by hour, and also saves each route and direction (route number, most common destination, trips per hour) for the stop popups
 - Outputs: `base_data/all_stops_{year}.json` (weekday) and `base_data/all_stops_{year}_{saturday|sunday}.json`, with pre-calculated frequencies for every stop (the site applies the frequency rules)
-- `future` is a scenario, not a feed (labeled "Future" on the site): it extracts only the hand-made stops in `base_data/future_stops/future_stops.json` (planned projects not yet in a feed: the RapidRide J and I Lines today), which the site layers on top of the 2026 data. Every enabled future stop is kept, whatever its frequency.
+- `future` is a scenario, not a feed (labeled "Future" on the site): it extracts only the hand-made stops in `base_data/future_stops/future_stops.json` (planned projects not yet in a feed: the RapidRide J and I Lines and Stride BRT today), which the site layers on top of the 2026 data. Every enabled future stop is kept, whatever its frequency.
 
 **Run:**
 ```bash
