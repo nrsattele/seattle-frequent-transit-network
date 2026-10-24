@@ -948,5 +948,345 @@
     "lat": 47.305772,
     "lon": -122.232055,
     "route_name": "RapidRide I Line"
+  },
+  {
+    "id": "future_096",
+    "original_id": "future_096",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Burien Transit Center",
+    "lat": 47.4701042,
+    "lon": -122.337067,
+    "route_name": "Stride S1"
+  },
+  {
+    "id": "future_097",
+    "original_id": "future_097",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Tukwila International Blvd Station",
+    "lat": 47.4640274,
+    "lon": -122.287933,
+    "route_name": "Stride S1"
+  },
+  {
+    "id": "future_098",
+    "original_id": "future_098",
+    "feed": "future",
+    "dataset": "future",
+    "name": "South Renton Transit Center",
+    "lat": 47.4744148,
+    "lon": -122.21508,
+    "route_name": "Stride S1"
+  },
+  {
+    "id": "future_099",
+    "original_id": "future_099",
+    "feed": "future",
+    "dataset": "future",
+    "name": "NE 44th Station",
+    "lat": 47.531988,
+    "lon": -122.197261,
+    "route_name": "Stride S1"
+  },
+  {
+    "id": "future_100",
+    "original_id": "future_100",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Bellevue Transit Center",
+    "lat": 47.6155052,
+    "lon": -122.195358,
+    "route_name": "Stride S1"
+  },
+  {
+    "id": "future_101",
+    "original_id": "future_101",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Bellevue Transit Center",
+    "lat": 47.6155052,
+    "lon": -122.195358,
+    "route_name": "Stride S2"
+  },
+  {
+    "id": "future_102",
+    "original_id": "future_102",
+    "feed": "future",
+    "dataset": "future",
+    "name": "NE 85th Station",
+    "lat": 47.679079,
+    "lon": -122.184614,
+    "route_name": "Stride S2"
+  },
+  {
+    "id": "future_103",
+    "original_id": "future_103",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Totem Lake Station",
+    "lat": 47.715172,
+    "lon": -122.185403,
+    "route_name": "Stride S2"
+  },
+  {
+    "id": "future_104",
+    "original_id": "future_104",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Brickyard Station",
+    "lat": 47.742627,
+    "lon": -122.187062,
+    "route_name": "Stride S2"
+  },
+  {
+    "id": "future_105",
+    "original_id": "future_105",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Bothell/Woodinville Transit Center",
+    "lat": 47.7691231,
+    "lon": -122.182869,
+    "route_name": "Stride S2"
+  },
+  {
+    "id": "future_106",
+    "original_id": "future_106",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Canyon Park Station",
+    "lat": 47.795158,
+    "lon": -122.21422,
+    "route_name": "Stride S2"
+  },
+  {
+    "id": "future_107",
+    "original_id": "future_107",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Lynnwood City Center Station",
+    "lat": 47.815637,
+    "lon": -122.294779,
+    "route_name": "Stride S2"
+  },
+  {
+    "id": "future_108",
+    "original_id": "future_108",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Shoreline South/148th Station",
+    "lat": 47.7357445,
+    "lon": -122.324867,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_109",
+    "original_id": "future_109",
+    "feed": "future",
+    "dataset": "future",
+    "name": "15th Ave NE Station (one direction)",
+    "lat": 47.7340279,
+    "lon": -122.313164,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_110",
+    "original_id": "future_110",
+    "feed": "future",
+    "dataset": "future",
+    "name": "15th Ave NE Station (other direction)",
+    "lat": 47.7338753,
+    "lon": -122.311699,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_111",
+    "original_id": "future_111",
+    "feed": "future",
+    "dataset": "future",
+    "name": "30th Ave NE Station",
+    "lat": 47.7337112,
+    "lon": -122.295761,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_112",
+    "original_id": "future_112",
+    "feed": "future",
+    "dataset": "future",
+    "name": "NE 153rd St Station (one direction)",
+    "lat": 47.7393837,
+    "lon": -122.289886,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_113",
+    "original_id": "future_113",
+    "feed": "future",
+    "dataset": "future",
+    "name": "NE 153rd St Station (other direction)",
+    "lat": 47.7399063,
+    "lon": -122.289215,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_114",
+    "original_id": "future_114",
+    "feed": "future",
+    "dataset": "future",
+    "name": "NE 165th St Station (one direction)",
+    "lat": 47.7483559,
+    "lon": -122.284912,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_115",
+    "original_id": "future_115",
+    "feed": "future",
+    "dataset": "future",
+    "name": "NE 165th St Station (other direction)",
+    "lat": 47.748497,
+    "lon": -122.284599,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_116",
+    "original_id": "future_116",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Ballinger Way Station (one direction)",
+    "lat": 47.7532158,
+    "lon": -122.277527,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_117",
+    "original_id": "future_117",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Ballinger Way Station (other direction)",
+    "lat": 47.7536697,
+    "lon": -122.275978,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_118",
+    "original_id": "future_118",
+    "feed": "future",
+    "dataset": "future",
+    "name": "61st Ave NE Station (one direction)",
+    "lat": 47.7583733,
+    "lon": -122.263519,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_119",
+    "original_id": "future_119",
+    "feed": "future",
+    "dataset": "future",
+    "name": "61st Ave NE Station (other direction)",
+    "lat": 47.7583046,
+    "lon": -122.261749,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_120",
+    "original_id": "future_120",
+    "feed": "future",
+    "dataset": "future",
+    "name": "68th Ave NE Station (one direction)",
+    "lat": 47.7584076,
+    "lon": -122.249435,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_121",
+    "original_id": "future_121",
+    "feed": "future",
+    "dataset": "future",
+    "name": "68th Ave NE Station (other direction)",
+    "lat": 47.7581787,
+    "lon": -122.248703,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_122",
+    "original_id": "future_122",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Kenmore Park-and-Ride (one direction)",
+    "lat": 47.7571831,
+    "lon": -122.241859,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_123",
+    "original_id": "future_123",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Kenmore Park-and-Ride (other direction)",
+    "lat": 47.7572136,
+    "lon": -122.242851,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_124",
+    "original_id": "future_124",
+    "feed": "future",
+    "dataset": "future",
+    "name": "98th Ave NE Station",
+    "lat": 47.758892,
+    "lon": -122.209607,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_125",
+    "original_id": "future_125",
+    "feed": "future",
+    "dataset": "future",
+    "name": "104th Ave NE Station",
+    "lat": 47.7619629,
+    "lon": -122.20163,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_126",
+    "original_id": "future_126",
+    "feed": "future",
+    "dataset": "future",
+    "name": "UW Bothell/Cascadia College Station",
+    "lat": 47.7617683,
+    "lon": -122.192421,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_127",
+    "original_id": "future_127",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Beardslee Blvd Station (one direction)",
+    "lat": 47.7679176,
+    "lon": -122.19101,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_128",
+    "original_id": "future_128",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Beardslee Blvd Station (other direction)",
+    "lat": 47.7679214,
+    "lon": -122.191216,
+    "route_name": "Stride S3"
+  },
+  {
+    "id": "future_129",
+    "original_id": "future_129",
+    "feed": "future",
+    "dataset": "future",
+    "name": "Bothell/Woodinville Transit Center",
+    "lat": 47.7691231,
+    "lon": -122.182869,
+    "route_name": "Stride S3"
   }
 ]
