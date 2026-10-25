@@ -72,6 +72,7 @@ const HEADWAY_COLORS: Record<number, string> = {
 // Tiers mode draws nested walksheds for these headways, tightest first, each as a ring outside the tighter tier
 const TIER_HEADWAYS = [10, 15, 30, 60, 120];
 const TIER_FILL_OPACITY = 0.35;
+const IS_TOUCH = typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(hover: none)').matches;
 const TIER_MARKER_MIN_ZOOM = 14; // In tiers mode, stop markers would hide the bands when zoomed out
 
 // Format an hour of the day (0-24) for display, e.g. 6 -> "6am", 15 -> "3pm", 0 or 24 -> "midnight"
@@ -316,7 +317,8 @@ export default function SeattleTransitVisualizer() {
   const [preset, setPreset] = useState<Preset>(Preset.AllDay);
   const [headway, setHeadway] = useState<number>(10); // Minutes between buses, in single mode
   const [mode, setMode] = useState<'single' | 'tiers'>('single');
-  const [walkMinutes, setWalkMinutes] = useState<WalkMinutes>(10); // Walkshed size // One headway, or nested bands for TIER_HEADWAYS
+  const [walkMinutes, setWalkMinutes] = useState<WalkMinutes>(10); // Walkshed size
+  const [showControls, setShowControls] = useState<boolean>(false); // Phones only: controls are collapsed behind an Options button // One headway, or nested bands for TIER_HEADWAYS
   const modeRef = useRef(mode); // For the map's zoom handler, which outlives renders
   modeRef.current = mode;
 
@@ -511,7 +513,7 @@ export default function SeattleTransitVisualizer() {
     // are drawn as SVG. Otherwise whichever renderer was created last covers the other and takes the hover.
     map.createPane('stops');
     map.getPane('stops').style.zIndex = '450';
-    canvasRendererRef.current = L.canvas({ padding: 0.5, pane: 'stops' });
+    canvasRendererRef.current = L.canvas({ padding: 0.5, pane: 'stops', tolerance: IS_TOUCH ? 10 : 0 }); // Wider tap target on touch screens
 
     markersLayerRef.current = L.layerGroup();
     map.on('zoomend', updateMarkerVisibility);
@@ -687,7 +689,7 @@ export default function SeattleTransitVisualizer() {
       };
 
       L.circleMarker([stop.lat, stop.lon], { ...markerOptions, renderer: canvasRendererRef.current })
-        .bindTooltip(tooltip)
+        [IS_TOUCH ? 'bindPopup' : 'bindTooltip'](tooltip) // Touch screens can't hover, so details open on tap
         .addTo(markersLayerRef.current);
     });
     updateMarkerVisibility();
@@ -1206,18 +1208,26 @@ export default function SeattleTransitVisualizer() {
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header bar with title and year selector */}
-      <div className="bg-blue-600 text-white p-4 shadow-lg">
-        <div className="flex items-start justify-between gap-4">
+      <div className="bg-blue-600 text-white p-3 sm:p-4 shadow-lg">
+        <div className="flex flex-wrap sm:flex-nowrap items-start justify-between gap-x-4 gap-y-2">
           <div className="flex-1">
-            <h1 className="text-2xl font-bold">{areaLabel} Frequent Transit Access</h1>
-            <p className="text-blue-100 text-sm mt-1">
+            <h1 className="text-xl sm:text-2xl font-bold">{areaLabel} Frequent Transit Access</h1>
+            <p className="text-blue-100 text-xs sm:text-sm mt-1">
               {mode === 'tiers'
                 ? `Stops by how often buses come, ${presetHours} ${DAYS[day].plural} + ${walkMinutes}-minute walksheds`
                 : `Stops with service every ${headway} minutes, ${presetHours} ${DAYS[day].plural} + ${walkMinutes}-minute walksheds`}
             </p>
           </div>
+          {/* Phones: Options button showing or hiding the controls (always shown on larger screens) */}
+          <button
+            onClick={() => setShowControls(!showControls)}
+            className="sm:hidden shrink-0 px-3 py-1.5 rounded text-sm border bg-blue-700 text-white border-blue-500"
+            aria-expanded={showControls}
+          >
+            {YEAR_LABELS[selectedYear] ?? selectedYear} · Options {showControls ? '▴' : '▾'}
+          </button>
           {/* Area toggle and year selector dropdown */}
-          <div className="flex items-center gap-2 flex-wrap justify-end">
+          <div className={`${showControls ? 'flex' : 'hidden'} sm:flex w-full sm:w-auto items-center gap-2 flex-wrap justify-start sm:justify-end`}>
             <div className="flex gap-1">
               {Object.entries(AREAS).map(([key, { label }]) => {
                 const value = Number(key) as Area;
@@ -1249,7 +1259,7 @@ export default function SeattleTransitVisualizer() {
           </div>
         </div>
         {/* Frequency controls - day, time of day preset buttons and headway dropdown */}
-        <div className="flex items-center gap-x-4 gap-y-2 flex-wrap mt-3">
+        <div className={`${showControls ? 'flex' : 'hidden'} sm:flex items-center gap-x-4 gap-y-2 flex-wrap mt-3`}>
           <div className="flex gap-1">
             {Object.entries(DAYS).map(([key, { label }]) => {
               const value = Number(key) as Day;
@@ -1359,8 +1369,8 @@ export default function SeattleTransitVisualizer() {
       
       {/* Statistics bar - shown after data is processed */}
       {stats && (
-        <div className="bg-white border-b shadow-sm p-4">
-          <div className="flex gap-8 items-center flex-wrap">
+        <div className="bg-white border-b shadow-sm px-3 py-2 sm:p-4">
+          <div className="flex gap-x-8 gap-y-1 sm:gap-y-3 items-center flex-wrap">
             {mode === 'tiers' ? (
               <>
                 {/* Per-tier legend with stop count, area coverage and population served once calculated
@@ -1370,12 +1380,12 @@ export default function SeattleTransitVisualizer() {
                   return (
                     <div key={tier.headway} className="flex items-center gap-2">
                       {tierSwatch(tier.headway)}
-                      <span className="text-gray-600 text-sm">Every {tier.headway} min:</span>
-                      <span className="text-lg font-bold text-gray-800">{tier.coveragePercent}%</span>
+                      <span className="text-gray-600 text-xs sm:text-sm">Every {tier.headway} min:</span>
+                      <span className="text-base sm:text-lg font-bold text-gray-800">{tier.coveragePercent}%</span>
                       <span className="text-gray-500 text-xs -ml-1">area</span>
                       {tierPopulation && (
                         <>
-                          <span className="text-lg font-bold text-gray-800" title={`${tierPopulation.population} people`}>
+                          <span className="text-base sm:text-lg font-bold text-gray-800" title={`${tierPopulation.population} people`}>
                             {tierPopulation.populationPercent}%
                           </span>
                           <span className="text-gray-500 text-xs -ml-1">people</span>
@@ -1385,7 +1395,7 @@ export default function SeattleTransitVisualizer() {
                     </div>
                   );
                 })}
-                <span className="text-gray-500 text-xs">
+                <span className="hidden sm:inline text-gray-500 text-xs">
                   Share of {areaLabel} within a {walkMinutes}-minute walk, each tier including the more frequent ones. Zoom in to see stops.
                 </span>
               </>
@@ -1394,12 +1404,12 @@ export default function SeattleTransitVisualizer() {
                 {/* Stop count metric */}
                 <div>
                   <span className="text-gray-600 text-sm">Frequent Transit Stops:</span>
-                  <span className="ml-2 text-2xl font-bold text-blue-600">{stats.tiers[0].stopCount}</span>
+                  <span className="ml-2 text-xl sm:text-2xl font-bold text-blue-600">{stats.tiers[0].stopCount}</span>
                 </div>
                 {/* Area coverage metric (percentage of the selected area covered by walksheds) */}
                 <div>
                   <span className="text-gray-600 text-sm">Coverage (by area):</span>
-                  <span className="ml-2 text-2xl font-bold text-green-600">{stats.tiers[0].coveragePercent}%</span>
+                  <span className="ml-2 text-xl sm:text-2xl font-bold text-green-600">{stats.tiers[0].coveragePercent}%</span>
                   <span className="text-gray-500 text-xs ml-1">(merged walksheds)</span>
                 </div>
               </>
@@ -1408,7 +1418,7 @@ export default function SeattleTransitVisualizer() {
             {mode === 'single' && censusData?.tiers && (
               <div>
                 <span className="text-gray-600 text-sm">Population Served:</span>
-                <span className="ml-2 text-2xl font-bold text-purple-600">{censusData.tiers[0].populationPercent}%</span>
+                <span className="ml-2 text-xl sm:text-2xl font-bold text-purple-600">{censusData.tiers[0].populationPercent}%</span>
                 <span className="text-gray-500 text-xs ml-1">({censusData.tiers[0].population} people)</span>
               </div>
             )}
@@ -1445,10 +1455,10 @@ export default function SeattleTransitVisualizer() {
       )}
 
       {/* Map container - Leaflet renders the interactive map here */}
-      <div ref={mapRef} className="flex-1 relative" />
+      <div ref={mapRef} className="flex-1 relative min-h-[50vh]" />
 
       {/* Footer with methodology explanation */}
-      <div className="bg-gray-100 p-3 text-xs text-gray-600 border-t">
+      <div className="hidden sm:block bg-gray-100 p-3 text-xs text-gray-600 border-t">
         <p>Shaded areas are within a {walkMinutes}-minute walk of a qualifying stop. Coverage and population count only the part inside {areaLabel}; dashed gray areas are outside it.</p>
       </div>
     </div>

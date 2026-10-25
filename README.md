@@ -72,6 +72,7 @@ node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or future
 - **Area:** Seattle (default) or King County. Coverage and population are measured within the selected area's boundary (`seattle-city-limits.geojson` or `king-county-limits.geojson`); walksheds outside it are drawn dashed gray. Stops are shown county-wide either way.
 - Coverage: share of the area's land within the selected walk time, per headway. County-wide this stays small (2.2% at every 10 minutes in 2026), since most of King County is forest and farmland.
 - Population served (on request): share of the area's 2020 population within the selected walk time, from census blocks (Seattle: 737,015; King County: 2,269,675). The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
+- On phones, the controls collapse behind an Options button and stops open their details on tap.
 - Population density layer, available once population is calculated. Tiers draw as outlines over it.
 
 **Run:**
