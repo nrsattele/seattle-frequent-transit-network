@@ -2,7 +2,11 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 
 // Geographic constants for Seattle
 const SEATTLE_CENTER = [47.6062, -122.3321]; // Center coordinates for map initialization
-const HALF_MILE_METERS = 804.672; // Walking distance buffer (approximately 10 minute walk)
+// Walk times the map can show. Each stop's walkshed file has a polygon for each (isochrone_5min, isochrone_10min);
+// stops without one fall back to a circle of about that walking distance (a quarter or half mile).
+const WALK_MINUTES = [5, 10] as const;
+type WalkMinutes = typeof WALK_MINUTES[number];
+const WALK_RADIUS_METERS: Record<WalkMinutes, number> = { 5: 402.336, 10: 804.672 };
 
 // The Future scenario has no GTFS feed of its own; it layers future_stops/future_stops.json on top of this year's data.
 // Keep in sync with GTFS_YEAR in isochrone-generation/extract-all-stops.js.
@@ -271,11 +275,11 @@ function loadScriptOnce(src: string, globalName: 'L' | 'turf'): Promise<void> {
 /**
  * Seattle Transit Visualizer
  *
- * This component maps transit stops by how often buses come, with a 10-minute walkshed around each.
+ * This component maps transit stops by how often buses come, with a 5- or 10-minute walkshed around each.
  * - Loads pre-processed stop data with per-hour trip frequencies from all_stops JSON files
  * - Filters stops by a time-of-day preset and headway (see PRESETS and qualifies())
  * - Single mode shows one headway; tiers mode shows nested bands for TIER_HEADWAYS
- * - Visualizes 10-minute walksheds (pre-computed isochrones or circle buffers), merged per headway
+ * - Visualizes 5- or 10-minute walksheds (pre-computed isochrones or circle buffers), merged per headway
  * - Integrates US Census data to calculate population served, on request
  * - Displays coverage statistics and interactive map
  * - Supports a Future scenario w/ planned transit expansions hard coded in future_stops JSON
@@ -311,7 +315,8 @@ export default function SeattleTransitVisualizer() {
   const [day, setDay] = useState<Day>(Day.Weekday);
   const [preset, setPreset] = useState<Preset>(Preset.AllDay);
   const [headway, setHeadway] = useState<number>(10); // Minutes between buses, in single mode
-  const [mode, setMode] = useState<'single' | 'tiers'>('single'); // One headway, or nested bands for TIER_HEADWAYS
+  const [mode, setMode] = useState<'single' | 'tiers'>('single');
+  const [walkMinutes, setWalkMinutes] = useState<WalkMinutes>(10); // Walkshed size // One headway, or nested bands for TIER_HEADWAYS
   const modeRef = useRef(mode); // For the map's zoom handler, which outlives renders
   modeRef.current = mode;
 
@@ -484,7 +489,7 @@ export default function SeattleTransitVisualizer() {
     if (boundary && yearStops.length > 0 && isochrones.size > 0 && turfLoaded && window.turf) {
       recalculateWalksheds();
     }
-  }, [boundary, frequentStops, isochrones, turfLoaded]);
+  }, [boundary, frequentStops, isochrones, turfLoaded, walkMinutes]);
 
   /**
    * Initialize the Leaflet map with OpenStreetMap tiles
@@ -622,7 +627,7 @@ export default function SeattleTransitVisualizer() {
       }).addTo(map);
     }
 
-    // Draw merged walkshed polygons within Seattle (combined 10-minute walking areas), in the headway's color.
+    // Draw merged walkshed polygons within the area (combined walking areas), in the headway's color.
     // Single mode: one area. Tiers mode: one ring per headway, so each area shows exactly one tier's color.
     // Over population density, tiers are outlines of the full tier instead, so the density colors show through.
     const tiers = mode === 'tiers';
@@ -752,10 +757,11 @@ export default function SeattleTransitVisualizer() {
       stopId                                        // Finally, try the raw ID in case it's already composite (for future stops)
     ];
 
+    const field = walkMinutes === 5 ? 'isochrone_5min' : 'isochrone_10min';
     for (const key of possibleKeys) {
       const isoData = isochrones.get(key);
-      if (isoData && isoData.isochrone_10min) {
-        return isoData.isochrone_10min;
+      if (isoData && isoData[field]) {
+        return isoData[field];
       }
     }
 
@@ -770,13 +776,13 @@ export default function SeattleTransitVisualizer() {
       const isochronePolygon = findIsochroneForStop(stop, selectedYear);
 
       if (isochronePolygon) {
-        // Use pre-computed 10-minute isochrone
+        // Use pre-computed isochrone for the selected walk time
         return isochronePolygon;
       } else {
-        // Fall back to half-mile circular buffer
+        // Fall back to a circular buffer of about that walking distance
         return window.turf.circle(
           [stop.lon, stop.lat],
-          HALF_MILE_METERS / 1000,
+          WALK_RADIUS_METERS[walkMinutes] / 1000,
           { steps: 32, units: 'kilometers' }
         );
       }
@@ -1160,6 +1166,11 @@ export default function SeattleTransitVisualizer() {
     setCensusData(null);
   }
 
+  function handleWalkMinutesChange(minutes: WalkMinutes) {
+    setWalkMinutes(minutes);
+    setCensusData(null);
+  }
+
   function handleModeChange(newMode: 'single' | 'tiers') {
     setMode(newMode);
     setCensusData(null);
@@ -1201,8 +1212,8 @@ export default function SeattleTransitVisualizer() {
             <h1 className="text-2xl font-bold">{areaLabel} Frequent Transit Access</h1>
             <p className="text-blue-100 text-sm mt-1">
               {mode === 'tiers'
-                ? `Stops by how often buses come, ${presetHours} ${DAYS[day].plural} + 10-minute walksheds`
-                : `Stops with service every ${headway} minutes, ${presetHours} ${DAYS[day].plural} + 10-minute walksheds`}
+                ? `Stops by how often buses come, ${presetHours} ${DAYS[day].plural} + ${walkMinutes}-minute walksheds`
+                : `Stops with service every ${headway} minutes, ${presetHours} ${DAYS[day].plural} + ${walkMinutes}-minute walksheds`}
             </p>
           </div>
           {/* Area toggle and year selector dropdown */}
@@ -1274,6 +1285,23 @@ export default function SeattleTransitVisualizer() {
                 </button>
               );
             })}
+          </div>
+          {/* Walk time toggle - walkshed size */}
+          <div className="flex items-center gap-1">
+            <span className="text-sm text-blue-100 mr-1">Walk</span>
+            {WALK_MINUTES.map(minutes => (
+              <button
+                key={minutes}
+                onClick={() => handleWalkMinutesChange(minutes)}
+                className={`px-3 py-1 rounded text-sm border ${
+                  walkMinutes === minutes
+                    ? 'bg-white text-blue-700 border-white font-semibold'
+                    : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
+                }`}
+              >
+                {minutes} min
+              </button>
+            ))}
           </div>
           {/* Mode toggle - nested tiers, or a single headway */}
           <div className="flex gap-1">
@@ -1358,7 +1386,7 @@ export default function SeattleTransitVisualizer() {
                   );
                 })}
                 <span className="text-gray-500 text-xs">
-                  Share of {areaLabel} within a 10-minute walk, each tier including the more frequent ones. Zoom in to see stops.
+                  Share of {areaLabel} within a {walkMinutes}-minute walk, each tier including the more frequent ones. Zoom in to see stops.
                 </span>
               </>
             ) : (
@@ -1421,7 +1449,7 @@ export default function SeattleTransitVisualizer() {
 
       {/* Footer with methodology explanation */}
       <div className="bg-gray-100 p-3 text-xs text-gray-600 border-t">
-        <p>Shaded areas are within a 10-minute walk of a qualifying stop. Coverage and population count only the part inside {areaLabel}; dashed gray areas are outside it.</p>
+        <p>Shaded areas are within a {walkMinutes}-minute walk of a qualifying stop. Coverage and population count only the part inside {areaLabel}; dashed gray areas are outside it.</p>
       </div>
     </div>
   );

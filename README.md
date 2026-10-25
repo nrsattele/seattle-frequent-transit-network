@@ -3,7 +3,7 @@ A map visualizing access to frequent transit in Seattle and King County
 
 ## Overview
 
-This project analyzes GTFS (General Transit Feed Specification) data to map how often buses and trains come at each stop, and how much of Seattle lives within a 10-minute walk of that service. It defaults to the city's frequent transit network (every 10 minutes, 6am-7pm weekdays), and you can pick other times of day and headways.
+This project analyzes GTFS (General Transit Feed Specification) data to map how often buses and trains come at each stop, and how much of Seattle lives within a 5- or 10-minute walk of that service. It defaults to the city's frequent transit network (every 10 minutes, 6am-7pm weekdays), and you can pick other times of day and headways.
 
 ## How frequency is measured
 
@@ -68,10 +68,10 @@ node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or future
 - Year selector (2020, 2025, 2026, Future), day buttons (Weekday, Saturday, Sunday; each loads that day's stop file) and time of day preset buttons. Future stops can carry their own Saturday and Sunday trips (the I Line does); otherwise weekends reuse their weekday trips.
 - **Single mode:** one headway, picked from a dropdown. Each headway has its own color, used in both modes.
 - **Tiers mode:** nested bands for every 10, 15, 30, 60 and 120 minutes, so you can see all levels of service at once. Stop markers appear from zoom 14 and their tooltips show the stop's tier.
-- Visualizes 10-minute walksheds (using pre-computed isochrones or circles), merged per headway
+- Visualizes 5- or 10-minute walksheds (Walk toggle; pre-computed isochrones, or circles of about a quarter or half mile), merged per headway
 - **Area:** Seattle (default) or King County. Coverage and population are measured within the selected area's boundary (`seattle-city-limits.geojson` or `king-county-limits.geojson`); walksheds outside it are drawn dashed gray. Stops are shown county-wide either way.
-- Coverage: share of the area's land within a 10-minute walk, per headway. County-wide this stays small (2.2% at every 10 minutes in 2026), since most of King County is forest and farmland.
-- Population served (on request): share of the area's 2020 population within a 10-minute walk, from census blocks (Seattle: 737,015; King County: 2,269,675). The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
+- Coverage: share of the area's land within the selected walk time, per headway. County-wide this stays small (2.2% at every 10 minutes in 2026), since most of King County is forest and farmland.
+- Population served (on request): share of the area's 2020 population within the selected walk time, from census blocks (Seattle: 737,015; King County: 2,269,675). The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
 - Population density layer, available once population is calculated. Tiers draw as outlines over it.
 
 **Run:**
