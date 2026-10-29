@@ -1,5 +1,5 @@
 /**
- * Generate 10-minute walk isochrones for all transit stops
+ * Generate 5- and 10-minute walk isochrones for all transit stops
  *
  * This script uses the Mapbox Isochrone API to generate accurate walking
  * isochrones that account for:
@@ -9,11 +9,10 @@
  *
  * Usage:
  * 1. Set MAPBOX_ACCESS_TOKEN environment variable
- * 2. Run: node generate-isochrones.js
- * 3. Output: base_data/isochrones.json
+ * 2. Run: node generate-isochrones.js [year|future]
+ * 3. Output: public/base_data/isochrones_{year}.json
  */
 
-import fetch from 'node-fetch';
 import fs from 'fs';
 
 // Configuration

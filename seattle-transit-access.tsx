@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, type ReactNode } from 'react';
 import {
   FUTURE_SCENARIO, FUTURE_SCENARIO_BASE_YEAR, YEARS, Preset, PRESETS, Day, DAYS, Area, AREAS, HEADWAYS, TIER_HEADWAYS,
   qualifies, bestHeadways, stopsFromFile, futureStopsForDay
@@ -38,6 +38,27 @@ function formatHour(hour: number): string {
   return hour < 12 ? `${hour}am` : `${hour - 12}pm`;
 }
 
+// A button in one of the header's toggle groups (area, day, preset, walk time, mode), highlighted when selected
+function ToggleButton({ selected, onClick, padding = 'py-1', children }: {
+  selected: boolean;
+  onClick: () => void;
+  padding?: string;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-3 ${padding} rounded text-sm border ${
+        selected
+          ? 'bg-white text-blue-700 border-white font-semibold'
+          : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
 /**
  * Load a script at most once per page, resolving when its global is available.
  *
@@ -67,13 +88,14 @@ function loadScriptOnce(src: string, globalName: 'L' | 'turf'): Promise<void> {
  * - Filters stops by a time-of-day preset and headway (see PRESETS and qualifies())
  * - Single mode shows one headway; tiers mode shows nested bands for TIER_HEADWAYS
  * - Visualizes 5- or 10-minute walksheds (pre-computed isochrones or circle buffers), merged per headway
- * - Integrates US Census data to calculate population served, on request
- * - Displays coverage statistics and interactive map
+ * - Shows area coverage, and population served from stats.json
+ * - Optional census population density layer
  * - Supports a Future scenario w/ planned transit expansions hard coded in future_stops JSON
  *
  * Data Processing:
  * - GTFS parsing is done offline by extract-all-stops.js
  * - Hourly frequencies are pre-calculated and stored in all_stops_{year}.json
+ * - Population served is precomputed for every view by build-stats.js
  * - This site then loads and filters that pre-processed data
  */
 export default function SeattleTransitVisualizer() {
@@ -88,23 +110,21 @@ export default function SeattleTransitVisualizer() {
   const [censusBlocks, setCensusBlocks] = useState<any>(null); // Census blocks with population for visualization
 
   // UI state - tracks loading and error states
-  const [loading, setLoading] = useState<boolean>(false); // GTFS data loading indicator
+  const [loading, setLoading] = useState<boolean>(false); // Stop data loading indicator
   const [loadingCensus, setLoadingCensus] = useState<boolean>(false); // Census blocks loading indicator (density layer)
   const [error, setError] = useState<string | null>(null); // Error message display
   const [showCensusBlocks, setShowCensusBlocks] = useState<boolean>(false); // Toggle census block visualization
 
-  // Year selection - allows switching between different GTFS datasets
-  // 2020 is base year, 2025 and 2026 are recent feeds, Future is 2026 plus hardcoded future stops
+  // Year selection - a GTFS feed's year, or Future (the base year's feed plus the stops in future_stops.json)
   const [selectedYear, setSelectedYear] = useState<string>('2020');
-  const [availableYears] = useState<string[]>(YEARS);
 
   // Frequency selection - which time of day and how often buses must come for a stop to count
   const [day, setDay] = useState<Day>(Day.Weekday);
   const [preset, setPreset] = useState<Preset>(Preset.AllDay);
   const [headway, setHeadway] = useState<number>(10); // Minutes between buses, in single mode
-  const [mode, setMode] = useState<'single' | 'tiers'>('single');
+  const [mode, setMode] = useState<'single' | 'tiers'>('single'); // One headway, or nested bands for TIER_HEADWAYS
   const [walkMinutes, setWalkMinutes] = useState<WalkMinutes>(10); // Walkshed size
-  const [showControls, setShowControls] = useState<boolean>(false); // Phones only: controls are collapsed behind an Options button // One headway, or nested bands for TIER_HEADWAYS
+  const [showControls, setShowControls] = useState<boolean>(false); // Phones only: controls are collapsed behind an Options button
   const modeRef = useRef(mode); // For the map's zoom handler, which outlives renders
   modeRef.current = mode;
 
@@ -125,9 +145,9 @@ export default function SeattleTransitVisualizer() {
   const fitToStopsRef = useRef<boolean>(true); // Zoom to fit the stops on the next draw (set when the year changes)
   const fitToAreaRef = useRef<boolean>(false); // Zoom to fit the area's boundary on the next draw (set when the area changes)
   const markersLayerRef = useRef<any>(null); // Layer group holding the stop markers, so tiers mode can hide them by zoom
-  // In-bounds merged walkshed per active headway, and its ring: the part not covered by the next tighter headway
-  const tierPolygonsRef = useRef<{ headway: number; polygon: any; ring: any }[]>([]);
-  const mergedPolygonOutOfBoundsRef = useRef<any>(null); // Out-of-bounds portion of the loosest active headway
+  // Walksheds to draw, from computeTiers: per active headway the in-bounds merged walkshed and its ring (the part not
+  // covered by the next tighter headway), plus the out-of-bounds portion of the loosest one
+  const walkshedsRef = useRef<{ tiers: { headway: number; polygon: any; ring: any }[]; outOfBounds: any }>({ tiers: [], outOfBounds: null });
 
   // Library loading state - tracks when external CDN libraries are ready
   const [leafletLoaded, setLeafletLoaded] = useState<boolean>(false); // Mapping library
@@ -176,9 +196,8 @@ export default function SeattleTransitVisualizer() {
   }, [leafletLoaded]);
 
   /**
-   * Effect: Redraw map markers when frequent stops data changes
+   * Effect: Redraw the map when the qualifying stops, the area or the density layer change
    *
-   * Triggers whenever we process new GTFS data, change years, or change preset/headway.
    * Runs even when no stops qualify, so the previous selection's markers are cleared.
    */
   useEffect(() => {
@@ -188,12 +207,12 @@ export default function SeattleTransitVisualizer() {
   }, [frequentStops, boundary, showCensusBlocks]);
 
   /**
-   * Effect: Auto-load pre-processed stop data when year changes
+   * Effect: Load the stop file when the year or day changes
    *
-   * Loads pre-processed all_stops JSON file from /base_data/{year}/ directory
+   * Walksheds don't depend on the day, so changing day keeps the map's view.
    */
   useEffect(() => {
-    loadUploadedFile();
+    loadStops();
   }, [selectedYear, day]);
 
   /**
@@ -222,14 +241,11 @@ export default function SeattleTransitVisualizer() {
             });
           } else {
             console.warn(`No isochrones file found for ${year} (status ${response.status})`);
-            setIsochrones(new Map());
           }
         } catch (err) {
           console.error('Could not load isochrones:', err);
-          setIsochrones(new Map());
         }
       }
-      console.log(`Total isochrones loaded: ${isoMap.size}`);
       setIsochrones(isoMap);
     }
     loadIsochrones();
@@ -248,7 +264,6 @@ export default function SeattleTransitVisualizer() {
         const response = await fetch(`${import.meta.env.BASE_URL}base_data/${boundaryFile}`);
         if (response.ok) {
           const loaded = await response.json();
-          console.log(`${label} boundary loaded successfully`);
           setBoundaries(previous => ({ ...previous, [area]: loaded }));
         }
       } catch (err) {
@@ -328,44 +343,55 @@ export default function SeattleTransitVisualizer() {
       return '#fde047';
     }
 
+    // A block's population, land area and density
+    function blockStats(feature: any) {
+      const population = parseInt(feature.properties.TOT_POP || '0');
+      const squareMiles = parseInt(feature.properties.ACRES_LAND || '0') * 0.0015625; // Convert acres to square miles
+      return { population, squareMiles, density: population / squareMiles };
+    }
+
     // Draw each census block
     L.geoJSON(censusBlocks, {
       filter: (feature: any) => {
         return (place === null || feature.properties.Place === place) &&
                parseInt(feature.properties.TOT_POP || '0') > 0;
       },
-      style: (feature: any) => {
-        const population = parseInt(feature.properties.TOT_POP || '0');
-        const area = parseInt(feature.properties.ACRES_LAND || '0') * 0.0015625; // Convert acres to square miles
-        const density = population / area;
-
-        return {
-          fillColor: getColor(density),
-          fillOpacity: 0.4,
-          color: '#666',
-          weight: 0.5,
-          opacity: 0.3
-        };
-      },
+      style: (feature: any) => ({
+        fillColor: getColor(blockStats(feature).density),
+        fillOpacity: 0.4,
+        color: '#666',
+        weight: 0.5,
+        opacity: 0.3
+      }),
       onEachFeature: (feature: any, layer: any) => {
-        const population = parseInt(feature.properties.TOT_POP || '0');
-        const area = parseInt(feature.properties.ACRES_LAND || '0') * 0.0015625; // Convert acres to square miles
-        const density = population / area;
-
+        const { population, squareMiles, density } = blockStats(feature);
         layer.bindTooltip(
           `<strong>Population:</strong> ${population.toLocaleString()}<br>` +
           `<strong>Density:</strong> ${Math.round(density).toLocaleString()} per mi²<br>` +
-          `<strong>Area:</strong> ${area.toFixed(3)} mi²`
+          `<strong>Area:</strong> ${squareMiles.toFixed(3)} mi²`
         );
       }
     }).addTo(map);
   }
 
   /**
+   * Remove everything drawn over the base map: stop markers, walksheds, the boundary and census blocks
+   */
+  function clearMap() {
+    const L = window.L;
+    const map = leafletMapRef.current;
+    if (!map) return;
+    markersLayerRef.current.clearLayers();
+    map.eachLayer((layer: any) => {
+      if (layer instanceof L.GeoJSON) map.removeLayer(layer);
+    });
+  }
+
+  /**
    * Draw qualifying stops and walkshed coverage on the map
    *
    * Layers (in order):
-   * 1. Seattle city boundary (thin gray outline)
+   * 1. The selected area's boundary (thin gray outline)
    * 2. Census blocks (if enabled, colored by population density)
    * 3. Out-of-bounds walkshed portions (gray, faded)
    * 4. In-bounds merged walksheds in each headway's color (one area in single mode, rings in tiers mode)
@@ -375,14 +401,7 @@ export default function SeattleTransitVisualizer() {
   function drawStops() {
     const L = window.L;
     const map = leafletMapRef.current;
-
-    // Clear existing layers (circles, markers, polygons) to avoid duplicates
-    markersLayerRef.current.clearLayers();
-    map.eachLayer(layer => {
-      if (layer instanceof L.Circle || layer instanceof L.CircleMarker || layer instanceof L.GeoJSON) {
-        map.removeLayer(layer);
-      }
-    });
+    clearMap();
 
     // Draw the selected area's boundary for reference, zooming to it after an area change
     if (boundary) {
@@ -401,13 +420,14 @@ export default function SeattleTransitVisualizer() {
     }
 
     // Draw census blocks with population density coloring (if enabled)
-    if (showCensusBlocks && censusBlocks && window.turf) {
+    if (showCensusBlocks) {
       drawCensusBlocks(map, L);
     }
 
     // Draw out-of-bounds walkshed portions (gray, faded)
-    if (mergedPolygonOutOfBoundsRef.current) {
-      L.geoJSON(mergedPolygonOutOfBoundsRef.current, {
+    const { tiers, outOfBounds } = walkshedsRef.current;
+    if (outOfBounds) {
+      L.geoJSON(outOfBounds, {
         style: {
           fillColor: '#727881c2', // Gray fill
           fillOpacity: 0.30,
@@ -422,14 +442,14 @@ export default function SeattleTransitVisualizer() {
     // Draw merged walkshed polygons within the area (combined walking areas), in the headway's color.
     // Single mode: one area. Tiers mode: one ring per headway, so each area shows exactly one tier's color.
     // Over population density, tiers are outlines of the full tier instead, so the density colors show through.
-    const tiers = mode === 'tiers';
-    const tierOutlines = tiers && showCensusBlocks && !!censusBlocks;
-    [...tierPolygonsRef.current].reverse().forEach(({ headway: tierHeadway, polygon, ring }) => {
-      const shape = tiers && !tierOutlines ? ring : polygon;
+    const tiersMode = mode === 'tiers';
+    const tierOutlines = tiersMode && showCensusBlocks && !!censusBlocks;
+    [...tiers].reverse().forEach(({ headway: tierHeadway, polygon, ring }) => {
+      const shape = tiersMode && !tierOutlines ? ring : polygon;
       if (!shape) return;
       const color = HEADWAY_COLORS[tierHeadway];
       L.geoJSON(shape, {
-        style: tiers ? {
+        style: tiersMode ? {
           fillColor: color,
           fillOpacity: tierOutlines ? 0 : TIER_FILL_OPACITY,
           color,
@@ -472,7 +492,7 @@ export default function SeattleTransitVisualizer() {
       const tooltip = () => {
         const stopHeadway = bestHeadway.get(stop.id)!;
         if (isFuture) {
-          const tierLine = tiers ? `<br><small>Every ${stopHeadway} min or better</small>` : '';
+          const tierLine = tiersMode ? `<br><small>Every ${stopHeadway} min or better</small>` : '';
           return `${stop.name}<br><small>${stop.routeName || 'Future Stop'}</small>${tierLine}`;
         }
         return `${stop.name}<br><small>ID: ${stop.id}</small>${stopRoutesSummary(stop, stopHeadway)}`;
@@ -537,9 +557,7 @@ export default function SeattleTransitVisualizer() {
    * Runs when stops, isochrones, the boundary or the walk time change.
    */
   function recalculateWalksheds() {
-    if (!boundary || !turfLoaded || !window.turf) return;
-
-    const { tiers, outOfBounds } = computeTiers(window.turf, {
+    const walksheds = computeTiers(window.turf, {
       stops: frequentStops,
       bestHeadway,
       headways: activeHeadways,
@@ -548,10 +566,8 @@ export default function SeattleTransitVisualizer() {
       withRings: mode === 'tiers'
     });
 
-    tierPolygonsRef.current = tiers.map(({ headway: tierHeadway, polygon, ring }) => ({ headway: tierHeadway, polygon, ring }));
-    mergedPolygonOutOfBoundsRef.current = outOfBounds; // Loosest headway's, which contains the others
-
-    setStats({ tiers: tiers.map(({ headway: tierHeadway, stopCount, coveragePercent }) => ({ headway: tierHeadway, stopCount, coveragePercent })) });
+    walkshedsRef.current = walksheds;
+    setStats({ tiers: walksheds.tiers }); // Each tier's stop count and coverage, for the stats bar
 
     // Redraw the map to show updated walksheds with isochrones
     if (leafletMapRef.current) {
@@ -560,102 +576,39 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Auto-load pre-processed stop data from all_stops JSON file
+   * Load every stop for the selected year and day, with its hourly trips
    *
-   * Loads stop data with pre-calculated hourly trip frequencies from the
-   * all_stops_{year}.json files generated by extract-all-stops.js, or all_stops_{year}_{saturday|sunday}.json
-   * for weekends
-   *
-   * For Future, loads base year GTFS data (there's no future feed). Its hand-made future stops use their
-   * hourly_trips_saturday / hourly_trips_sunday on weekends when they have them, or reuse weekday trips.
-   *
-   * File structure expected: /base_data/all_stops_{year}{_saturday|_sunday}.json
+   * Reads all_stops_{year}{_saturday|_sunday}.json from extract-all-stops.js; frequentStops then filters the stops for
+   * the selected preset and headway. Future has no feed of its own, so it's the base year's stops plus the enabled
+   * stops in future_stops.json (see futureStopsForDay for weekends).
    */
-  async function loadUploadedFile() {
+  async function loadStops() {
     setLoading(true);
     setError(null);
 
     try {
-      // For Future, use base year GTFS data (there's no future feed)
       const gtfsYear = selectedYear === FUTURE_SCENARIO ? FUTURE_SCENARIO_BASE_YEAR : selectedYear;
       const stopsFile = `all_stops_${gtfsYear}${DAYS[day].fileSuffix}.json`;
-      const allStopsUrl = `${import.meta.env.BASE_URL}base_data/${stopsFile}`;
-
-      if (selectedYear === FUTURE_SCENARIO) {
-        console.log(`Using ${FUTURE_SCENARIO_BASE_YEAR} GTFS data as base for the Future scenario`);
-      }
-      console.log(`Loading pre-processed stop data from: ${allStopsUrl}`);
-
-      const response = await fetch(allStopsUrl);
+      const response = await fetch(`${import.meta.env.BASE_URL}base_data/${stopsFile}`);
       if (!response.ok) {
         throw new Error(`${stopsFile} not found. Please run extract-all-stops.js first.`);
       }
+      const stops = stopsFromFile(await response.json());
 
-      const allStops = await response.json();
-      console.log(`Loaded ${allStops.length} stops with frequency data`);
-
-      // Keep every stop; frequentStops filters them for the selected preset and headway
-      await processAllStopsData(allStops);
-
-    } catch (err: any) {
-      setError('Error loading stop data: ' + err.message);
-      console.error('Error loading all_stops data:', err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  /**
-   * Store every stop for the selected year, including future stops for scenario years
-   *
-   * Takes the all_stops JSON data (which already has hourly_trips calculated) and keeps all of it.
-   * Filtering to the selected frequency happens in frequentStops, and the walkshed effect
-   * recalculates coverage whenever that list changes.
-   */
-  async function processAllStopsData(allStops: any[]) {
-    const stopList = stopsFromFile(allStops);
-
-    // Load and add future stops if this is a future year scenario
-    const finalStopList = await addFutureStops(stopList, selectedYear);
-    console.log(`Total stops including future: ${finalStopList.length}`);
-
-    setYearStops(finalStopList);
-  }
-  
-  /**
-   * Load and add future transit stops for scenario planning
-   *
-   * For the Future scenario, we add stops that are under construction
-   * or planned but not yet in the GTFS feed. This allows "what-if" analysis.
-   */
-  async function addFutureStops(existingStops: any[], year: string): Promise<any[]> {
-    // Only the Future scenario has future stops
-    if (year !== FUTURE_SCENARIO) {
-      return existingStops;
-    }
-
-    try {
-      const futureStopsUrl = `${import.meta.env.BASE_URL}base_data/future_stops/future_stops.json`;
-      console.log(`Loading future stops from: ${futureStopsUrl}`);
-
-      const response = await fetch(futureStopsUrl);
-      if (!response.ok) {
-        console.warn(`No future stops file found for ${year}`);
-        return existingStops;
+      if (selectedYear === FUTURE_SCENARIO) {
+        const futureResponse = await fetch(`${import.meta.env.BASE_URL}base_data/future_stops/future_stops.json`);
+        if (!futureResponse.ok) {
+          throw new Error('future_stops/future_stops.json not found.');
+        }
+        stops.push(...futureStopsForDay(await futureResponse.json(), day));
       }
 
-      const futureData = await response.json();
-
-      // Keep enabled stops; frequentStops decides which meet the selected frequency
-      const enabledFutureStops = futureStopsForDay(futureData, day);
-
-      console.log(`Adding ${enabledFutureStops.length} future stops for ${year}`);
-
-      // Combine existing and future stops
-      return [...existingStops, ...enabledFutureStops];
-    } catch (err) {
-      console.error('Error loading future stops:', err);
-      return existingStops;
+      setYearStops(stops);
+    } catch (err: any) {
+      setError('Error loading stop data: ' + err.message);
+      console.error('Error loading stop data:', err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -696,55 +649,19 @@ export default function SeattleTransitVisualizer() {
   /**
    * Handle year selection change
    *
-   * Resets all data and triggers reload of pre-processed stop data for selected year
-   * The actual file loading is done by the useEffect hook
+   * Clears the previous year's stops, walksheds and map layers, and zooms to the new stops once drawn.
+   * The stop file is loaded by the effect watching selectedYear.
+   *
+   * Other controls (day, preset, headway, walk time, mode) just set their state: frequentStops re-filters on its own
+   * and the effects reload, recalculate and redraw as needed.
    */
-  async function handleYearChange(year: string) {
+  function handleYearChange(year: string) {
     setSelectedYear(year);
-    // Clear existing data
     setStats(null);
     setYearStops([]);
-    tierPolygonsRef.current = [];
-    mergedPolygonOutOfBoundsRef.current = null;
+    walkshedsRef.current = { tiers: [], outOfBounds: null };
     fitToStopsRef.current = true;
-
-    // Clear map layers
-    if (leafletMapRef.current) {
-      const L = window.L;
-      const map = leafletMapRef.current;
-      map.eachLayer(layer => {
-        if (layer instanceof L.Circle || layer instanceof L.CircleMarker || layer instanceof L.GeoJSON) {
-          map.removeLayer(layer);
-        }
-      });
-    }
-  }
-
-  /**
-   * Handle preset, headway or mode change
-   *
-   * frequentStops re-filters on its own and the effects redraw the map and walksheds.
-   */
-  function handlePresetChange(newPreset: Preset) {
-    setPreset(newPreset);
-  }
-
-  function handleHeadwayChange(newHeadway: number) {
-    setHeadway(newHeadway);
-  }
-
-  // Changing day loads that day's stop file; walksheds are the same, so the map keeps its view
-  function handleDayChange(newDay: Day) {
-    if (newDay === day) return;
-    setDay(newDay);
-  }
-
-  function handleWalkMinutesChange(minutes: WalkMinutes) {
-    setWalkMinutes(minutes);
-  }
-
-  function handleModeChange(newMode: 'single' | 'tiers') {
-    setMode(newMode);
+    clearMap();
   }
 
   // Changing area re-clips walksheds to its boundary (loaded on first use) and zooms the map to it
@@ -797,22 +714,11 @@ export default function SeattleTransitVisualizer() {
           {/* Area toggle and year selector dropdown */}
           <div className={`${showControls ? 'flex' : 'hidden'} sm:flex w-full sm:w-auto items-center gap-2 flex-wrap justify-start sm:justify-end`}>
             <div className="flex gap-1">
-              {Object.entries(AREAS).map(([key, { label }]) => {
-                const value = Number(key) as Area;
-                return (
-                  <button
-                    key={key}
-                    onClick={() => handleAreaChange(value)}
-                    className={`px-3 py-1.5 rounded text-sm border ${
-                      area === value
-                        ? 'bg-white text-blue-700 border-white font-semibold'
-                        : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
-                    }`}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
+              {Object.entries(AREAS).map(([key, { label }]) => (
+                <ToggleButton key={key} selected={area === Number(key)} onClick={() => handleAreaChange(Number(key))} padding="py-1.5">
+                  {label}
+                </ToggleButton>
+              ))}
             </div>
             <label className="text-sm text-blue-100">Year:</label>
             <select
@@ -820,7 +726,7 @@ export default function SeattleTransitVisualizer() {
               onChange={(e) => handleYearChange(e.target.value)}
               className="px-3 py-1.5 rounded bg-blue-700 text-white border border-blue-500 hover:bg-blue-800 cursor-pointer"
             >
-              {availableYears.map((year) => (
+              {YEARS.map((year) => (
                 <option key={year} value={year}>{YEAR_LABELS[year] ?? year}</option>
               ))}
             </select>
@@ -829,72 +735,34 @@ export default function SeattleTransitVisualizer() {
         {/* Frequency controls - day, time of day preset buttons and headway dropdown */}
         <div className={`${showControls ? 'flex' : 'hidden'} sm:flex items-center gap-x-4 gap-y-2 flex-wrap mt-3`}>
           <div className="flex gap-1">
-            {Object.entries(DAYS).map(([key, { label }]) => {
-              const value = Number(key) as Day;
-              return (
-                <button
-                  key={key}
-                  onClick={() => handleDayChange(value)}
-                  className={`px-3 py-1 rounded text-sm border ${
-                    day === value
-                      ? 'bg-white text-blue-700 border-white font-semibold'
-                      : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
+            {Object.entries(DAYS).map(([key, { label }]) => (
+              <ToggleButton key={key} selected={day === Number(key)} onClick={() => setDay(Number(key))}>
+                {label}
+              </ToggleButton>
+            ))}
           </div>
           <div className="flex flex-wrap gap-1">
-            {Object.entries(PRESETS).map(([key, { label }]) => {
-              const value = Number(key) as Preset;
-              return (
-                <button
-                  key={key}
-                  onClick={() => handlePresetChange(value)}
-                  className={`px-3 py-1 rounded text-sm border ${
-                    preset === value
-                      ? 'bg-white text-blue-700 border-white font-semibold'
-                      : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
+            {Object.entries(PRESETS).map(([key, { label }]) => (
+              <ToggleButton key={key} selected={preset === Number(key)} onClick={() => setPreset(Number(key))}>
+                {label}
+              </ToggleButton>
+            ))}
           </div>
           {/* Walk time toggle - walkshed size */}
           <div className="flex items-center gap-1">
             <span className="text-sm text-blue-100 mr-1">Walk</span>
             {WALK_MINUTES.map(minutes => (
-              <button
-                key={minutes}
-                onClick={() => handleWalkMinutesChange(minutes)}
-                className={`px-3 py-1 rounded text-sm border ${
-                  walkMinutes === minutes
-                    ? 'bg-white text-blue-700 border-white font-semibold'
-                    : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
-                }`}
-              >
+              <ToggleButton key={minutes} selected={walkMinutes === minutes} onClick={() => setWalkMinutes(minutes)}>
                 {minutes} min
-              </button>
+              </ToggleButton>
             ))}
           </div>
           {/* Mode toggle - nested tiers, or a single headway */}
           <div className="flex gap-1">
             {(['tiers', 'single'] as const).map(value => (
-              <button
-                key={value}
-                onClick={() => handleModeChange(value)}
-                className={`px-3 py-1 rounded text-sm border ${
-                  mode === value
-                    ? 'bg-white text-blue-700 border-white font-semibold'
-                    : 'bg-blue-700 text-white border-blue-500 hover:bg-blue-800'
-                }`}
-              >
+              <ToggleButton key={value} selected={mode === value} onClick={() => setMode(value)}>
                 {value === 'tiers' ? 'Tiers' : 'Single'}
-              </button>
+              </ToggleButton>
             ))}
           </div>
           {mode === 'single' && (
@@ -902,7 +770,7 @@ export default function SeattleTransitVisualizer() {
               <label className="text-sm text-blue-100">Every</label>
               <select
                 value={headway}
-                onChange={(e) => handleHeadwayChange(Number(e.target.value))}
+                onChange={(e) => setHeadway(Number(e.target.value))}
                 className="px-3 py-1 rounded bg-blue-700 text-white border border-blue-500 hover:bg-blue-800 cursor-pointer"
               >
                 {HEADWAYS.map((minutes) => (
@@ -990,19 +858,17 @@ export default function SeattleTransitVisualizer() {
               );
             })()}
             {/* Toggle for census block visualization */}
-            {(
-              <button
-                onClick={() => toggleDensity()}
-                disabled={loadingCensus}
-                className={`px-4 py-2 rounded text-sm ${
-                  showCensusBlocks
-                    ? 'bg-purple-600 text-white hover:bg-purple-700'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                }`}
-              >
-                {showCensusBlocks ? 'Hide' : 'Show'} Population Density
-              </button>
-            )}
+            <button
+              onClick={() => toggleDensity()}
+              disabled={loadingCensus}
+              className={`px-4 py-2 rounded text-sm ${
+                showCensusBlocks
+                  ? 'bg-purple-600 text-white hover:bg-purple-700'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              {showCensusBlocks ? 'Hide' : 'Show'} Population Density
+            </button>
           </div>
         </div>
       )}
