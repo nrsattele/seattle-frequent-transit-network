@@ -1,58 +1,16 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
+import {
+  FUTURE_SCENARIO, FUTURE_SCENARIO_BASE_YEAR, YEARS, Preset, PRESETS, Day, DAYS, Area, AREAS, HEADWAYS, TIER_HEADWAYS,
+  qualifies, bestHeadways
+} from './shared/frequency.ts';
+import {
+  WALK_MINUTES, type WalkMinutes, walkshedsForStops, computeTiers, prepareCensusBlocks, populationInWalkshed
+} from './shared/walksheds.ts';
 
 // Geographic constants for Seattle
 const SEATTLE_CENTER = [47.6062, -122.3321]; // Center coordinates for map initialization
-// Walk times the map can show. Each stop's walkshed file has a polygon for each (isochrone_5min, isochrone_10min);
-// stops without one fall back to a circle of about that walking distance (a quarter or half mile).
-const WALK_MINUTES = [5, 10] as const;
-type WalkMinutes = typeof WALK_MINUTES[number];
-const WALK_RADIUS_METERS: Record<WalkMinutes, number> = { 5: 402.336, 10: 804.672 };
 
-// The Future scenario has no GTFS feed of its own; it layers future_stops/future_stops.json on top of this year's data.
-// Keep in sync with GTFS_YEAR in isochrone-generation/extract-all-stops.js.
-const FUTURE_SCENARIO_BASE_YEAR = '2026';
-
-// The Future scenario's key in the year selector and its data file names (all_stops_future.json, isochrones_future.json)
-const FUTURE_SCENARIO = 'future';
 const YEAR_LABELS: Record<string, string> = { [FUTURE_SCENARIO]: 'Future' }; // Dropdown labels for keys that aren't a year
-
-// Time-of-day presets.
-enum Preset {
-  AllDay,
-  AmPeak,
-  Midday,
-  PmPeak,
-  Evening,
-  LateNight,
-  Overnight,
-}
-
-// Hours are [start, end) on a 24-hour clock, matching the keys of hourly_trips.
-const PRESETS: Record<Preset, { label: string; hours: readonly [number, number] }> = {
-  [Preset.AllDay]: { label: 'All day', hours: [6, 19] },
-  [Preset.AmPeak]: { label: 'AM peak', hours: [6, 9] },
-  [Preset.Midday]: { label: 'Midday', hours: [9, 15] },
-  [Preset.PmPeak]: { label: 'PM peak', hours: [15, 19] },
-  [Preset.Evening]: { label: 'Evening', hours: [19, 21] },
-  [Preset.LateNight]: { label: 'Late night', hours: [21, 24] },
-  [Preset.Overnight]: { label: 'Overnight', hours: [0, 6] },
-};
-
-// Days of service. Each has its own all_stops file from extract-all-stops.js (weekdays use a representative Wednesday).
-enum Day {
-  Weekday,
-  Saturday,
-  Sunday,
-}
-
-const DAYS: Record<Day, { label: string; plural: string; fileSuffix: string }> = {
-  [Day.Weekday]: { label: 'Weekday', plural: 'weekdays', fileSuffix: '' },
-  [Day.Saturday]: { label: 'Saturday', plural: 'Saturdays', fileSuffix: '_saturday' },
-  [Day.Sunday]: { label: 'Sunday', plural: 'Sundays', fileSuffix: '_sunday' },
-};
-
-const HEADWAYS = [10, 15, 20, 30, 60, 120]; // Minutes between buses, offered in the headway dropdown
-const LONG_WINDOW_HOURS = 6; // Presets this long (All day, Midday, Overnight) may fall one trip short of the average
 
 // One color per headway, used in both single and tiers mode so a headway always looks the same.
 // The tier colors stay distinguishable in every pair under red-green colorblindness, and the cool hues stay clear
@@ -69,8 +27,6 @@ const HEADWAY_COLORS: Record<number, string> = {
   120: '#a8a29e', // warm gray
 };
 
-// Tiers mode draws nested walksheds for these headways, tightest first, each as a ring outside the tighter tier
-const TIER_HEADWAYS = [10, 15, 30, 60, 120];
 const TIER_FILL_OPACITY = 0.35;
 const IS_TOUCH = typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(hover: none)').matches;
 const TIER_MARKER_MIN_ZOOM = 14; // In tiers mode, stop markers would hide the bands when zoomed out
@@ -80,176 +36,6 @@ function formatHour(hour: number): string {
   if (hour % 24 === 0) return 'midnight';
   if (hour === 12) return 'noon';
   return hour < 12 ? `${hour}am` : `${hour - 12}pm`;
-}
-
-/**
- * Does a stop with these hourly trip counts have service every `headway` minutes or better during the preset?
- *
- * The preset's window must average at least 60 / headway trips per hour, and no hour may drop below the next
- * looser headway in HEADWAYS. e.g. 15 minutes needs an average of 4 trips per hour with no hour under 3
- * (every 20 minutes). This forgives routes that ex: ramp up slowly in the morning.
- *
- * Windows of LONG_WINDOW_HOURS or more may also fall one trip short of that total, which generalizes the
- * city-matched 10-minute rule: 4+ trips every hour (15 minutes) AND 77+ trips from 6am-7pm, i.e. 6 x 13 - 1.
- * Shorter windows get no slack, since one trip there is a big share (Evening at 30 minutes would otherwise pass
- * with 2 trips then 1, hourly for half the window).
- *
- * Headways longer than an hour (120 min) can't be checked hour by hour, since that would need half a trip per hour.
- * Instead every stretch of that many hours in the window needs at least 1 trip. (60 minutes is unaffected: its
- * floor of 60 / 120 = 0.5 trips still means at least 1 trip every hour.)
- */
-function qualifies(hourlyTrips: Record<string, number> | undefined, preset: Preset, headway: number): boolean {
-  if (!hourlyTrips) return false;
-
-  const [start, end] = PRESETS[preset].hours;
-  if (headway > 60) {
-    const span = headway / 60;
-    for (let h = start; h + span <= end; h++) {
-      let trips = 0;
-      for (let k = h; k < h + span; k++) trips += hourlyTrips[k.toString()] || 0;
-      if (trips < 1) return false;
-    }
-    return true;
-  }
-
-  const looserHeadway = HEADWAYS[HEADWAYS.indexOf(headway) + 1] ?? headway;
-  const minTripsPerHour = 60 / looserHeadway;
-  const hours = end - start;
-  const minTotalTrips = (60 / headway) * hours - (hours >= LONG_WINDOW_HOURS ? 1 : 0);
-
-  let total = 0;
-  for (let h = start; h < end; h++) {
-    const trips = hourlyTrips[h.toString()] || 0;
-    if (trips < minTripsPerHour) return false;
-    total += trips;
-  }
-
-  return total >= minTotalTrips;
-}
-
-/**
- * Does a stop meet the headway during the preset through a single route and direction, or an approved pair?
- *
- * Each stop's routes list has every route and direction serving it with its own hourly trips, plus an entry for
- * each pair in COMBINABLE_ROUTES (extract-all-stops.js) that serves it, e.g. "31/32". Different routes are never
- * mixed otherwise, not even hour by hour. Stops without a routes list (the hand-made Future stops, each a
- * single route) use their own hourly trips.
- */
-function stopQualifies(stop: any, preset: Preset, headway: number): boolean {
-  const routes: any[] = stop.routes || [];
-  if (routes.length === 0) return qualifies(stop.hourlyTrips, preset, headway);
-  return routes.some(route => qualifies(route.hourly_trips, preset, headway));
-}
-
-/**
- * Merge polygons into one with turf.union, in a tree: pairs, then pairs of pairs, and so on.
- *
- * Merging one at a time into a single growing shape gets slower with every polygon, since each union scans the
- * whole merged outline (minutes for a few thousand walksheds). In a tree most unions are between small shapes,
- * which takes seconds. A polygon that fails to merge is set aside and retried at the end, and skipped if it fails
- * again, so one bad geometry doesn't drop the rest of its branch.
- */
-function mergeWalksheds(polygons: any[]): any {
-  const failed: any[] = [];
-  let level = polygons;
-  while (level.length > 1) {
-    const next = [];
-    for (let i = 0; i < level.length; i += 2) {
-      if (i + 1 === level.length) {
-        next.push(level[i]);
-        continue;
-      }
-      try {
-        next.push(window.turf.union(level[i], level[i + 1]));
-      } catch {
-        next.push(level[i]);
-        failed.push(level[i + 1]);
-      }
-    }
-    level = next;
-  }
-
-  let union = level[0];
-  for (const polygon of failed) {
-    try {
-      union = window.turf.union(union, polygon);
-    } catch {
-      continue;
-    }
-  }
-  return union;
-}
-
-// Areas that coverage and population are measured within
-enum Area {
-  Seattle,
-  KingCounty,
-}
-
-// Boundary files exclude major bodies of water, so coverage is a share of land. `place` filters census blocks by
-// their Place field (null = every block). Populations are 2020 Census counts.
-const AREAS: Record<Area, { label: string; boundaryFile: string; population: number; place: string | null }> = {
-  [Area.Seattle]: { label: 'Seattle', boundaryFile: 'seattle-city-limits.geojson', population: 737015, place: 'Seattle' },
-  [Area.KingCounty]: { label: 'King County', boundaryFile: 'king-county-limits.geojson', population: 2269675, place: null },
-};
-
-const POPULATION_GRID_SIZE = 24; // Walkshed is cut into this many cells per side for population served
-
-/**
- * Population living inside a walkshed, from census blocks prepared as { feature, population, area, bbox }
- *
- * Partially covered blocks count in proportion to the area covered, which assumes people are spread evenly across
- * each block (an approximation: people cluster in buildings, not parking lots).
- *
- * Intersecting every block with the whole walkshed takes 10-15s, since each intersection scans the walkshed's full
- * outline. Instead the walkshed is cut into a grid of small pieces once, and each block is intersected only with the
- * pieces its bounding box overlaps. Same result in about 1s.
- */
-function populationInWalkshed(walkshed: any, blocks: any[]): number {
-  const turf = window.turf;
-  const [x0, y0, x1, y1] = turf.bbox(walkshed);
-  const n = POPULATION_GRID_SIZE;
-  const dx = (x1 - x0) / n;
-  const dy = (y1 - y0) / n;
-
-  // Clip the walkshed to each grid cell, dropping the empty rings bboxClip leaves behind
-  const cells: any[] = [];
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
-      const clipped = turf.bboxClip(walkshed, [x0 + i * dx, y0 + j * dy, x0 + (i + 1) * dx, y0 + (j + 1) * dy]);
-      const geometry = clipped.geometry;
-      const polygons = (geometry.type === 'MultiPolygon' ? geometry.coordinates : [geometry.coordinates])
-        .map((polygon: any[]) => polygon.filter(ring => ring.length >= 4))
-        .filter((polygon: any[]) => polygon.length > 0);
-      cells.push(polygons.length > 0 ? turf.multiPolygon(polygons) : null);
-    }
-  }
-
-  let population = 0;
-  for (const block of blocks) {
-    const [bx0, by0, bx1, by1] = block.bbox;
-    if (bx1 < x0 || bx0 > x1 || by1 < y0 || by0 > y1) continue;
-
-    const i0 = Math.max(0, Math.floor((bx0 - x0) / dx));
-    const i1 = Math.min(n - 1, Math.floor((bx1 - x0) / dx));
-    const j0 = Math.max(0, Math.floor((by0 - y0) / dy));
-    const j1 = Math.min(n - 1, Math.floor((by1 - y0) / dy));
-    let coveredArea = 0;
-    for (let i = i0; i <= i1; i++) {
-      for (let j = j0; j <= j1; j++) {
-        const cell = cells[i * n + j];
-        if (!cell) continue;
-        try {
-          const part = turf.intersect(block.feature, cell);
-          if (part) coveredArea += turf.area(part);
-        } catch {
-          // Skip pieces that cause geometry errors
-        }
-      }
-    }
-    population += block.population * Math.min(1, coveredArea / block.area);
-  }
-  return population;
 }
 
 /**
@@ -310,7 +96,7 @@ export default function SeattleTransitVisualizer() {
   // Year selection - allows switching between different GTFS datasets
   // 2020 is base year, 2025 and 2026 are recent feeds, Future is 2026 plus hardcoded future stops
   const [selectedYear, setSelectedYear] = useState<string>('2020');
-  const [availableYears] = useState<string[]>(['2020', '2025', '2026', FUTURE_SCENARIO]);
+  const [availableYears] = useState<string[]>(YEARS);
 
   // Frequency selection - which time of day and how often buses must come for a stop to count
   const [day, setDay] = useState<Day>(Day.Weekday);
@@ -328,11 +114,7 @@ export default function SeattleTransitVisualizer() {
   // Stops meeting the loosest active headway, and the tightest active headway each one meets.
   // Changing year, preset, headway or mode re-filters without re-fetching.
   const { frequentStops, bestHeadway } = useMemo(() => {
-    const bestHeadway = new Map<string, number>();
-    for (const stop of yearStops) {
-      const tightest = activeHeadways.find(h => stopQualifies(stop, preset, h));
-      if (tightest !== undefined) bestHeadway.set(stop.id, tightest);
-    }
+    const bestHeadway = bestHeadways(yearStops, preset, activeHeadways);
     return { frequentStops: yearStops.filter(stop => bestHeadway.has(stop.id)), bestHeadway };
   }, [yearStops, preset, headway, mode]);
 
@@ -742,180 +524,31 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Try to find an isochrone for a stop by checking possible feed combinations
-   * Returns the isochrone data if found, null otherwise
-   */
-  function findIsochroneForStop(stop: any, year: string): any {
-    const stopId = stop.id || stop.stop_id;
-
-    // In the Future scenario, GTFS stops come from base year data and new stops from the future stops data.
-    // So we need to check base year isochrones for non-future stops
-    const isochroneYear = (year === FUTURE_SCENARIO && !stop.isFuture) ? FUTURE_SCENARIO_BASE_YEAR : year;
-
-    // Try different feed combinations
-    const possibleKeys = [
-      `${isochroneYear}_soundtransit_${stopId}`,  // Try Sound Transit first (more likely to be frequent)
-      `${isochroneYear}_metro_${stopId}`,          // Then Metro
-      stopId                                        // Finally, try the raw ID in case it's already composite (for future stops)
-    ];
-
-    const field = walkMinutes === 5 ? 'isochrone_5min' : 'isochrone_10min';
-    for (const key of possibleKeys) {
-      const isoData = isochrones.get(key);
-      if (isoData && isoData[field]) {
-        return isoData[field];
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * Walkshed polygon for each stop - pre-computed isochrones when available, circular buffers otherwise
-   */
-  function walkshedsForStops(stopList: any[]): any[] {
-    return stopList.map((stop: any) => {
-      const isochronePolygon = findIsochroneForStop(stop, selectedYear);
-
-      if (isochronePolygon) {
-        // Use pre-computed isochrone for the selected walk time
-        return isochronePolygon;
-      } else {
-        // Fall back to a circular buffer of about that walking distance
-        return window.turf.circle(
-          [stop.lon, stop.lat],
-          WALK_RADIUS_METERS[walkMinutes] / 1000,
-          { steps: 32, units: 'kilometers' }
-        );
-      }
-    });
-  }
-
-  /**
-   * Clip a merged walkshed to the selected area's boundary and calculate coverage
+   * Recalculate walksheds for each active headway (see computeTiers), and redraw the map
    *
-   * Returns the part inside the area, the part outside (only if withOutside, since only the loosest tier's is drawn
-   * and the cut is slow against a detailed boundary like King County's), and the inside area as a percentage of the area
-   */
-  function clipToArea(union: any, boundary: any = null, withOutside = true) {
-    try {
-      let mergedPolygon = null;
-      let mergedPolygonOutOfBounds = null;
-      let coveragePercent = '0';
-
-      // If the boundary is available, clip walksheds to it
-      if (boundary) {
-        const boundaryAreaSqMeters = window.turf.area(boundary.features[0]);
-        try {
-          // Simplify the boundary for faster intersection (tolerance = 0.001 degrees ~= 100m)
-          const simplifiedBoundary = window.turf.simplify(boundary.features[0], {tolerance: 0.001, highQuality: false});
-
-          // Calculate intersection (walkshed area within the area)
-          let clipped = null;
-          try {
-            clipped = window.turf.intersect(union, simplifiedBoundary);
-          } catch (intersectErr) {
-            console.error('turf.intersect failed:', intersectErr);
-          }
-
-          // Calculate difference (walkshed area outside the area)
-          if (withOutside) {
-            try {
-              mergedPolygonOutOfBounds = window.turf.difference(union, simplifiedBoundary);
-            } catch (diffErr) {
-              console.error('Difference operation failed (may be no out-of-bounds area):', diffErr);
-            }
-          }
-
-          if (clipped) {
-            mergedPolygon = clipped;
-
-            // Calculate coverage using the actual boundary area (use original, not simplified)
-            const clippedAreaSqMeters = window.turf.area(clipped);
-            coveragePercent = (clippedAreaSqMeters / boundaryAreaSqMeters * 100).toFixed(1);
-          } else {
-            // No intersection - all walksheds are outside the area
-            console.log('No intersection found - all walksheds outside the area');
-            mergedPolygon = null;
-            mergedPolygonOutOfBounds = union;
-            coveragePercent = '0';
-          }
-        } catch (err) {
-          // If clipping fails, fall back to unclipped calculation
-          console.error('Clipping to the boundary failed, using full walkshed:', err);
-          mergedPolygon = union;
-          coveragePercent = (window.turf.area(union) / boundaryAreaSqMeters * 100).toFixed(1);
-        }
-      } else {
-        // No boundary available, use full walkshed (coverage is unknown without an area to divide by)
-        console.log('Boundary not loaded yet');
-        mergedPolygon = union;
-      }
-
-      return { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent };
-    } catch (err) {
-      console.error('Error calculating walkshed coverage:', err);
-      return { mergedPolygon: null, mergedPolygonOutOfBounds: null, coveragePercent: '0' };
-    }
-  }
-
-  /**
-   * Recalculate walksheds for each active headway
-   *
-   * Runs when stops, isochrones or the boundary change. Tiers are nested, so each headway's walkshed is the
-   * tighter headway's walkshed plus only the stops that newly qualify, rather than a fresh merge of every stop.
+   * Runs when stops, isochrones, the boundary or the walk time change.
    */
   function recalculateWalksheds() {
     if (!boundary || !turfLoaded || !window.turf) return;
 
-    let union = null;
-    let outOfBounds = null;
-    const tierPolygons = [];
-    const tierStats = [];
-    for (const tierHeadway of activeHeadways) {
-      const tierStops = frequentStops.filter(stop => bestHeadway.get(stop.id)! <= tierHeadway);
-      const newStops = frequentStops.filter(stop => bestHeadway.get(stop.id) === tierHeadway);
-      if (newStops.length > 0) {
-        const merged = mergeWalksheds(walkshedsForStops(newStops));
-        union = union ? mergeWalksheds([union, merged]) : merged;
-      }
+    const { tiers, outOfBounds } = computeTiers(window.turf, {
+      stops: frequentStops,
+      bestHeadway,
+      headways: activeHeadways,
+      boundary,
+      walksheds: stops => walkshedsForStops(window.turf, stops, isochrones, selectedYear, walkMinutes),
+      withRings: mode === 'tiers'
+    });
 
-      const { mergedPolygon, mergedPolygonOutOfBounds, coveragePercent } = union
-        ? clipToArea(union, boundary, tierHeadway === activeHeadways[activeHeadways.length - 1])
-        : { mergedPolygon: null, mergedPolygonOutOfBounds: null, coveragePercent: '0' };
-      outOfBounds = mergedPolygonOutOfBounds;
-
-      // Ring: this tier minus the tighter tier, so each area is drawn in exactly one tier's color.
-      // Nearly identical edges (points differing in the 14th decimal place) can make the difference fail, slowly
-      // (sometimes only after a stack overflow), so both shapes are rounded to 6 decimal places (~10cm) first.
-      const tighter = tierPolygons[tierPolygons.length - 1]?.polygon;
-      let ring = mergedPolygon;
-      if (mergedPolygon && tighter) {
-        try {
-          const round = (shape: any) => window.turf.truncate(shape, { precision: 6 });
-          ring = window.turf.difference(round(mergedPolygon), round(tighter));
-        } catch (err) {
-          console.error('Tier ring difference failed, drawing the full tier:', err);
-        }
-      }
-      tierPolygons.push({ headway: tierHeadway, polygon: mergedPolygon, ring });
-      tierStats.push({
-        headway: tierHeadway,
-        stopCount: tierStops.length,
-        coveragePercent: parseFloat(coveragePercent) > 100 ? '100+' : coveragePercent
-      });
-    }
-
-    tierPolygonsRef.current = tierPolygons;
+    tierPolygonsRef.current = tiers.map(({ headway: tierHeadway, polygon, ring }) => ({ headway: tierHeadway, polygon, ring }));
     mergedPolygonOutOfBoundsRef.current = outOfBounds; // Loosest headway's, which contains the others
 
-    setStats({ tiers: tierStats });
+    setStats({ tiers: tiers.map(({ headway: tierHeadway, stopCount, coveragePercent }) => ({ headway: tierHeadway, stopCount, coveragePercent })) });
 
     // Redraw the map to show updated walksheds with isochrones
     if (leafletMapRef.current) {
       drawStops();
     }
-
   }
 
   /**
@@ -1081,20 +714,13 @@ export default function SeattleTransitVisualizer() {
       const cache = censusCacheRef.current;
       const { place, population: areaPopulation } = AREAS[area];
       if (!cache.blocksByArea[area]) {
-        cache.blocksByArea[area] = (cache.geometries.features || [])
-          .filter((block: any) => (place === null || block.properties.Place === place) && parseInt(block.properties.TOT_POP || '0') > 0)
-          .map((block: any) => ({
-            feature: block,
-            population: parseInt(block.properties.TOT_POP),
-            area: window.turf.area(block),
-            bbox: window.turf.bbox(block)
-          }));
+        cache.blocksByArea[area] = prepareCensusBlocks(window.turf, cache.geometries.features || [], place);
       }
 
       const blocks = cache.blocksByArea[area]!;
       const geometries = cache.geometries;
       const tiers = tierPolygonsRef.current.map(({ headway: tierHeadway, polygon }) => {
-        const population = polygon ? populationInWalkshed(polygon, blocks) : 0;
+        const population = polygon ? populationInWalkshed(window.turf, polygon, blocks) : 0;
         return {
           headway: tierHeadway,
           population: Math.round(population).toLocaleString(),
