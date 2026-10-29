@@ -65,7 +65,7 @@ node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or future
 **File:** `isochrone-generation/build-stats.js`
 
 - Precomputes coverage, population and stop counts for every year, day, preset, walk time, area and headway, using the same rules and geometry code as the site (`shared/frequency.ts`, `shared/walksheds.ts`)
-- Outputs: `base_data/stats.json` (about 250KB), used to compare years
+- Outputs: `base_data/stats.json` (about 160KB), used to compare years
 - Takes about 35-40 minutes on 6 worker threads; no network calls
 - **Rerun it after any change to the rules or walkshed code in `shared/`, or after regenerating stops or walksheds** (steps 1 and 2); the site doesn't check whether it's up to date
 
@@ -95,7 +95,7 @@ npm run dev
 
 ## Adding a new year
 
-1. Put the Metro and Sound Transit GTFS ZIPs in `public/base_data/{year}/`
+1. Put the Metro and Sound Transit GTFS ZIPs in `isochrone-generation/gtfs/{year}/` (not in `public/`, so they aren't deployed)
 2. Add a `GTFS_FILES_{year}` entry to `GTFS_FILES_BY_YEAR` in `extract-all-stops.js`
 3. Run `node extract-all-stops.js {year}`, `node extract-all-stops.js {year} saturday` and `node extract-all-stops.js {year} sunday`, then `node generate-isochrones.js {year}` (needs `MAPBOX_ACCESS_TOKEN`; calls Mapbox once per stop)
 4. Add the year to `YEARS` in `shared/frequency.ts`, and set `DEFAULT_YEAR` there if the site should open on it

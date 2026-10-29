@@ -18,20 +18,21 @@ import JSZip from 'jszip';
 import Papa from 'papaparse';
 import fs from 'fs';
 
-// GTFS files to process (paths relative to project root)
+// GTFS files to process (paths relative to isochrone-generation/, where the script is run). They live outside
+// public/ so they aren't deployed with the site, which never reads them.
 // Each entry: [file_path, feed_name]
 const GTFS_FILES_2020 = [
-  ['../public/base_data/2020/feb_2020_metro_gtfs.zip', 'metro']
+  ['gtfs/2020/feb_2020_metro_gtfs.zip', 'metro']
 ];
 
 const GTFS_FILES_2025 = [
-  ['../public/base_data/2025/dec_2025_metro_gtfs.zip', 'metro'],
-  ['../public/base_data/2025/dec_2025_soundtransit_gtfs.zip', 'soundtransit']
+  ['gtfs/2025/dec_2025_metro_gtfs.zip', 'metro'],
+  ['gtfs/2025/dec_2025_soundtransit_gtfs.zip', 'soundtransit']
 ];
 
 const GTFS_FILES_2026 = [
-  ['../public/base_data/2026/oct_2026_metro.zip', 'metro'],
-  ['../public/base_data/2026/oct_2026_soundtransit.zip', 'soundtransit']
+  ['gtfs/2026/oct_2026_metro.zip', 'metro'],
+  ['gtfs/2026/oct_2026_soundtransit.zip', 'soundtransit']
 ];
 
 // Metro routes (by route number) that alternate on a shared corridor, so riders there get their combined
@@ -68,7 +69,7 @@ if (DATASET === 'future' && DAY !== 'weekday') {
 }
 
 // For future, use 2026 GTFS as base and add future stops
-// Keep in sync with FUTURE_SCENARIO_BASE_YEAR in seattle-transit-access.tsx.
+// Keep in sync with FUTURE_SCENARIO_BASE_YEAR in shared/frequency.ts.
 const GTFS_YEAR = DATASET === 'future' ? '2026' : DATASET;
 const GTFS_FILES = GTFS_FILES_BY_YEAR[GTFS_YEAR];
 if (!GTFS_FILES) {
