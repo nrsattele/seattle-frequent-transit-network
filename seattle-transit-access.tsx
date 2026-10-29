@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import {
   FUTURE_SCENARIO, FUTURE_SCENARIO_BASE_YEAR, YEARS, Preset, PRESETS, Day, DAYS, Area, AREAS, HEADWAYS, TIER_HEADWAYS,
-  qualifies, bestHeadways
+  qualifies, bestHeadways, stopsFromFile, futureStopsForDay
 } from './shared/frequency.ts';
 import {
   WALK_MINUTES, type WalkMinutes, walkshedsForStops, computeTiers, prepareCensusBlocks, populationInWalkshed
@@ -605,14 +605,7 @@ export default function SeattleTransitVisualizer() {
    * recalculates coverage whenever that list changes.
    */
   async function processAllStopsData(allStops: any[]) {
-    const stopList = allStops.map((s: any) => ({
-      id: s.id,
-      name: s.name,
-      lat: s.lat,
-      lon: s.lon,
-      hourlyTrips: s.hourly_trips,
-      routes: s.routes || [] // Each route and direction serving the stop, with its own hourly_trips
-    }));
+    const stopList = stopsFromFile(allStops);
 
     // Load and add future stops if this is a future year scenario
     const finalStopList = await addFutureStops(stopList, selectedYear);
@@ -646,20 +639,7 @@ export default function SeattleTransitVisualizer() {
       const futureData = await response.json();
 
       // Keep enabled stops; frequentStops decides which meet the selected frequency
-      const enabledFutureStops = futureData.stops
-        .filter((stop: any) => stop.enabled !== false)
-        .map((stop: any) => ({
-          id: stop.id,
-          name: stop.name,
-          lat: stop.lat,
-          lon: stop.lon,
-          isFuture: true,
-          routeName: stop.route_name,
-          // Weekend trips when the stop has them (e.g. the I Line); otherwise weekends reuse weekday trips
-          hourlyTrips: (day === Day.Saturday && stop.hourly_trips_saturday)
-            || (day === Day.Sunday && stop.hourly_trips_sunday)
-            || stop.hourly_trips
-        }));
+      const enabledFutureStops = futureStopsForDay(futureData, day);
 
       console.log(`Adding ${enabledFutureStops.length} future stops for ${year}`);
 

@@ -139,3 +139,38 @@ export function bestHeadways(stops: any[], preset: Preset, headways: number[]): 
   }
   return best;
 }
+
+/**
+ * Stops from an all_stops_{year}{_day}.json file, in the shape the rules and walkshed code use
+ */
+export function stopsFromFile(allStops: any[]): any[] {
+  return allStops.map(s => ({
+    id: s.id,
+    name: s.name,
+    lat: s.lat,
+    lon: s.lon,
+    hourlyTrips: s.hourly_trips,
+    routes: s.routes || [] // Each route and direction serving the stop, with its own hourly_trips
+  }));
+}
+
+/**
+ * Enabled stops from future_stops/future_stops.json for a day of service. Each is a single route, so it has no
+ * routes list. Weekends use the stop's own Saturday / Sunday trips when it has them (e.g. the I Line), otherwise
+ * its weekday trips.
+ */
+export function futureStopsForDay(futureData: any, day: Day): any[] {
+  return (futureData.stops || [])
+    .filter((stop: any) => stop.enabled !== false)
+    .map((stop: any) => ({
+      id: stop.id,
+      name: stop.name,
+      lat: stop.lat,
+      lon: stop.lon,
+      isFuture: true,
+      routeName: stop.route_name,
+      hourlyTrips: (day === Day.Saturday && stop.hourly_trips_saturday)
+        || (day === Day.Sunday && stop.hourly_trips_sunday)
+        || stop.hourly_trips
+    }));
+}

@@ -61,7 +61,20 @@ cd isochrone-generation
 node generate-isochrones.js [year]  # year: 2020, 2025, 2026, or future
 ```
 
-### 3: Website!
+### 3: Stats
+**File:** `isochrone-generation/build-stats.js`
+
+- Precomputes coverage, population and stop counts for every year, day, preset, walk time, area and headway, using the same rules and geometry code as the site (`shared/frequency.ts`, `shared/walksheds.ts`)
+- Outputs: `base_data/stats.json` (about 250KB), used to compare years
+- Takes about 35-40 minutes on 6 worker threads; no network calls
+- **Rerun it after any change to the rules or walkshed code in `shared/`, or after regenerating stops or walksheds** (steps 1 and 2); the site doesn't check whether it's up to date
+
+**Run:**
+```bash
+npm run build-stats  # optional: -- --only 2026 to rebuild one year
+```
+
+### 4: Website!
 **File:** `seattle-transit-access.tsx`
 
 - Loads pre-processed data from all_stops JSON files
@@ -84,6 +97,7 @@ npm run dev
 
 1. Put the Metro and Sound Transit GTFS ZIPs in `public/base_data/{year}/`
 2. Add a `GTFS_FILES_{year}` entry to `GTFS_FILES_BY_YEAR` in `extract-all-stops.js`
-3. Run `node extract-all-stops.js {year}`, then `node generate-isochrones.js {year}` (needs `MAPBOX_ACCESS_TOKEN`; calls Mapbox once per stop)
-4. Add the year to `availableYears` in `seattle-transit-access.tsx`
-5. To move the future scenario onto the new year, update `FUTURE_SCENARIO_BASE_YEAR` in `seattle-transit-access.tsx` and `GTFS_YEAR` in `extract-all-stops.js`, then disable any future stops that now appear in the real feed and re-run `node extract-all-stops.js future`
+3. Run `node extract-all-stops.js {year}`, `node extract-all-stops.js {year} saturday` and `node extract-all-stops.js {year} sunday`, then `node generate-isochrones.js {year}` (needs `MAPBOX_ACCESS_TOKEN`; calls Mapbox once per stop)
+4. Add the year to `YEARS` in `shared/frequency.ts`
+5. To move the future scenario onto the new year, update `FUTURE_SCENARIO_BASE_YEAR` in `shared/frequency.ts` and `GTFS_YEAR` in `extract-all-stops.js`, then remove any future stops that now appear in the real feed and re-run `node extract-all-stops.js future`
+6. Run `npm run build-stats` so the year comparison includes the new year
