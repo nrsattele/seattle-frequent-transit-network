@@ -2,6 +2,7 @@
   "name": "seattle-frequent-transit-network",
   "homepage": "https://nrsattele.github.io/seattle-frequent-transit-network/",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,10 +18,10 @@
     "@turf/turf": "^6.5.0",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
-    "@vitejs/plugin-react": "^4.0.0",
+    "@vitejs/plugin-react": "^6.1.2",
     "gh-pages": "^6.3.0",
     "jszip": "^3.10.2",
     "papaparse": "^5.7.0",
-    "vite": "^4.3.9"
+    "vite": "^8.3.5"
   }
 }
