@@ -84,9 +84,9 @@ npm run build-stats  # optional: -- --only 2026 to rebuild one year
 - Visualizes 5- or 10-minute walksheds (Walk toggle; pre-computed isochrones, or circles of about a quarter or half mile), merged per headway
 - **Area:** Seattle (default) or King County. Coverage and population are measured within the selected area's boundary (`seattle-city-limits.geojson` or `king-county-limits.geojson`); walksheds outside it are drawn dashed gray. Stops are shown county-wide either way.
 - Coverage: share of the area's land within the selected walk time, per headway. County-wide this stays small (2.2% at every 10 minutes in 2026), since most of King County is forest and farmland.
-- Population served (on request): share of the area's 2020 population within the selected walk time, from census blocks (Seattle: 737,015; King County: 2,269,675). The 56MB census file downloads on the first click, and partially covered blocks count in proportion to the area covered.
+- Population served: share of the area's 2020 population within the selected walk time, from census blocks (Seattle: 737,015; King County: 2,269,675), read from the precomputed `stats.json` (step 3), so it shows instantly. Partially covered blocks count in proportion to the area covered. Shows "—" if the stats don't cover the view (rerun `npm run build-stats`).
 - On phones, the controls collapse behind an Options button and stops open their details on tap.
-- Population density layer, available once population is calculated. Tiers draw as outlines over it.
+- Population density layer (button): loads the 56MB census file the first time it's switched on. Tiers draw as outlines over it.
 
 **Run:**
 ```bash

@@ -4,7 +4,7 @@ import {
   qualifies, bestHeadways, stopsFromFile, futureStopsForDay
 } from './shared/frequency.ts';
 import {
-  WALK_MINUTES, type WalkMinutes, walkshedsForStops, computeTiers, prepareCensusBlocks, populationInWalkshed
+  WALK_MINUTES, type WalkMinutes, walkshedsForStops, computeTiers
 } from './shared/walksheds.ts';
 
 // Geographic constants for Seattle
@@ -80,7 +80,7 @@ export default function SeattleTransitVisualizer() {
   // Data state - stores processed transit information
   const [yearStops, setYearStops] = useState<any[]>([]); // Every stop for the selected year (incl. future stops), with hourlyTrips
   const [stats, setStats] = useState<any>(null); // Calculated coverage statistics
-  const [censusData, setCensusData] = useState<any>(null); // Population data from US Census
+  const [statsData, setStatsData] = useState<any>(null); // Precomputed coverage and population (stats.json, from build-stats.js)
   const [area, setArea] = useState<Area>(Area.Seattle); // Area that coverage and population are measured within
   const [boundaries, setBoundaries] = useState<Partial<Record<Area, any>>>({}); // Boundary polygons, loaded per area on first use
   const boundary = boundaries[area] ?? null; // Selected area's boundary
@@ -89,7 +89,7 @@ export default function SeattleTransitVisualizer() {
 
   // UI state - tracks loading and error states
   const [loading, setLoading] = useState<boolean>(false); // GTFS data loading indicator
-  const [loadingCensus, setLoadingCensus] = useState<boolean>(false); // Census data loading indicator
+  const [loadingCensus, setLoadingCensus] = useState<boolean>(false); // Census blocks loading indicator (density layer)
   const [error, setError] = useState<string | null>(null); // Error message display
   const [showCensusBlocks, setShowCensusBlocks] = useState<boolean>(false); // Toggle census block visualization
 
@@ -127,8 +127,6 @@ export default function SeattleTransitVisualizer() {
   const markersLayerRef = useRef<any>(null); // Layer group holding the stop markers, so tiers mode can hide them by zoom
   // In-bounds merged walkshed per active headway, and its ring: the part not covered by the next tighter headway
   const tierPolygonsRef = useRef<{ headway: number; polygon: any; ring: any }[]>([]);
-  // Census file, loaded once per page, with each area's populated blocks prepared on first use
-  const censusCacheRef = useRef<{ geometries: any; blocksByArea: Partial<Record<Area, any[]>> } | null>(null);
   const mergedPolygonOutOfBoundsRef = useRef<any>(null); // Out-of-bounds portion of the loosest active headway
 
   // Library loading state - tracks when external CDN libraries are ready
@@ -259,6 +257,16 @@ export default function SeattleTransitVisualizer() {
     }
     loadBoundary();
   }, [area]);
+
+  /**
+   * Effect: Load precomputed population (and coverage) for every view, built by isochrone-generation/build-stats.js
+   */
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}base_data/stats.json`)
+      .then(response => response.ok ? response.json() : null)
+      .then(data => setStatsData(data))
+      .catch(err => console.error('Could not load stats.json:', err));
+  }, []);
 
   /**
    * Effect: Recalculate walksheds when the area's boundary loads OR when stops/isochrones load
@@ -652,74 +660,38 @@ export default function SeattleTransitVisualizer() {
   }
 
   /**
-   * Load US Census population data and calculate how many people live within each active headway's walkshed
+   * Show or hide the population density layer, loading the census blocks the first time
    *
-   * - Local GeoJSON file: Census block geometries with population counts for King County
-   *   (KING_COUNTY_BLOCK_2020_POPULATION.geojson in base_data directory), fetched once per page
-   * - Only the selected area's blocks with people count (filtered by `Place`, or every block for King County)
-   * - Single mode gets one number; tiers mode gets one per tier, each including the more frequent tiers
-   * - Percentages are of the area's total population
+   * Local GeoJSON file with census block geometries and population counts for King County
+   * (KING_COUNTY_BLOCK_2020_POPULATION.geojson, 56MB), fetched once per page and only for this layer.
    */
-  async function loadCensusData() {
-    if (!turfLoaded || !window.turf) return;
-
-    setLoadingCensus(true);
-
-    try {
-      let loadedNow = false;
-      if (!censusCacheRef.current) {
-        const censusUrl = `${import.meta.env.BASE_URL}base_data/KING_COUNTY_BLOCK_2020_POPULATION.geojson`;
-        console.log(`Loading census data from: ${censusUrl}`);
-
-        const censusResponse = await fetch(censusUrl);
-        if (!censusResponse.ok) {
-          setCensusData({
-            error: 'Census data file not found. Please add KING_COUNTY_BLOCK_2020_POPULATION.geojson to base_data/'
-          });
-          return;
-        }
-
-        const geometries = await censusResponse.json();
-        console.log(`Loaded ${geometries.features?.length || 0} census blocks`);
-
-        censusCacheRef.current = { geometries, blocksByArea: {} };
-        loadedNow = true;
+  async function toggleDensity() {
+    if (showCensusBlocks) return setShowCensusBlocks(false);
+    if (!censusBlocks) {
+      setLoadingCensus(true);
+      try {
+        const response = await fetch(`${import.meta.env.BASE_URL}base_data/KING_COUNTY_BLOCK_2020_POPULATION.geojson`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        setCensusBlocks(await response.json());
+      } catch (err: any) {
+        setError('Could not load census data: ' + err.message);
+        return;
+      } finally {
+        setLoadingCensus(false);
       }
-      if (!loadedNow) {
-        // Let the loading indicator paint before the synchronous calculation
-        await new Promise(resolve => setTimeout(resolve, 0));
-      }
-
-      // Prepare the area's populated blocks once, with the area and bounding box the calculation needs
-      const cache = censusCacheRef.current;
-      const { place, population: areaPopulation } = AREAS[area];
-      if (!cache.blocksByArea[area]) {
-        cache.blocksByArea[area] = prepareCensusBlocks(window.turf, cache.geometries.features || [], place);
-      }
-
-      const blocks = cache.blocksByArea[area]!;
-      const geometries = cache.geometries;
-      const tiers = tierPolygonsRef.current.map(({ headway: tierHeadway, polygon }) => {
-        const population = polygon ? populationInWalkshed(window.turf, polygon, blocks) : 0;
-        return {
-          headway: tierHeadway,
-          population: Math.round(population).toLocaleString(),
-          populationPercent: (population / areaPopulation * 100).toFixed(1)
-        };
-      });
-
-      // Store census blocks for visualization
-      setCensusBlocks(geometries);
-      setCensusData({ tiers });
-    } catch (err: any) {
-      setCensusData({
-        error: 'Could not load census data: ' + err.message
-      });
-    } finally {
-      setLoadingCensus(false);
     }
+    setShowCensusBlocks(true);
   }
 
+  /**
+   * Population served from stats.json for a headway in the current view, or null if the stats don't cover it
+   * (e.g. a year added since the stats were last built)
+   */
+  function statsPopulation(tierHeadway: number): { people: number; percent: string } | null {
+    const entry = statsData?.results?.[selectedYear]?.[Day[day]]?.[Preset[preset]]?.[walkMinutes]?.[tierHeadway]?.[Area[area]];
+    if (!entry) return null;
+    return { people: entry.population, percent: (entry.population / AREAS[area].population * 100).toFixed(1) };
+  }
 
   /**
    * Handle year selection change
@@ -731,10 +703,7 @@ export default function SeattleTransitVisualizer() {
     setSelectedYear(year);
     // Clear existing data
     setStats(null);
-    setCensusData(null);
     setYearStops([]);
-    setCensusBlocks(null);
-    setShowCensusBlocks(false);
     tierPolygonsRef.current = [];
     mergedPolygonOutOfBoundsRef.current = null;
     fitToStopsRef.current = true;
@@ -755,40 +724,33 @@ export default function SeattleTransitVisualizer() {
    * Handle preset, headway or mode change
    *
    * frequentStops re-filters on its own and the effects redraw the map and walksheds.
-   * Population served describes the previous walkshed, so clear it.
    */
   function handlePresetChange(newPreset: Preset) {
     setPreset(newPreset);
-    setCensusData(null);
   }
 
   function handleHeadwayChange(newHeadway: number) {
     setHeadway(newHeadway);
-    setCensusData(null);
   }
 
   // Changing day loads that day's stop file; walksheds are the same, so the map keeps its view
   function handleDayChange(newDay: Day) {
     if (newDay === day) return;
     setDay(newDay);
-    setCensusData(null);
   }
 
   function handleWalkMinutesChange(minutes: WalkMinutes) {
     setWalkMinutes(minutes);
-    setCensusData(null);
   }
 
   function handleModeChange(newMode: 'single' | 'tiers') {
     setMode(newMode);
-    setCensusData(null);
   }
 
   // Changing area re-clips walksheds to its boundary (loaded on first use) and zooms the map to it
   function handleAreaChange(newArea: Area) {
     if (newArea === area) return;
     setArea(newArea);
-    setCensusData(null);
     fitToAreaRef.current = true;
   }
 
@@ -962,7 +924,7 @@ export default function SeattleTransitVisualizer() {
 
       {loadingCensus && (
         <div className="bg-purple-50 border-l-4 border-purple-400 p-4">
-          <p className="text-purple-800">Loading census population data...</p>
+          <p className="text-purple-800">Loading population density...</p>
         </div>
       )}
 
@@ -979,24 +941,20 @@ export default function SeattleTransitVisualizer() {
           <div className="flex gap-x-8 gap-y-1 sm:gap-y-3 items-center flex-wrap">
             {mode === 'tiers' ? (
               <>
-                {/* Per-tier legend with stop count, area coverage and population served once calculated
+                {/* Per-tier legend with stop count, area coverage and population served
                     (cumulative: each tier includes the more frequent ones) */}
                 {stats.tiers.map((tier: any) => {
-                  const tierPopulation = censusData?.tiers?.find((t: any) => t.headway === tier.headway);
+                  const tierPopulation = statsPopulation(tier.headway);
                   return (
                     <div key={tier.headway} className="flex items-center gap-2">
                       {tierSwatch(tier.headway)}
                       <span className="text-gray-600 text-xs sm:text-sm">Every {tier.headway} min:</span>
                       <span className="text-base sm:text-lg font-bold text-gray-800">{tier.coveragePercent}%</span>
                       <span className="text-gray-500 text-xs -ml-1">area</span>
-                      {tierPopulation && (
-                        <>
-                          <span className="text-base sm:text-lg font-bold text-gray-800" title={`${tierPopulation.population} people`}>
-                            {tierPopulation.populationPercent}%
-                          </span>
-                          <span className="text-gray-500 text-xs -ml-1">people</span>
-                        </>
-                      )}
+                      <span className="text-base sm:text-lg font-bold text-gray-800" title={tierPopulation ? `${tierPopulation.people.toLocaleString()} people` : 'Not in stats.json; run npm run build-stats'}>
+                        {tierPopulation ? `${tierPopulation.percent}%` : '—'}
+                      </span>
+                      <span className="text-gray-500 text-xs -ml-1">people</span>
                       <span className="text-gray-500 text-xs">({tier.stopCount} stops)</span>
                     </div>
                   );
@@ -1020,33 +978,22 @@ export default function SeattleTransitVisualizer() {
                 </div>
               </>
             )}
-            {/* Population metrics - shown when census data loads successfully (tiers mode shows them per tier above) */}
-            {mode === 'single' && censusData?.tiers && (
-              <div>
-                <span className="text-gray-600 text-sm">Population Served:</span>
-                <span className="ml-2 text-xl sm:text-2xl font-bold text-purple-600">{censusData.tiers[0].populationPercent}%</span>
-                <span className="text-gray-500 text-xs ml-1">({censusData.tiers[0].population} people)</span>
-              </div>
-            )}
-            {/* Census error message if data failed to load */}
-            {censusData?.error && (
-              <div>
-                <span className="text-red-600 text-sm">{censusData.error}</span>
-              </div>
-            )}
-            {/* Button to calculate population served (only shown when walkshed is ready and census hasn't been loaded yet) */}
-            {!censusData && !loadingCensus && tierPolygonsRef.current.some(tier => tier.polygon) && (
-              <button
-                onClick={() => loadCensusData()}
-                className="px-4 py-2 rounded text-sm bg-purple-100 text-purple-700 hover:bg-purple-200"
-              >
-                Calculate Population Served
-              </button>
-            )}
+            {/* Population served, from stats.json (tiers mode shows it per tier above) */}
+            {mode === 'single' && (() => {
+              const population = statsPopulation(headway);
+              return (
+                <div title={population ? undefined : 'Not in stats.json; run npm run build-stats'}>
+                  <span className="text-gray-600 text-sm">Population Served:</span>
+                  <span className="ml-2 text-xl sm:text-2xl font-bold text-purple-600">{population ? `${population.percent}%` : '—'}</span>
+                  {population && <span className="text-gray-500 text-xs ml-1">({population.people.toLocaleString()} people)</span>}
+                </div>
+              );
+            })()}
             {/* Toggle for census block visualization */}
-            {censusBlocks && (
+            {(
               <button
-                onClick={() => setShowCensusBlocks(!showCensusBlocks)}
+                onClick={() => toggleDensity()}
+                disabled={loadingCensus}
                 className={`px-4 py-2 rounded text-sm ${
                   showCensusBlocks
                     ? 'bg-purple-600 text-white hover:bg-purple-700'
