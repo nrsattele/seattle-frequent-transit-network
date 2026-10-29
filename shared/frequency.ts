@@ -16,6 +16,9 @@ export const FUTURE_SCENARIO = 'future';
 // Years and scenarios with data, in the order the site offers them
 export const YEARS = ['2020', '2025', '2026', FUTURE_SCENARIO];
 
+// The year the site opens on
+export const DEFAULT_YEAR = '2026';
+
 // Time-of-day presets.
 export enum Preset {
   AllDay,

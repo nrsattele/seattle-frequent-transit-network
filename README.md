@@ -98,6 +98,6 @@ npm run dev
 1. Put the Metro and Sound Transit GTFS ZIPs in `public/base_data/{year}/`
 2. Add a `GTFS_FILES_{year}` entry to `GTFS_FILES_BY_YEAR` in `extract-all-stops.js`
 3. Run `node extract-all-stops.js {year}`, `node extract-all-stops.js {year} saturday` and `node extract-all-stops.js {year} sunday`, then `node generate-isochrones.js {year}` (needs `MAPBOX_ACCESS_TOKEN`; calls Mapbox once per stop)
-4. Add the year to `YEARS` in `shared/frequency.ts`
+4. Add the year to `YEARS` in `shared/frequency.ts`, and set `DEFAULT_YEAR` there if the site should open on it
 5. To move the future scenario onto the new year, update `FUTURE_SCENARIO_BASE_YEAR` in `shared/frequency.ts` and `GTFS_YEAR` in `extract-all-stops.js`, then remove any future stops that now appear in the real feed and re-run `node extract-all-stops.js future`
 6. Run `npm run build-stats` so the year comparison includes the new year

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo, type ReactNode } from 'react';
 import {
-  FUTURE_SCENARIO, FUTURE_SCENARIO_BASE_YEAR, YEARS, Preset, PRESETS, Day, DAYS, Area, AREAS, HEADWAYS, TIER_HEADWAYS,
+  FUTURE_SCENARIO, FUTURE_SCENARIO_BASE_YEAR, YEARS, DEFAULT_YEAR, Preset, PRESETS, Day, DAYS, Area, AREAS, HEADWAYS, TIER_HEADWAYS,
   qualifies, bestHeadways, stopsFromFile, futureStopsForDay
 } from './shared/frequency.ts';
 import {
@@ -116,7 +116,7 @@ export default function SeattleTransitVisualizer() {
   const [showCensusBlocks, setShowCensusBlocks] = useState<boolean>(false); // Toggle census block visualization
 
   // Year selection - a GTFS feed's year, or Future (the base year's feed plus the stops in future_stops.json)
-  const [selectedYear, setSelectedYear] = useState<string>('2020');
+  const [selectedYear, setSelectedYear] = useState<string>(DEFAULT_YEAR);
 
   // Frequency selection - which time of day and how often buses must come for a stop to count
   const [day, setDay] = useState<Day>(Day.Weekday);
