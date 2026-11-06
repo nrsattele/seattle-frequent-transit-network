@@ -124,7 +124,8 @@ export default function SeattleTransitVisualizer() {
   const [headway, setHeadway] = useState<number>(10); // Minutes between buses, in single mode
   const [mode, setMode] = useState<'single' | 'tiers'>('single'); // One headway, or nested bands for TIER_HEADWAYS
   const [walkMinutes, setWalkMinutes] = useState<WalkMinutes>(10); // Walkshed size
-  const [showControls, setShowControls] = useState<boolean>(false); // Phones only: controls are collapsed behind an Options button
+  // Controls can be collapsed behind the Options button; they start collapsed on phones (under Tailwind's sm, 640px)
+  const [showControls, setShowControls] = useState<boolean>(() => !!window.matchMedia?.('(min-width: 640px)').matches);
   const modeRef = useRef(mode); // For the map's zoom handler, which outlives renders
   modeRef.current = mode;
 
@@ -322,6 +323,9 @@ export default function SeattleTransitVisualizer() {
 
     markersLayerRef.current = L.layerGroup();
     map.on('zoomend', updateMarkerVisibility);
+
+    // Leaflet only notices window resizes, so tell it when the map's box changes, e.g. when the controls collapse
+    new ResizeObserver(() => map.invalidateSize()).observe(mapRef.current);
   }
 
   /**
@@ -704,16 +708,17 @@ export default function SeattleTransitVisualizer() {
                 : `Stops with service every ${headway} minutes, ${presetHours} ${DAYS[day].plural} + ${walkMinutes}-minute walksheds`}
             </p>
           </div>
-          {/* Phones: Options button showing or hiding the controls (always shown on larger screens) */}
+          {/* Options button showing or hiding the controls. Collapsed, it names the year, since the selector is hidden.
+              On larger screens it sits at the far right, after the area and year controls. */}
           <button
             onClick={() => setShowControls(!showControls)}
-            className="sm:hidden shrink-0 px-3 py-1.5 rounded text-sm border bg-blue-700 text-white border-blue-500"
+            className="shrink-0 sm:order-last px-3 py-1.5 rounded text-sm border bg-blue-700 text-white border-blue-500 hover:bg-blue-800"
             aria-expanded={showControls}
           >
-            {YEAR_LABELS[selectedYear] ?? selectedYear} · Options {showControls ? '▴' : '▾'}
+            {showControls ? 'Options ▴' : `${YEAR_LABELS[selectedYear] ?? selectedYear} · Options ▾`}
           </button>
           {/* Area toggle and year selector dropdown */}
-          <div className={`${showControls ? 'flex' : 'hidden'} sm:flex w-full sm:w-auto items-center gap-2 flex-wrap justify-start sm:justify-end`}>
+          <div className={`${showControls ? 'flex' : 'hidden'} w-full sm:w-auto items-center gap-2 flex-wrap justify-start sm:justify-end`}>
             <div className="flex gap-1">
               {Object.entries(AREAS).map(([key, { label }]) => (
                 <ToggleButton key={key} selected={area === Number(key)} onClick={() => handleAreaChange(Number(key))} padding="py-1.5">
@@ -734,7 +739,7 @@ export default function SeattleTransitVisualizer() {
           </div>
         </div>
         {/* Frequency controls - day, time of day preset buttons and headway dropdown */}
-        <div className={`${showControls ? 'flex' : 'hidden'} sm:flex items-center gap-x-4 gap-y-2 flex-wrap mt-3`}>
+        <div className={`${showControls ? 'flex' : 'hidden'} items-center gap-x-4 gap-y-2 flex-wrap mt-3`}>
           <div className="flex gap-1">
             {Object.entries(DAYS).map(([key, { label }]) => (
               <ToggleButton key={key} selected={day === Number(key)} onClick={() => setDay(Number(key))}>
