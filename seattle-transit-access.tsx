@@ -343,10 +343,11 @@ export default function SeattleTransitVisualizer() {
       return '#fde047';
     }
 
-    // A block's population, land area and density
+    // A block's population, land area and density. Acreage has decimals, so it's read as a float; a few populated
+    // blocks have no land at all (e.g. houseboats), so their density is infinite and they get the densest color.
     function blockStats(feature: any) {
       const population = parseInt(feature.properties.TOT_POP || '0');
-      const squareMiles = parseInt(feature.properties.ACRES_LAND || '0') * 0.0015625; // Convert acres to square miles
+      const squareMiles = parseFloat(feature.properties.ACRES_LAND || '0') * 0.0015625; // Convert acres to square miles
       return { population, squareMiles, density: population / squareMiles };
     }
 
@@ -367,7 +368,7 @@ export default function SeattleTransitVisualizer() {
         const { population, squareMiles, density } = blockStats(feature);
         layer.bindTooltip(
           `<strong>Population:</strong> ${population.toLocaleString()}<br>` +
-          `<strong>Density:</strong> ${Math.round(density).toLocaleString()} per mi²<br>` +
+          `<strong>Density:</strong> ${isFinite(density) ? `${Math.round(density).toLocaleString()} per mi²` : 'no land area'}<br>` +
           `<strong>Area:</strong> ${squareMiles.toFixed(3)} mi²`
         );
       }

@@ -51,12 +51,29 @@ export function walkshedsForStops(turf: any, stops: any[], isochrones: Map<strin
 }
 
 /**
+ * turf.union, retrying with both shapes rounded to 6 decimal places (~10cm) if it fails
+ *
+ * Nearly identical edges (e.g. a Future stop's walkshed over an existing stop's) can make the union fail with
+ * "Unable to complete output ring". Rounding fixes that without visibly changing the shape. Only failing unions are
+ * rounded, so every other result stays exactly the same.
+ */
+function unionWithRetry(turf: any, a: any, b: any): any {
+  try {
+    return turf.union(a, b);
+  } catch {
+    const round = (shape: any) => turf.truncate(shape, { precision: 6 });
+    return turf.union(round(a), round(b));
+  }
+}
+
+/**
  * Merge polygons into one with turf.union, in a tree: pairs, then pairs of pairs, and so on.
  *
  * Merging one at a time into a single growing shape gets slower with every polygon, since each union scans the
  * whole merged outline (minutes for a few thousand walksheds). In a tree most unions are between small shapes,
- * which takes seconds. A polygon that fails to merge is set aside and retried at the end, and skipped if it fails
- * again, so one bad geometry doesn't drop the rest of its branch.
+ * which takes seconds. A polygon that fails to merge even after rounding (see unionWithRetry) is set aside and
+ * retried at the end, and skipped with a warning if it fails again. High in the tree that polygon is itself the
+ * merge of many walksheds, so a skip drops all of them.
  */
 export function mergeWalksheds(turf: any, polygons: any[]): any {
   const failed: any[] = [];
@@ -69,7 +86,7 @@ export function mergeWalksheds(turf: any, polygons: any[]): any {
         continue;
       }
       try {
-        next.push(turf.union(level[i], level[i + 1]));
+        next.push(unionWithRetry(turf, level[i], level[i + 1]));
       } catch {
         next.push(level[i]);
         failed.push(level[i + 1]);
@@ -81,9 +98,9 @@ export function mergeWalksheds(turf: any, polygons: any[]): any {
   let union = level[0];
   for (const polygon of failed) {
     try {
-      union = turf.union(union, polygon);
-    } catch {
-      continue;
+      union = unionWithRetry(turf, union, polygon);
+    } catch (err) {
+      console.warn('Walkshed merge failed, leaving part of the walkshed out:', err);
     }
   }
   return union;

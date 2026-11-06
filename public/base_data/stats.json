@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T04:04:12.795Z",
+  "generated_at": "2026-11-06T02:33:29.864Z",
   "settings": {
     "headways": [10, 15, 20, 30, 60, 120],
     "long_window_hours": 6,
@@ -1259,9 +1259,9 @@
             "10": { "stops": 197, "Seattle": { "coverage": 26.9, "population": 305437 }, "KingCounty": { "coverage": 1.4, "population": 356302 } },
             "15": { "stops": 1610, "Seattle": { "coverage": 67.9, "population": 603351 }, "KingCounty": { "coverage": 4.8, "population": 875451 } },
             "20": { "stops": 2359, "Seattle": { "coverage": 79.5, "population": 670262 }, "KingCounty": { "coverage": 6.8, "population": 1115502 } },
-            "30": { "stops": 4794, "Seattle": { "coverage": 79.5, "population": 670262 }, "KingCounty": { "coverage": 6.8, "population": 1115502 } },
-            "60": { "stops": 5701, "Seattle": { "coverage": 82.4, "population": 687723 }, "KingCounty": { "coverage": 9.4, "population": 1347781 } },
-            "120": { "stops": 6069, "Seattle": { "coverage": 83.1, "population": 690710 }, "KingCounty": { "coverage": 10.8, "population": 1435779 } }
+            "30": { "stops": 4794, "Seattle": { "coverage": 89.1, "population": 713365 }, "KingCounty": { "coverage": 10.3, "population": 1481676 } },
+            "60": { "stops": 5701, "Seattle": { "coverage": 90.4, "population": 718749 }, "KingCounty": { "coverage": 12.1, "population": 1628542 } },
+            "120": { "stops": 6069, "Seattle": { "coverage": 90.7, "population": 719630 }, "KingCounty": { "coverage": 13.2, "population": 1692687 } }
           }
         },
         "LateNight": {
@@ -1315,9 +1315,9 @@
             "10": { "stops": 188, "Seattle": { "coverage": 16.7, "population": 207300 }, "KingCounty": { "coverage": 0.9, "population": 244182 } },
             "15": { "stops": 1467, "Seattle": { "coverage": 60.9, "population": 553137 }, "KingCounty": { "coverage": 4.9, "population": 887611 } },
             "20": { "stops": 2171, "Seattle": { "coverage": 74.1, "population": 630360 }, "KingCounty": { "coverage": 6, "population": 1013896 } },
-            "30": { "stops": 3841, "Seattle": { "coverage": 74.1, "population": 630360 }, "KingCounty": { "coverage": 6, "population": 1013896 } },
-            "60": { "stops": 4328, "Seattle": { "coverage": 77.9, "population": 647863 }, "KingCounty": { "coverage": 7.4, "population": 1157683 } },
-            "120": { "stops": 5200, "Seattle": { "coverage": 80.2, "population": 663833 }, "KingCounty": { "coverage": 9.9, "population": 1405977 } }
+            "30": { "stops": 3841, "Seattle": { "coverage": 88.3, "population": 711626 }, "KingCounty": { "coverage": 8.6, "population": 1310155 } },
+            "60": { "stops": 4328, "Seattle": { "coverage": 88.9, "population": 712317 }, "KingCounty": { "coverage": 9.4, "population": 1388129 } },
+            "120": { "stops": 5200, "Seattle": { "coverage": 89.1, "population": 713377 }, "KingCounty": { "coverage": 11.4, "population": 1568913 } }
           }
         },
         "AmPeak": {
@@ -1333,9 +1333,9 @@
             "10": { "stops": 165, "Seattle": { "coverage": 16.6, "population": 206995 }, "KingCounty": { "coverage": 0.9, "population": 243877 } },
             "15": { "stops": 1103, "Seattle": { "coverage": 54.9, "population": 519773 }, "KingCounty": { "coverage": 4.5, "population": 840155 } },
             "20": { "stops": 1959, "Seattle": { "coverage": 73.7, "population": 628891 }, "KingCounty": { "coverage": 5.5, "population": 988146 } },
-            "30": { "stops": 3494, "Seattle": { "coverage": 73.7, "population": 628891 }, "KingCounty": { "coverage": 5.5, "population": 988146 } },
-            "60": { "stops": 4334, "Seattle": { "coverage": 82.5, "population": 672269 }, "KingCounty": { "coverage": 7.9, "population": 1244697 } },
-            "120": { "stops": 5201, "Seattle": { "coverage": 84.1, "population": 683554 }, "KingCounty": { "coverage": 10.3, "population": 1470607 } }
+            "30": { "stops": 3494, "Seattle": { "coverage": 87.5, "population": 710136 }, "KingCounty": { "coverage": 8.3, "population": 1274263 } },
+            "60": { "stops": 4334, "Seattle": { "coverage": 88.9, "population": 712317 }, "KingCounty": { "coverage": 9.4, "population": 1388307 } },
+            "120": { "stops": 5201, "Seattle": { "coverage": 89.1, "population": 713377 }, "KingCounty": { "coverage": 11.4, "population": 1568913 } }
           }
         },
         "Midday": {
@@ -1351,9 +1351,9 @@
             "10": { "stops": 323, "Seattle": { "coverage": 25.5, "population": 294346 }, "KingCounty": { "coverage": 1.4, "population": 348320 } },
             "15": { "stops": 2226, "Seattle": { "coverage": 72.8, "population": 623193 }, "KingCounty": { "coverage": 5.8, "population": 976269 } },
             "20": { "stops": 2409, "Seattle": { "coverage": 74.5, "population": 632106 }, "KingCounty": { "coverage": 6.1, "population": 1017794 } },
-            "30": { "stops": 4972, "Seattle": { "coverage": 74.5, "population": 632106 }, "KingCounty": { "coverage": 6.1, "population": 1017794 } },
-            "60": { "stops": 5701, "Seattle": { "coverage": 75, "population": 635886 }, "KingCounty": { "coverage": 8.1, "population": 1219024 } },
-            "120": { "stops": 5891, "Seattle": { "coverage": 75, "population": 635886 }, "KingCounty": { "coverage": 9.1, "population": 1262960 } }
+            "30": { "stops": 4972, "Seattle": { "coverage": 89.4, "population": 713952 }, "KingCounty": { "coverage": 10.5, "population": 1505422 } },
+            "60": { "stops": 5701, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 11.9, "population": 1637109 } },
+            "120": { "stops": 5891, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 12.8, "population": 1673194 } }
           }
         },
         "PmPeak": {
@@ -1369,9 +1369,9 @@
             "10": { "stops": 298, "Seattle": { "coverage": 25.4, "population": 294004 }, "KingCounty": { "coverage": 1.4, "population": 347975 } },
             "15": { "stops": 2171, "Seattle": { "coverage": 72.7, "population": 622780 }, "KingCounty": { "coverage": 5.9, "population": 994002 } },
             "20": { "stops": 2512, "Seattle": { "coverage": 77.6, "population": 651679 }, "KingCounty": { "coverage": 6.2, "population": 1037386 } },
-            "30": { "stops": 4799, "Seattle": { "coverage": 77.6, "population": 651679 }, "KingCounty": { "coverage": 6.2, "population": 1037386 } },
-            "60": { "stops": 5642, "Seattle": { "coverage": 79.8, "population": 662026 }, "KingCounty": { "coverage": 8.6, "population": 1288016 } },
-            "120": { "stops": 5872, "Seattle": { "coverage": 79.8, "population": 662026 }, "KingCounty": { "coverage": 9.7, "population": 1342112 } }
+            "30": { "stops": 4799, "Seattle": { "coverage": 89.4, "population": 714050 }, "KingCounty": { "coverage": 10.3, "population": 1478218 } },
+            "60": { "stops": 5642, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 11.8, "population": 1626417 } },
+            "120": { "stops": 5872, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 12.8, "population": 1671461 } }
           }
         },
         "Evening": {
@@ -1387,9 +1387,9 @@
             "10": { "stops": 104, "Seattle": { "coverage": 14.9, "population": 188788 }, "KingCounty": { "coverage": 0.9, "population": 238052 } },
             "15": { "stops": 1487, "Seattle": { "coverage": 65.2, "population": 581495 }, "KingCounty": { "coverage": 4.6, "population": 850481 } },
             "20": { "stops": 1966, "Seattle": { "coverage": 72.3, "population": 622483 }, "KingCounty": { "coverage": 5.7, "population": 969617 } },
-            "30": { "stops": 4300, "Seattle": { "coverage": 72.3, "population": 622483 }, "KingCounty": { "coverage": 5.7, "population": 969617 } },
-            "60": { "stops": 5331, "Seattle": { "coverage": 78.6, "population": 659860 }, "KingCounty": { "coverage": 8.6, "population": 1286026 } },
-            "120": { "stops": 5583, "Seattle": { "coverage": 79.4, "population": 662241 }, "KingCounty": { "coverage": 9.5, "population": 1348337 } }
+            "30": { "stops": 4300, "Seattle": { "coverage": 86.5, "population": 704791 }, "KingCounty": { "coverage": 9.5, "population": 1407862 } },
+            "60": { "stops": 5331, "Seattle": { "coverage": 88.7, "population": 712841 }, "KingCounty": { "coverage": 11.3, "population": 1582971 } },
+            "120": { "stops": 5583, "Seattle": { "coverage": 89.3, "population": 713993 }, "KingCounty": { "coverage": 12, "population": 1629696 } }
           }
         },
         "LateNight": {
@@ -1443,9 +1443,9 @@
             "10": { "stops": 146, "Seattle": { "coverage": 15.3, "population": 191593 }, "KingCounty": { "coverage": 0.9, "population": 228276 } },
             "15": { "stops": 1423, "Seattle": { "coverage": 61.1, "population": 555495 }, "KingCounty": { "coverage": 4.9, "population": 889467 } },
             "20": { "stops": 2164, "Seattle": { "coverage": 74.2, "population": 630794 }, "KingCounty": { "coverage": 6, "population": 1013342 } },
-            "30": { "stops": 3767, "Seattle": { "coverage": 74.2, "population": 630794 }, "KingCounty": { "coverage": 6, "population": 1013342 } },
-            "60": { "stops": 4276, "Seattle": { "coverage": 80.3, "population": 667001 }, "KingCounty": { "coverage": 7.3, "population": 1159141 } },
-            "120": { "stops": 5078, "Seattle": { "coverage": 82.9, "population": 683754 }, "KingCounty": { "coverage": 9.8, "population": 1410580 } }
+            "30": { "stops": 3767, "Seattle": { "coverage": 88.2, "population": 710312 }, "KingCounty": { "coverage": 8.6, "population": 1316486 } },
+            "60": { "stops": 4276, "Seattle": { "coverage": 88.9, "population": 712316 }, "KingCounty": { "coverage": 9.3, "population": 1376585 } },
+            "120": { "stops": 5078, "Seattle": { "coverage": 89.1, "population": 713377 }, "KingCounty": { "coverage": 11.2, "population": 1554666 } }
           }
         },
         "AmPeak": {
@@ -1479,9 +1479,9 @@
             "10": { "stops": 239, "Seattle": { "coverage": 21.5, "population": 256617 }, "KingCounty": { "coverage": 1.2, "population": 310765 } },
             "15": { "stops": 2134, "Seattle": { "coverage": 71.5, "population": 616551 }, "KingCounty": { "coverage": 5.7, "population": 969766 } },
             "20": { "stops": 2366, "Seattle": { "coverage": 74.3, "population": 631015 }, "KingCounty": { "coverage": 6.1, "population": 1016908 } },
-            "30": { "stops": 4855, "Seattle": { "coverage": 74.3, "population": 631015 }, "KingCounty": { "coverage": 6.1, "population": 1016908 } },
-            "60": { "stops": 5641, "Seattle": { "coverage": 76.2, "population": 640280 }, "KingCounty": { "coverage": 8.2, "population": 1226867 } },
-            "120": { "stops": 5770, "Seattle": { "coverage": 76.2, "population": 640288 }, "KingCounty": { "coverage": 8.8, "population": 1246899 } }
+            "30": { "stops": 4855, "Seattle": { "coverage": 88.9, "population": 713410 }, "KingCounty": { "coverage": 10.5, "population": 1504537 } },
+            "60": { "stops": 5641, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 11.9, "population": 1633902 } },
+            "120": { "stops": 5770, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 12.5, "population": 1653643 } }
           }
         },
         "PmPeak": {
@@ -1497,9 +1497,9 @@
             "10": { "stops": 239, "Seattle": { "coverage": 21.5, "population": 256617 }, "KingCounty": { "coverage": 1.2, "population": 310765 } },
             "15": { "stops": 2131, "Seattle": { "coverage": 71.5, "population": 616430 }, "KingCounty": { "coverage": 5.9, "population": 993540 } },
             "20": { "stops": 2384, "Seattle": { "coverage": 74.3, "population": 630988 }, "KingCounty": { "coverage": 6.1, "population": 1016881 } },
-            "30": { "stops": 4771, "Seattle": { "coverage": 74.3, "population": 630988 }, "KingCounty": { "coverage": 6.1, "population": 1016881 } },
-            "60": { "stops": 5639, "Seattle": { "coverage": 77.4, "population": 650443 }, "KingCounty": { "coverage": 8.6, "population": 1270550 } },
-            "120": { "stops": 5756, "Seattle": { "coverage": 77.4, "population": 650443 }, "KingCounty": { "coverage": 9.2, "population": 1296557 } }
+            "30": { "stops": 4771, "Seattle": { "coverage": 88.9, "population": 713523 }, "KingCounty": { "coverage": 10.3, "population": 1484695 } },
+            "60": { "stops": 5639, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 11.8, "population": 1626438 } },
+            "120": { "stops": 5756, "Seattle": { "coverage": 89.4, "population": 714066 }, "KingCounty": { "coverage": 12.4, "population": 1652057 } }
           }
         },
         "Evening": {
